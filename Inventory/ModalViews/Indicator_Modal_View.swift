@@ -1,6 +1,6 @@
 //
 //  Indicator_Modal_View.swift
-//  Inventory
+//  Restock
 //
 //  Created by David Christian on 14/06/23.
 //

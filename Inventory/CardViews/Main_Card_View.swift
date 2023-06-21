@@ -1,6 +1,6 @@
 //
 //  Main_Card_View.swift
-//  Inventory
+//  Restock
 //
 //  Created by David Christian on 13/06/23.
 //
