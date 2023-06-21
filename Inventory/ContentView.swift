@@ -8,14 +8,54 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var selection = 0
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+        TabView(selection: $selection){
+            Summary()
+                .tabItem(){
+                    if selection == 0{
+                        Image(systemName: "doc.text")
+                    }else{
+                        Image(systemName: "doc.text").environment(\.symbolVariants, .none)
+                    }
+                    Text("Summary")
+                        
+                }
+                .tag(0)
+            Production()
+                .tabItem(){
+                    if selection == 1{
+                        Image(systemName: "wrench.and.screwdriver.fill")
+                    }else{
+                        Image(systemName: "wrench.and.screwdriver").environment(\.symbolVariants, .none)
+                    }
+                    Text("Production")
+                        
+                }
+                .tag(1)
+            Catalog()
+                .tabItem(){
+                    if selection == 2{
+                        Image(systemName: "tray")
+                    }else{
+                        Image(systemName: "tray").environment(\.symbolVariants, .none)
+                    }
+                    Text("Catalog")
+                }
+                .tag(2)
+            Inventory()
+                .tabItem {
+                    if selection == 3{
+                        Image(systemName: "shippingbox")
+                    }else{
+                        Image(systemName: "shippingbox").environment(\.symbolVariants, .none)
+                    }
+                    Text("Inventory")
+                }
+                .tag(3)
+            
         }
-        .padding()
     }
 }
 
