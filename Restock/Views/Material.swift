@@ -1,6 +1,6 @@
 //
-//  Inventory.swift
-//  Inventory
+//  Material.swift
+//  Restock
 //
 //  Created by David Christian on 13/06/23.
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 import PhotosUI
 
-struct Inventory: View {
+struct Material: View {
     @State var selectedItems: [PhotosPickerItem] = []
     @State var data: Data?
     
@@ -48,8 +48,8 @@ struct Inventory: View {
     }
 }
 
-struct Inventory_Previews: PreviewProvider {
+struct Material_Previews: PreviewProvider {
     static var previews: some View {
-        Inventory()
+        Material()
     }
 }
