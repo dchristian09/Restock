@@ -7,14 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		36CB89392A385137000BDA6D /* InventoryApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CB89382A385137000BDA6D /* InventoryApp.swift */; };
+		36CB89392A385137000BDA6D /* RestockApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CB89382A385137000BDA6D /* RestockApp.swift */; };
 		36CB893B2A385137000BDA6D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CB893A2A385137000BDA6D /* ContentView.swift */; };
 		36CB893D2A385138000BDA6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36CB893C2A385138000BDA6D /* Assets.xcassets */; };
 		36CB89402A385138000BDA6D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36CB893F2A385138000BDA6D /* Preview Assets.xcassets */; };
 		36CB89482A385256000BDA6D /* Summary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CB89472A385256000BDA6D /* Summary.swift */; };
 		36CB894A2A385266000BDA6D /* Production.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CB89492A385266000BDA6D /* Production.swift */; };
-		36CB894C2A385272000BDA6D /* Catalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CB894B2A385272000BDA6D /* Catalog.swift */; };
-		36CB894E2A38527C000BDA6D /* Inventory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CB894D2A38527C000BDA6D /* Inventory.swift */; };
+		36CB894C2A385272000BDA6D /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CB894B2A385272000BDA6D /* Product.swift */; };
+		36CB894E2A38527C000BDA6D /* Material.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CB894D2A38527C000BDA6D /* Material.swift */; };
 		36CB89512A386934000BDA6D /* Main_Card_View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CB89502A386934000BDA6D /* Main_Card_View.swift */; };
 		36CB89562A39A158000BDA6D /* Indicator_Modal_View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CB89552A39A158000BDA6D /* Indicator_Modal_View.swift */; };
 		36CB89582A39BD52000BDA6D /* Summary_Material.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CB89572A39BD52000BDA6D /* Summary_Material.swift */; };
@@ -26,14 +26,14 @@
 
 /* Begin PBXFileReference section */
 		36CB89352A385137000BDA6D /* Inventory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Inventory.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		36CB89382A385137000BDA6D /* InventoryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InventoryApp.swift; sourceTree = "<group>"; };
+		36CB89382A385137000BDA6D /* RestockApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestockApp.swift; sourceTree = "<group>"; };
 		36CB893A2A385137000BDA6D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		36CB893C2A385138000BDA6D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		36CB893F2A385138000BDA6D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		36CB89472A385256000BDA6D /* Summary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Summary.swift; sourceTree = "<group>"; };
 		36CB89492A385266000BDA6D /* Production.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Production.swift; sourceTree = "<group>"; };
-		36CB894B2A385272000BDA6D /* Catalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Catalog.swift; sourceTree = "<group>"; };
-		36CB894D2A38527C000BDA6D /* Inventory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Inventory.swift; sourceTree = "<group>"; };
+		36CB894B2A385272000BDA6D /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		36CB894D2A38527C000BDA6D /* Material.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Material.swift; sourceTree = "<group>"; };
 		36CB89502A386934000BDA6D /* Main_Card_View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Main_Card_View.swift; sourceTree = "<group>"; };
 		36CB89552A39A158000BDA6D /* Indicator_Modal_View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Indicator_Modal_View.swift; sourceTree = "<group>"; };
 		36CB89572A39BD52000BDA6D /* Summary_Material.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Summary_Material.swift; sourceTree = "<group>"; };
@@ -76,7 +76,7 @@
 				36CB89542A39A13B000BDA6D /* ModalViews */,
 				36CB894F2A38690C000BDA6D /* CardViews */,
 				36CB89462A38523D000BDA6D /* Views */,
-				36CB89382A385137000BDA6D /* InventoryApp.swift */,
+				36CB89382A385137000BDA6D /* RestockApp.swift */,
 				36CB893A2A385137000BDA6D /* ContentView.swift */,
 				36CB893C2A385138000BDA6D /* Assets.xcassets */,
 				36CB893E2A385138000BDA6D /* Preview Content */,
@@ -97,8 +97,8 @@
 			children = (
 				36CB89472A385256000BDA6D /* Summary.swift */,
 				36CB89492A385266000BDA6D /* Production.swift */,
-				36CB894B2A385272000BDA6D /* Catalog.swift */,
-				36CB894D2A38527C000BDA6D /* Inventory.swift */,
+				36CB894B2A385272000BDA6D /* Product.swift */,
+				36CB894D2A38527C000BDA6D /* Material.swift */,
 				36CB89572A39BD52000BDA6D /* Summary_Material.swift */,
 				36CB89592A3AEB4E000BDA6D /* Summary_Product.swift */,
 				36CB895D2A3B1EBD000BDA6D /* Production_Stock.swift */,
@@ -197,15 +197,15 @@
 				36CB89602A403BE1000BDA6D /* Production_Detail.swift in Sources */,
 				36CB895A2A3AEB4E000BDA6D /* Summary_Product.swift in Sources */,
 				36CB89562A39A158000BDA6D /* Indicator_Modal_View.swift in Sources */,
-				36CB894E2A38527C000BDA6D /* Inventory.swift in Sources */,
+				36CB894E2A38527C000BDA6D /* Material.swift in Sources */,
 				36CB895C2A3B04D5000BDA6D /* Production_Card_View.swift in Sources */,
-				36CB894C2A385272000BDA6D /* Catalog.swift in Sources */,
+				36CB894C2A385272000BDA6D /* Product.swift in Sources */,
 				36CB893B2A385137000BDA6D /* ContentView.swift in Sources */,
 				36CB89512A386934000BDA6D /* Main_Card_View.swift in Sources */,
 				36CB895E2A3B1EBD000BDA6D /* Production_Stock.swift in Sources */,
 				36CB89482A385256000BDA6D /* Summary.swift in Sources */,
 				36CB894A2A385266000BDA6D /* Production.swift in Sources */,
-				36CB89392A385137000BDA6D /* InventoryApp.swift in Sources */,
+				36CB89392A385137000BDA6D /* RestockApp.swift in Sources */,
 				36CB89582A39BD52000BDA6D /* Summary_Material.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

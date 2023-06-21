@@ -1,6 +1,6 @@
 //
 //  Summary_Product.swift
-//  Inventory
+//  Restock
 //
 //  Created by David Christian on 15/06/23.
 //

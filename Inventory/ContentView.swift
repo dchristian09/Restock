@@ -1,6 +1,6 @@
 //
 //  ContentView.swift
-//  Inventory
+//  Restock
 //
 //  Created by David Christian on 13/06/23.
 //
@@ -34,24 +34,24 @@ struct ContentView: View {
                         
                 }
                 .tag(1)
-            Catalog()
+            Product()
                 .tabItem(){
                     if selection == 2{
                         Image(systemName: "tray")
                     }else{
                         Image(systemName: "tray").environment(\.symbolVariants, .none)
                     }
-                    Text("Catalog")
+                    Text("Product")
                 }
                 .tag(2)
-            Inventory()
+            Material()
                 .tabItem {
                     if selection == 3{
                         Image(systemName: "shippingbox")
                     }else{
                         Image(systemName: "shippingbox").environment(\.symbolVariants, .none)
                     }
-                    Text("Inventory")
+                    Text("Material")
                 }
                 .tag(3)
             
