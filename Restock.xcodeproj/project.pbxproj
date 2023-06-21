@@ -25,7 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		36CB89352A385137000BDA6D /* Inventory.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Inventory.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		36CB89352A385137000BDA6D /* Restock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Restock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36CB89382A385137000BDA6D /* RestockApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestockApp.swift; sourceTree = "<group>"; };
 		36CB893A2A385137000BDA6D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		36CB893C2A385138000BDA6D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -57,7 +57,7 @@
 		36CB892C2A385137000BDA6D = {
 			isa = PBXGroup;
 			children = (
-				36CB89372A385137000BDA6D /* Inventory */,
+				58E9ABB02A42E666006FCA14 /* Restock */,
 				36CB89362A385137000BDA6D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -65,23 +65,9 @@
 		36CB89362A385137000BDA6D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				36CB89352A385137000BDA6D /* Inventory.app */,
+				36CB89352A385137000BDA6D /* Restock.app */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		36CB89372A385137000BDA6D /* Inventory */ = {
-			isa = PBXGroup;
-			children = (
-				36CB89542A39A13B000BDA6D /* ModalViews */,
-				36CB894F2A38690C000BDA6D /* CardViews */,
-				36CB89462A38523D000BDA6D /* Views */,
-				36CB89382A385137000BDA6D /* RestockApp.swift */,
-				36CB893A2A385137000BDA6D /* ContentView.swift */,
-				36CB893C2A385138000BDA6D /* Assets.xcassets */,
-				36CB893E2A385138000BDA6D /* Preview Content */,
-			);
-			path = Inventory;
 			sourceTree = "<group>";
 		};
 		36CB893E2A385138000BDA6D /* Preview Content */ = {
@@ -124,12 +110,26 @@
 			path = ModalViews;
 			sourceTree = "<group>";
 		};
+		58E9ABB02A42E666006FCA14 /* Restock */ = {
+			isa = PBXGroup;
+			children = (
+				36CB89542A39A13B000BDA6D /* ModalViews */,
+				36CB894F2A38690C000BDA6D /* CardViews */,
+				36CB89462A38523D000BDA6D /* Views */,
+				36CB89382A385137000BDA6D /* RestockApp.swift */,
+				36CB893A2A385137000BDA6D /* ContentView.swift */,
+				36CB893C2A385138000BDA6D /* Assets.xcassets */,
+				36CB893E2A385138000BDA6D /* Preview Content */,
+			);
+			path = Restock;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		36CB89342A385137000BDA6D /* Inventory */ = {
+		36CB89342A385137000BDA6D /* Restock */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 36CB89432A385138000BDA6D /* Build configuration list for PBXNativeTarget "Inventory" */;
+			buildConfigurationList = 36CB89432A385138000BDA6D /* Build configuration list for PBXNativeTarget "Restock" */;
 			buildPhases = (
 				36CB89312A385137000BDA6D /* Sources */,
 				36CB89322A385137000BDA6D /* Frameworks */,
@@ -139,9 +139,9 @@
 			);
 			dependencies = (
 			);
-			name = Inventory;
+			name = Restock;
 			productName = Inventory;
-			productReference = 36CB89352A385137000BDA6D /* Inventory.app */;
+			productReference = 36CB89352A385137000BDA6D /* Restock.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -172,7 +172,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				36CB89342A385137000BDA6D /* Inventory */,
+				36CB89342A385137000BDA6D /* Restock */,
 			);
 		};
 /* End PBXProject section */
@@ -334,7 +334,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Inventory/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Restock/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -347,7 +347,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ada.Inventory;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ada.Restock;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -362,7 +362,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Inventory/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Restock/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -375,7 +375,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ada.Inventory;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ada.Restock;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -395,7 +395,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		36CB89432A385138000BDA6D /* Build configuration list for PBXNativeTarget "Inventory" */ = {
+		36CB89432A385138000BDA6D /* Build configuration list for PBXNativeTarget "Restock" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				36CB89442A385138000BDA6D /* Debug */,
