@@ -79,6 +79,7 @@ struct Production: View {
                             }
                             Spacer()
                         }
+                        .padding()
                     }
                 }
             }
