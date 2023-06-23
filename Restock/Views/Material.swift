@@ -9,37 +9,53 @@ import SwiftUI
 import PhotosUI
 
 struct Material: View {
-    @State var selectedItems: [PhotosPickerItem] = []
-    @State var data: Data?
+    @State private var searchText = ""
+    let columns = [GridItem(.flexible()), GridItem(.flexible())]
+    @State var showingAlert: Bool = false
     
     var body: some View {
-        VStack{
-            if let data = data, let uiimage = UIImage(data: data){
-                Image(uiImage: uiimage)
-                    .resizable()
-                    .frame(width: 300, height: 300)
-            }
-            PhotosPicker(
-                selection: $selectedItems,
-                maxSelectionCount: 1,
-                matching: .images
-            ){
-                Text("Pick Photo")
-            }
-            .onChange(of: selectedItems){ newValue in
-                guard let item = selectedItems.first else{
-                    return
-                }
-                item.loadTransferable(type: Data.self){result in
-                    switch result{
-                    case.success(let data):
-                        if let data = data {
-                            self.data = data
-                        }else{
-                            print("Data is nil")
+        NavigationView{
+            ZStack{
+                Rectangle()
+                    .fill(Color(hex: 0xf2f4ff))
+                    .ignoresSafeArea()
+                
+                ScrollView {
+                    
+                    ZStack{
+                        RoundedRectangle(cornerRadius: 60, style:.continuous)
+                            .fill(.white)
+                            .frame(maxHeight: .infinity)
+                        
+                        VStack{
+                            LazyVGrid(columns: columns){
+                                NavigationLink{
+                                    Material_Detail()
+                                }label: {
+                                    Main_Card_View()
+                                }
+                                NavigationLink{
+                                    Material_Detail()
+                                }label: {
+                                    Main_Card_View()
+                                }
+                            }
+                            Spacer()
                         }
-                    case.failure(let failure):
-                        fatalError("\(failure)")
+                        .padding()
+                    }
+                }
+            }
+            .navigationBarTitle("Material")
+            .navigationBarTitleDisplayMode(.large)
+            .navigationBarBackButtonHidden(true)
+            .searchable(text: $searchText)
+            .toolbar{
+                ToolbarItem(placement: .navigationBarTrailing){
+                    NavigationLink {
+                        Material_Add()
+                    }label: {
+                        Image(systemName: "plus")
                     }
                 }
             }

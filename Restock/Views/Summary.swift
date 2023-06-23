@@ -23,6 +23,7 @@ struct Summary: View {
     @State private var showingSheet = false
     @Environment(\.dismiss) var dismiss
     @State var showingAlert: Bool = false
+    @State var cekekek: Bool = false
     let columns = [GridItem(.flexible()), GridItem(.flexible())]
     var body: some View {
         NavigationView{
@@ -72,13 +73,21 @@ struct Summary: View {
                             Main_Card_View()
                                 .onLongPressGesture(minimumDuration: 1) {
                                     showingAlert = true
-                                }.alert(isPresented: $showingAlert) { () -> Alert in
-                                    Alert(title: Text("Reminder - Rose Flower"), message: Text("Choose your next step for this reminder"))
-                   
-                    }
+                                }.alert("Reminder - Red Ribbon", isPresented: $showingAlert, actions: {
+                                    Button("Produce Material", action: {})
+                                    Button("Deactivate Material", role: .destructive, action: {})
+                                }, message: {
+                                    Text("Choose your next step for this reminder")
+                                })
                             Main_Card_View()
-                            Main_Card_View()
-                            Main_Card_View()
+                                .onLongPressGesture(minimumDuration: 1) {
+                                    showingAlert = true
+                                }.alert("Reminder - Red Ribbon", isPresented: $showingAlert, actions: {
+                                    Button("Produce Material", action: {})
+                                    Button("Deactivate Material", role: .destructive, action: {})
+                                }, message: {
+                                    Text("Choose your next step for this reminder")
+                                })
                         }
                         
                         HStack{
@@ -97,9 +106,24 @@ struct Summary: View {
                         
                         LazyVGrid (columns: columns){
                             Main_Card_View()
+                                .onLongPressGesture(minimumDuration: 1) {
+                                    cekekek = true
+                                }.alert("Reminder - Red Ribbon", isPresented: $cekekek, actions: {
+                                    Button("Produce Product", action: {})
+                                    Button("Deactivate Product", role: .destructive, action: {})
+                                }, message: {
+                                    Text("Choose your next step for this reminder")
+                                })
                             Main_Card_View()
-                            Main_Card_View()
-                            Main_Card_View()
+                                .onLongPressGesture(minimumDuration: 1) {
+                                    cekekek = true
+                                }.alert("Reminder - Red Ribbon", isPresented: $cekekek, actions: {
+                                    Button("Produce Product", action: {})
+                                    Button("Deactivate Product", role: .destructive, action: {})
+                                }, message: {
+                                    Text("Choose your next step for this reminder")
+                                })
+                            
                         }
                         
                         Spacer()
