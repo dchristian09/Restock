@@ -28,6 +28,11 @@
 		36CB895C2A3B04D5000BDA6D /* Production_Card_View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CB895B2A3B04D5000BDA6D /* Production_Card_View.swift */; };
 		36CB895E2A3B1EBD000BDA6D /* Production_Stock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CB895D2A3B1EBD000BDA6D /* Production_Stock.swift */; };
 		36CB89602A403BE1000BDA6D /* Production_Detail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CB895F2A403BE1000BDA6D /* Production_Detail.swift */; };
+		58E245562A47376800DC9B6E /* Summary_No_Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E245552A47376800DC9B6E /* Summary_No_Reminder.swift */; };
+		58E245582A474F0100DC9B6E /* Summary_Safe_Reminder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E245572A474F0100DC9B6E /* Summary_Safe_Reminder.swift */; };
+		58E2455A2A47534000DC9B6E /* Production_No_Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E245592A47534000DC9B6E /* Production_No_Data.swift */; };
+		58E2455C2A4758F400DC9B6E /* Product_No_Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E2455B2A4758F400DC9B6E /* Product_No_Data.swift */; };
+		58E2455E2A475D5C00DC9B6E /* Material_No_Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E2455D2A475D5C00DC9B6E /* Material_No_Data.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +58,11 @@
 		36CB895B2A3B04D5000BDA6D /* Production_Card_View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Production_Card_View.swift; sourceTree = "<group>"; };
 		36CB895D2A3B1EBD000BDA6D /* Production_Stock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Production_Stock.swift; sourceTree = "<group>"; };
 		36CB895F2A403BE1000BDA6D /* Production_Detail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Production_Detail.swift; sourceTree = "<group>"; };
+		58E245552A47376800DC9B6E /* Summary_No_Reminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Summary_No_Reminder.swift; sourceTree = "<group>"; };
+		58E245572A474F0100DC9B6E /* Summary_Safe_Reminder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Summary_Safe_Reminder.swift; sourceTree = "<group>"; };
+		58E245592A47534000DC9B6E /* Production_No_Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Production_No_Data.swift; sourceTree = "<group>"; };
+		58E2455B2A4758F400DC9B6E /* Product_No_Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product_No_Data.swift; sourceTree = "<group>"; };
+		58E2455D2A475D5C00DC9B6E /* Material_No_Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Material_No_Data.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,15 +104,20 @@
 			isa = PBXGroup;
 			children = (
 				36CB89472A385256000BDA6D /* Summary.swift */,
+				58E245552A47376800DC9B6E /* Summary_No_Reminder.swift */,
+				58E245572A474F0100DC9B6E /* Summary_Safe_Reminder.swift */,
 				36CB89572A39BD52000BDA6D /* Material_Reminder.swift */,
 				36CB89592A3AEB4E000BDA6D /* Product_Reminder.swift */,
+				58E245592A47534000DC9B6E /* Production_No_Data.swift */,
 				36CB89492A385266000BDA6D /* Production.swift */,
 				36CB895D2A3B1EBD000BDA6D /* Production_Stock.swift */,
 				36CB895F2A403BE1000BDA6D /* Production_Detail.swift */,
+				58E2455B2A4758F400DC9B6E /* Product_No_Data.swift */,
 				36CB894B2A385272000BDA6D /* Product.swift */,
 				3634D61E2A44299400C31903 /* Product_Detail.swift */,
 				3634D6202A442D9400C31903 /* Product_Add.swift */,
 				3634D6222A45880100C31903 /* Product_Edit.swift */,
+				58E2455D2A475D5C00DC9B6E /* Material_No_Data.swift */,
 				36CB894D2A38527C000BDA6D /* Material.swift */,
 				3634D6242A45987300C31903 /* Material_Edit.swift */,
 				3634D6262A45AC3000C31903 /* Material_Detail.swift */,
@@ -217,9 +232,11 @@
 				36CB89562A39A158000BDA6D /* Indicator_Modal_View.swift in Sources */,
 				3634D6232A45880100C31903 /* Product_Edit.swift in Sources */,
 				36CB894E2A38527C000BDA6D /* Material.swift in Sources */,
+				58E2455E2A475D5C00DC9B6E /* Material_No_Data.swift in Sources */,
 				36CB895C2A3B04D5000BDA6D /* Production_Card_View.swift in Sources */,
 				36CB894C2A385272000BDA6D /* Product.swift in Sources */,
 				3634D6272A45AC3000C31903 /* Material_Detail.swift in Sources */,
+				58E2455C2A4758F400DC9B6E /* Product_No_Data.swift in Sources */,
 				3634D61F2A44299400C31903 /* Product_Detail.swift in Sources */,
 				3634D6212A442D9400C31903 /* Product_Add.swift in Sources */,
 				36CB893B2A385137000BDA6D /* ContentView.swift in Sources */,
@@ -227,6 +244,9 @@
 				36CB89512A386934000BDA6D /* Main_Card_View.swift in Sources */,
 				36CB895E2A3B1EBD000BDA6D /* Production_Stock.swift in Sources */,
 				3634D6252A45987300C31903 /* Material_Edit.swift in Sources */,
+				58E245562A47376800DC9B6E /* Summary_No_Reminder.swift in Sources */,
+				58E245582A474F0100DC9B6E /* Summary_Safe_Reminder.swift in Sources */,
+				58E2455A2A47534000DC9B6E /* Production_No_Data.swift in Sources */,
 				36CB89482A385256000BDA6D /* Summary.swift in Sources */,
 				36CB894A2A385266000BDA6D /* Production.swift in Sources */,
 				36CB89392A385137000BDA6D /* RestockApp.swift in Sources */,

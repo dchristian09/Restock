@@ -34,7 +34,7 @@ struct Material_Add: View {
                             if let data = dataProductImage, let uiimage = UIImage(data: data){
                                 Image(uiImage: uiimage)
                                     .resizable()
-                                    .frame(width: 150, height: 120)
+                                    .frame(width: 150, height: 150)
                             }else{
                                 Image(systemName: "photo")
                                     .resizable()

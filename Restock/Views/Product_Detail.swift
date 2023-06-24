@@ -18,7 +18,7 @@ struct Product_Detail: View {
                 VStack{
                     Image("bouquet")
                         .resizable()
-                        .cornerRadius(20)
+                        .cornerRadius(16)
                         .frame(width: 150, height: 150)
                         .padding(.top)
                     Text("Bouquet Rose")

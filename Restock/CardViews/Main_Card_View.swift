@@ -10,8 +10,8 @@ import SwiftUI
 struct Main_Card_View: View {
     var body: some View {
         ZStack{
-            RoundedRectangle(cornerRadius: 20, style:.continuous)
-                .fill(.blue)
+            RoundedRectangle(cornerRadius: 16, style:.continuous)
+                .fill(Color(hex: 0x3C6EE1))
             ZStack {
                 HStack(alignment: .top){
                     VStack {
@@ -38,11 +38,11 @@ struct Main_Card_View: View {
                 Text("100")
                     .font(.title2)
                     .bold()
-                    .foregroundColor(.blue)
+                    .foregroundColor(Color(hex: 0x3C6EE1))
                     .offset(x: 67, y: 20)
                 Text("pcs")
                     .font(.caption2)
-                    .foregroundColor(.blue)
+                    .foregroundColor(Color(hex: 0x3C6EE1))
                     .offset(x: 67, y: 35)
             }
 

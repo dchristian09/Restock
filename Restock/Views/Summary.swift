@@ -32,7 +32,7 @@ struct Summary: View {
                     .fill(Color(hex: 0xf2f4ff))
                     .ignoresSafeArea()
                 ZStack {
-                    RoundedRectangle(cornerRadius: 60, style:.continuous)
+                    RoundedRectangle(cornerRadius: 50, style:.continuous)
                         .fill(.white)
                         .offset(y:90)
                     VStack {
