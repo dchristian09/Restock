@@ -31,15 +31,11 @@ struct Material_Detail: View {
                                     Spacer()
                                     Text("3 pcs")
                                 }
-                            }
-                            Section{
                                 HStack {
                                     Text("Current Stock")
                                     Spacer()
                                     Text("1 pcs")
                                 }
-                            }
-                            Section{
                                 HStack {
                                     Text("Notes")
                                     Spacer()

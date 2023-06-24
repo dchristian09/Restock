@@ -31,26 +31,30 @@ struct Product_Detail: View {
                                     Spacer()
                                     Text("3 pcs")
                                 }
-                            }
-                            Section{
                                 HStack {
                                     Text("Current Stock")
                                     Spacer()
                                     Text("1 pcs")
                                 }
-                            }
-                            Section{
                                 HStack {
                                     Text("Tissue Paper")
                                     Spacer()
                                     Text("5 pcs")
                                 }
-                            }
-                            Section{
                                 HStack {
                                     Text("Rose Flower")
                                     Spacer()
                                     Text("5 pcs")
+                                }
+                                HStack {
+                                    Text("Lem Fox")
+                                    Spacer()
+                                    Text("20 gram")
+                                }
+                                HStack {
+                                    Text("Red Ribbon")
+                                    Spacer()
+                                    Text("1 pcs")
                                 }
                             }
                         }

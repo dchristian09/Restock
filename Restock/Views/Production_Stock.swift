@@ -45,11 +45,12 @@ struct Production_Stock: View {
                                     if let data = dataProduce, let uiimage = UIImage(data: data){
                                         Image(uiImage: uiimage)
                                             .resizable()
-                                            .frame(width: 180, height: 180)
+                                            .frame(width: 150, height: 120)
                                     }else{
                                         Image(systemName: "photo")
                                             .resizable()
-                                            .frame(width: 180, height: 180)
+                                            .frame(width: 150, height: 120)
+                                            .foregroundColor(.gray)
                                     }
                                     Spacer()
                                 }
@@ -58,7 +59,7 @@ struct Production_Stock: View {
                                     maxSelectionCount: 1,
                                     matching: .images
                                 ){
-                                    Text("Pick Photo")
+                                    Text("Add Photo")
                                 }.onChange(of: selectedProduceItems){ newValue in
                                     guard let item = selectedProduceItems.first else{
                                         return
@@ -92,13 +93,13 @@ struct Production_Stock: View {
                             }
                             
                             HStack{
-                                Text("Product Date")
+                                Text("Produce Date")
                                 DatePicker(selection: $itemDate, in: ...Date.now, displayedComponents: .date) {
                                     
                                 }
                             }
                             HStack{
-                                Picker("Product Label", selection: $selectedProductLabel){
+                                Picker("Produce Label", selection: $selectedProductLabel){
                                     ForEach (label, id: \.self){
                                         Text($0)
                                     }
@@ -115,11 +116,12 @@ struct Production_Stock: View {
                                     if let data = dataReduce, let uiimage = UIImage(data: data){
                                         Image(uiImage: uiimage)
                                             .resizable()
-                                            .frame(width: 180, height: 180)
+                                            .frame(width: 150, height: 120)
                                     }else{
                                         Image(systemName: "photo")
                                             .resizable()
-                                            .frame(width: 180, height: 180)
+                                            .frame(width: 150, height: 120)
+                                            .foregroundColor(.gray)
                                     }
                                     Spacer()
                                 }
@@ -128,7 +130,7 @@ struct Production_Stock: View {
                                     maxSelectionCount: 1,
                                     matching: .images
                                 ){
-                                    Text("Pick Photo")
+                                    Text("Add Photo")
                                 }.onChange(of: selectedReduceItems){ newValue in
                                     guard let item = selectedReduceItems.first else{
                                         return

@@ -34,11 +34,12 @@ struct Product_Add: View {
                             if let data = dataProductImage, let uiimage = UIImage(data: data){
                                 Image(uiImage: uiimage)
                                     .resizable()
-                                    .frame(width: 180, height: 180)
+                                    .frame(width: 150, height: 120)
                             }else{
                                 Image(systemName: "photo")
                                     .resizable()
-                                    .frame(width: 180, height: 180)
+                                    .frame(width: 150, height: 120)
+                                    .foregroundColor(.gray)
                             }
                             Spacer()
                         }
@@ -49,7 +50,7 @@ struct Product_Add: View {
                             maxSelectionCount: 1,
                             matching: .images
                         ){
-                            Text("Pick Photo")
+                            Text("Add Photo")
                         }.onChange(of: selectedProductImage){ newValue in
                             guard let item = selectedProductImage.first else{
                                 return
@@ -71,20 +72,11 @@ struct Product_Add: View {
                     }
                     
                     Form {
-                        
                         Section{
                             //product
                             HStack{
                                 Text("Product Name")
                                 TextField("Name", text: $productName)
-                                    .keyboardType(.numberPad)
-                                    .multilineTextAlignment(.trailing)
-                            }
-                            
-                            //current stock
-                            HStack{
-                                Text("Current Stock")
-                                TextField("Current Stock", text: $productCurrentStock)
                                     .keyboardType(.numberPad)
                                     .multilineTextAlignment(.trailing)
                             }
@@ -96,6 +88,15 @@ struct Product_Add: View {
                                     .keyboardType(.numberPad)
                                     .multilineTextAlignment(.trailing)
                             }
+                            
+                            //current stock
+                            HStack{
+                                Text("Current Stock")
+                                TextField("Current Stock", text: $productCurrentStock)
+                                    .keyboardType(.numberPad)
+                                    .multilineTextAlignment(.trailing)
+                            }
+                     
                         }
                         
                         Section{
@@ -156,8 +157,10 @@ struct Product_Add: View {
                                     arrayMaterialIngredients.append(MaterialIngredients(materialUnit: "", materialQuantity: ""))
                                 }label:{
                                     HStack{
-                                        Image(systemName: "plus.circle")
-                                        Text("Add Material")
+                                        Image(systemName: "plus.circle.fill")
+                                            .foregroundColor(.green)
+                                        Text("add material")
+                                            .foregroundColor(.black)
                                     }
                                 }
                                 

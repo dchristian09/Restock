@@ -27,21 +27,26 @@ struct Material_Edit: View {
                     .ignoresSafeArea()
                 VStack{
                     VStack {
+                        Image("bouquet")
+                            .resizable()
+                            .cornerRadius(20)
+                            .frame(width: 150, height: 150)
+                            .padding(.top)
                         
-                        //icon
-                        HStack{
-                            Spacer()
-                            if let data = dataMaterialImage, let uiimage = UIImage(data: data){
-                                Image(uiImage: uiimage)
-                                    .resizable()
-                                    .frame(width: 180, height: 180)
-                            }else{
-                                Image(systemName: "photo")
-                                    .resizable()
-                                    .frame(width: 180, height: 180)
-                            }
-                            Spacer()
-                        }
+//                        //icon
+//                        HStack{
+//                            Spacer()
+//                            if let data = dataMaterialImage, let uiimage = UIImage(data: data){
+//                                Image(uiImage: uiimage)
+//                                    .resizable()
+//                                    .frame(width: 180, height: 180)
+//                            }else{
+//                                Image(systemName: "photo")
+//                                    .resizable()
+//                                    .frame(width: 180, height: 180)
+//                            }
+//                            Spacer()
+//                        }
                         
                         //pick photo
                         PhotosPicker(
@@ -49,7 +54,7 @@ struct Material_Edit: View {
                             maxSelectionCount: 1,
                             matching: .images
                         ){
-                            Text("Pick Photo")
+                            Text("Edit")
                         }.onChange(of: selectedMaterialImage){ newValue in
                             guard let item = selectedMaterialImage.first else{
                                 return
@@ -75,32 +80,32 @@ struct Material_Edit: View {
                         Section{
                             //product
                             HStack{
-                                Text("Product Name")
-                                TextField("Name", text: $materialName)
-                                    .keyboardType(.numberPad)
-                                    .multilineTextAlignment(.trailing)
-                            }
-                            
-                            //current stock
-                            HStack{
-                                Text("Current Stock")
-                                TextField("Current Stock", text: $materialCurrentStock)
-                                    .keyboardType(.numberPad)
-                                    .multilineTextAlignment(.trailing)
+                                Text("Bouquet Rose")
+//                                TextField("Name", text: $materialName)
+//                                    .keyboardType(.numberPad)
+//                                    .multilineTextAlignment(.trailing)
                             }
                             
                             //minimal stock
                             HStack{
-                                Text("Minimal Stock")
-                                TextField("Minimal Stock", text: $materialMinimalStock)
-                                    .keyboardType(.numberPad)
-                                    .multilineTextAlignment(.trailing)
+                                Text("3")
+//                                TextField("Minimal Stock", text: $materialMinimalStock)
+//                                    .keyboardType(.numberPad)
+//                                    .multilineTextAlignment(.trailing)
+                            }
+                            
+                            //current stock
+                            HStack{
+                                Text("1")
+//                                TextField("Current Stock", text: $materialCurrentStock)
+//                                    .keyboardType(.numberPad)
+//                                    .multilineTextAlignment(.trailing)
                             }
                         }
                         
                         Section{
                             HStack{
-                                Picker("Product Unit", selection: $selectedUnitList){
+                                Picker("Material Unit", selection: $selectedUnitList){
                                     ForEach (unitList, id: \.self){
                                         Text($0)
                                     }

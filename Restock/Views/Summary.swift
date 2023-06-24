@@ -57,7 +57,7 @@ struct Summary: View {
                         }
                         HStack{
                             Image(systemName: "shippingbox")
-                            Text("Material Summary")
+                            Text("Material Reminder")
                                 .font(.title2.bold())
                             Spacer()
                             NavigationLink {
@@ -92,7 +92,7 @@ struct Summary: View {
                         
                         HStack{
                             Image(systemName: "tray")
-                            Text("Product Summary")
+                            Text("Product Reminder")
                                 .font(.title2.bold())
                             Spacer()
                             NavigationLink {

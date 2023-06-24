@@ -27,29 +27,34 @@ struct Product_Edit: View {
                     .ignoresSafeArea()
                 VStack{
                     VStack {
+                        Image("bouquet")
+                            .resizable()
+                            .cornerRadius(20)
+                            .frame(width: 150, height: 150)
+                            .padding(.top)
                         
                         //icon
-                        HStack{
-                            Spacer()
-                            if let data = dataProductImage, let uiimage = UIImage(data: data){
-                                Image(uiImage: uiimage)
-                                    .resizable()
-                                    .frame(width: 180, height: 180)
-                            }else{
-                                Image(systemName: "photo")
-                                    .resizable()
-                                    .frame(width: 180, height: 180)
-                            }
-                            Spacer()
-                        }
+//                        HStack{
+//                            Spacer()
+//                            if let data = dataProductImage, let uiimage = UIImage(data: data){
+//                                Image(uiImage: uiimage)
+//                                    .resizable()
+//                                    .frame(width: 180, height: 180)
+//                            }else{
+//                                Image(systemName: "photo")
+//                                    .resizable()
+//                                    .frame(width: 180, height: 180)
+//                            }
+//                            Spacer()
+//                        }
                         
-                        //pick photo
+                        //edit photo
                         PhotosPicker(
                             selection: $selectedProductImage,
                             maxSelectionCount: 1,
                             matching: .images
                         ){
-                            Text("Pick Photo")
+                            Text("Edit")
                         }.onChange(of: selectedProductImage){ newValue in
                             guard let item = selectedProductImage.first else{
                                 return
@@ -71,30 +76,29 @@ struct Product_Edit: View {
                     }
                     
                     Form {
-                        
                         Section{
                             //product
                             HStack{
-                                Text("Product Name")
-                                TextField("Name", text: $productName)
-                                    .keyboardType(.numberPad)
-                                    .multilineTextAlignment(.trailing)
-                            }
-                            
-                            //current stock
-                            HStack{
-                                Text("Current Stock")
-                                TextField("Current Stock", text: $productCurrentStock)
-                                    .keyboardType(.numberPad)
-                                    .multilineTextAlignment(.trailing)
+                                Text("Bouquet Rose")
+//                                TextField("Name", text: $productName)
+//                                    .keyboardType(.numberPad)
+//                                    .multilineTextAlignment(.trailing)
                             }
                             
                             //minimal stock
                             HStack{
-                                Text("Minimal Stock")
-                                TextField("Minimal Stock", text: $productMinimalStock)
-                                    .keyboardType(.numberPad)
-                                    .multilineTextAlignment(.trailing)
+                                Text("3")
+//                                TextField("Minimal Stock", text: $productMinimalStock)
+//                                    .keyboardType(.numberPad)
+//                                    .multilineTextAlignment(.trailing)
+                            }
+                            
+                            //current stock
+                            HStack{
+                                Text("1").foregroundColor(.gray)
+//                                TextField("Current Stock", text: $productCurrentStock)
+//                                    .keyboardType(.numberPad)
+//                                    .multilineTextAlignment(.trailing)
                             }
                         }
                         
@@ -132,8 +136,10 @@ struct Product_Edit: View {
                                     arrayMaterialIngredients.append(MaterialIngredients(materialUnit: "", materialQuantity: ""))
                                 }label:{
                                     HStack{
-                                        Image(systemName: "plus.circle")
-                                        Text("Add Material")
+                                        Image(systemName: "plus.circle.fill")
+                                            .foregroundColor(.green)
+                                        Text("add material")
+                                            .foregroundColor(.black)
                                     }
                                 }
                                 

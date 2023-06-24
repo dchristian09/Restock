@@ -1,13 +1,13 @@
 //
-//  Summary_Product.swift
+//  Material_Reminder.swift
 //  Restock
 //
-//  Created by David Christian on 15/06/23.
+//  Created by David Christian on 14/06/23.
 //
 
 import SwiftUI
 
-struct Summary_Product: View {
+struct Summary_Material: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State private var searchText = ""
     let columns = [GridItem(.flexible()), GridItem(.flexible())]
@@ -36,12 +36,13 @@ struct Summary_Product: View {
                     
                 }
             }
-            .navigationBarTitle(Text("Product Reminder"))
+            .navigationBarTitle(Text("Material Reminder"))
             .searchable(text: $searchText)
             .navigationBarItems(leading: backButton)
         }
         .navigationBarBackButtonHidden(true)
     }
+    
     var backButton: some View {
         Button(action: {
             self.presentationMode.wrappedValue.dismiss()
@@ -52,11 +53,10 @@ struct Summary_Product: View {
             }
         })
     }
-    
 }
 
-struct Summary_Product_Previews: PreviewProvider {
+struct Summary_Material_Previews: PreviewProvider {
     static var previews: some View {
-        Summary_Product()
+        Summary_Material()
     }
 }
