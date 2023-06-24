@@ -34,11 +34,11 @@ struct Material_Add: View {
                             if let data = dataProductImage, let uiimage = UIImage(data: data){
                                 Image(uiImage: uiimage)
                                     .resizable()
-                                    .frame(width: 180, height: 180)
+                                    .frame(width: 150, height: 120)
                             }else{
                                 Image(systemName: "photo")
                                     .resizable()
-                                    .frame(width: 180, height: 180)
+                                    .frame(width: 150, height: 120).foregroundColor(.gray)
                             }
                             Spacer()
                         }
@@ -49,7 +49,7 @@ struct Material_Add: View {
                             maxSelectionCount: 1,
                             matching: .images
                         ){
-                            Text("Pick Photo")
+                            Text("Add Photo")
                         }.onChange(of: selectedProductImage){ newValue in
                             guard let item = selectedProductImage.first else{
                                 return
@@ -81,18 +81,18 @@ struct Material_Add: View {
                                     .multilineTextAlignment(.trailing)
                             }
                             
-                            //current stock
-                            HStack{
-                                Text("Current Stock")
-                                TextField("Current Stock", text: $materialCurrentStock)
-                                    .keyboardType(.numberPad)
-                                    .multilineTextAlignment(.trailing)
-                            }
-                            
                             //minimal stock
                             HStack{
                                 Text("Minimal Stock")
                                 TextField("Minimal Stock", text: $materialMinimalStock)
+                                    .keyboardType(.numberPad)
+                                    .multilineTextAlignment(.trailing)
+                            }
+                            
+                            //current stock
+                            HStack{
+                                Text("Current Stock")
+                                TextField("Current Stock", text: $materialCurrentStock)
                                     .keyboardType(.numberPad)
                                     .multilineTextAlignment(.trailing)
                             }

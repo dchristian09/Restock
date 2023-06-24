@@ -40,13 +40,13 @@ struct Production_Card_View: View {
                         ZStack {
                             Circle()
                                 .fill(.white)
-                                .frame(width: 80, height: 80)
-                                .offset(x: 20, y: 7)
+                                .frame(width: 41, height: 41)
+                                .offset(x: 65, y: 25)
                             Text("+1")
                                 .font(.title3)
                                 .bold()
                                 .foregroundColor(.green)
-                                .offset(x: 20, y: 7)
+                                .offset(x: 65, y: 25)
                         }
                         
                     }

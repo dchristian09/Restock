@@ -25,28 +25,22 @@ struct Production_Detail: View {
                         .font(.largeTitle)
                     VStack{
                         List {
-                            Section{
+                            Section {
                                 HStack {
                                     Text("Produce Amount")
                                     Spacer()
                                     Text("4 pcs")
                                 }
-                            }
-                            Section{
                                 HStack {
                                     Text("Produce Date")
                                     Spacer()
                                     Text("Jun 14, 2023")
                                 }
-                            }
-                            Section{
                                 HStack {
                                     Text("Produce Label")
                                     Spacer()
                                     Text("Stok Toko")
                                 }
-                            }
-                            Section{
                                 HStack {
                                     Text("Notes")
                                     Spacer()
