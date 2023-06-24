@@ -61,7 +61,7 @@ struct Summary: View {
                                 .font(.title2.bold())
                             Spacer()
                             NavigationLink {
-                                Summary_Material()
+                                Material_Reminder()
                             } label: {
                                 Text("View Another")
                                     .font(.footnote)
@@ -96,7 +96,7 @@ struct Summary: View {
                                 .font(.title2.bold())
                             Spacer()
                             NavigationLink {
-                                Summary_Product()
+                                Product_Reminder()
                             } label: {
                                 Text("View Another")
                                     .font(.footnote)
