@@ -21,7 +21,7 @@ struct Product: View {
                 ScrollView {
                     
                     ZStack{
-                        RoundedRectangle(cornerRadius: 60, style:.continuous)
+                        RoundedRectangle(cornerRadius: 50, style:.continuous)
                             .fill(.white)
                             .frame(maxHeight: .infinity)
                         
@@ -46,7 +46,7 @@ struct Product: View {
             .toolbar{
                 ToolbarItem(placement: .navigationBarTrailing){
                     NavigationLink {
-                        Production_Stock()
+                        Product_Add()
                     }label: {
                         Image(systemName: "plus")
                     }

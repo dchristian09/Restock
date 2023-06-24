@@ -18,11 +18,10 @@ struct Production: View {
                     .ignoresSafeArea()
                 ScrollView {
                     ZStack{
-                        RoundedRectangle(cornerRadius: 60, style:.continuous)
+                        RoundedRectangle(cornerRadius: 50, style:.continuous)
                             .fill(.white)
                             .frame(maxHeight: .infinity)
                             
-
                         VStack{
                             LazyVGrid(columns: columns){
                                 NavigationLink{

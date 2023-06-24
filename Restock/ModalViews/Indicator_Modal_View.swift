@@ -18,7 +18,7 @@ struct Indicator_Modal_View: View {
                     .fill(Color(hex: 0xf2f4ff))
                     .ignoresSafeArea()
                 ZStack{
-                    RoundedRectangle(cornerRadius: 20, style:.continuous)
+                    RoundedRectangle(cornerRadius: 8, style:.continuous)
                         .fill(.white)
                     VStack{
                         VStack{

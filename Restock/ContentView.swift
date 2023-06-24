@@ -12,7 +12,7 @@ struct ContentView: View {
     
     var body: some View {
         TabView(selection: $selection){
-            Summary()
+            Summary_No_Reminder()
                 .tabItem(){
                     if selection == 0{
                         Image(systemName: "doc.text")
@@ -23,7 +23,7 @@ struct ContentView: View {
                         
                 }
                 .tag(0)
-            Production()
+            Production_No_Data()
                 .tabItem(){
                     if selection == 1{
                         Image(systemName: "wrench.and.screwdriver.fill")
@@ -34,7 +34,7 @@ struct ContentView: View {
                         
                 }
                 .tag(1)
-            Product()
+            Product_No_Data()
                 .tabItem(){
                     if selection == 2{
                         Image(systemName: "tray")
@@ -44,7 +44,7 @@ struct ContentView: View {
                     Text("Product")
                 }
                 .tag(2)
-            Material()
+            Material_No_Data()
                 .tabItem {
                     if selection == 3{
                         Image(systemName: "shippingbox")

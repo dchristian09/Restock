@@ -29,7 +29,7 @@ struct Material_Edit: View {
                     VStack {
                         Image("bouquet")
                             .resizable()
-                            .cornerRadius(20)
+                            .cornerRadius(16)
                             .frame(width: 150, height: 150)
                             .padding(.top)
                         

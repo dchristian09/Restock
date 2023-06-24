@@ -10,8 +10,8 @@ import SwiftUI
 struct Production_Card_View: View {
     var body: some View {
         ZStack{
-            RoundedRectangle(cornerRadius: 20, style:.continuous)
-                .fill(.blue)
+            RoundedRectangle(cornerRadius: 16, style:.continuous)
+                .fill(Color(hex: 0x3C6EE1))
             ZStack{
                 HStack(alignment: .top){
                     VStack{

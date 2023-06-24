@@ -23,7 +23,7 @@ struct Material: View {
                 ScrollView {
                     
                     ZStack{
-                        RoundedRectangle(cornerRadius: 60, style:.continuous)
+                        RoundedRectangle(cornerRadius: 50, style:.continuous)
                             .fill(.white)
                             .frame(maxHeight: .infinity)
                         
