@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Summary_Product: View {
+struct Product_Reminder: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State private var searchText = ""
     let columns = [GridItem(.flexible()), GridItem(.flexible())]
@@ -55,8 +55,8 @@ struct Summary_Product: View {
     
 }
 
-struct Summary_Product_Previews: PreviewProvider {
+struct Product_Reminder_Previews: PreviewProvider {
     static var previews: some View {
-        Summary_Product()
+        Product_Reminder()
     }
 }
