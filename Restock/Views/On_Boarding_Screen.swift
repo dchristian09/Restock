@@ -52,17 +52,19 @@ struct On_Boarding_Screen: View {
                     HStack(spacing: 6){
                         ForEach(0..<data.count) { i in
                             if i == currentPage {
-                                Capsule()
+                                Circle()
                                     .matchedGeometryEffect(id: "page", in: namespace)
-                                    .frame(width: 18, height: 6)
+                                    .frame(width: 10, height: 10)
                                     .animation(.default)
+                                    .foregroundColor(Color(hex: 0x3C6EE1))
                             } else {
                                 Circle()
-                                    .frame(width: 6, height: 6)
+                                    .frame(width: 8, height: 8)
+                                    .foregroundColor(Color(hex: 0x999999))
                             }
                         }
                     }
-                    .foregroundColor(Color(hex: 0x3C6EE1))
+                 
                 }
                 
                 ZStack {
