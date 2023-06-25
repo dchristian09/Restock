@@ -40,15 +40,6 @@ struct On_Boarding_Screen: View {
             
             VStack(spacing: 20) {
                 Spacer()
-                ZStack {
-                    HStack(spacing: 6) {
-                        ForEach(0..<data.count + 1) { i in
-                             Circle()
-                                .frame(width: 6, height: 6)
-                        }
-                    }
-                    .foregroundColor(.white)
-                    
                     HStack(spacing: 6){
                         ForEach(0..<data.count) { i in
                             if i == currentPage {
@@ -57,15 +48,15 @@ struct On_Boarding_Screen: View {
                                     .frame(width: 10, height: 10)
                                     .animation(.default)
                                     .foregroundColor(Color(hex: 0x3C6EE1))
+                                    .offset(y: -50)
                             } else {
                                 Circle()
                                     .frame(width: 8, height: 8)
                                     .foregroundColor(Color(hex: 0x999999))
+                                    .offset(y: -50)
                             }
                         }
                     }
-                 
-                }
                 
                 ZStack {
                     if currentPage != lastPage {
@@ -151,6 +142,7 @@ struct ItemView: View {
                     .resizable()
                     .frame(width: 294, height: 243)
                     .padding(80)
+                    .offset(y: 50)
                 
                 VStack(spacing: 15) {
                     Text(item.title)
