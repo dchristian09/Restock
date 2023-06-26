@@ -11,7 +11,10 @@ import SwiftUI
 struct RestockApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationStack{
+                On_Boarding_Screen()
+            }
+            //ContentView()
         }
     }
 }

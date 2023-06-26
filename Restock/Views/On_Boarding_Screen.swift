@@ -89,16 +89,25 @@ struct On_Boarding_Screen: View {
                         .frame(height: 60)
                         .foregroundColor(.white)
                     } else {
-                        Button(action: {
-                            
-                        }, label: {
-                            Text("Get Started ")
-                                .foregroundColor(.white)
-                                .fontWeight(.semibold)
-                                .frame(maxWidth: .infinity)
-                                .frame(height: 60)
-                                .background(Capsule().fill(Color(hex: 0x3C6EE1)))
-                        })
+                       // NavigationLink( destination: ContentView())
+                        NavigationLink(destination: ContentView(), label: {
+                                                        Text("Get Started ")
+                                                            .foregroundColor(.white)
+                                                            .fontWeight(.semibold)
+                                                            .frame(maxWidth: .infinity)
+                                                            .frame(height: 60)
+                                                            .background(Capsule().fill(Color(hex: 0x3C6EE1)))
+                                                    })
+//                        Button(action: {
+//
+//                        }, label: {
+//                            Text("Get Started ")
+//                                .foregroundColor(.white)
+//                                .fontWeight(.semibold)
+//                                .frame(maxWidth: .infinity)
+//                                .frame(height: 60)
+//                                .background(Capsule().fill(Color(hex: 0x3C6EE1)))
+//                        })
                     }
                 }
                 .padding(.horizontal)
