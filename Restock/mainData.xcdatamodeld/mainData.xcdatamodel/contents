@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22F82" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="DataMaterial" representedClassName="DataMaterial" syncable="YES" codeGenerationType="class">
-        <attribute name="curStock" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="currentStock" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="isActive" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="minStock" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="nama" optional="YES" attributeType="String"/>
+        <attribute name="minimalStock" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="note" optional="YES" attributeType="String"/>
-        <attribute name="satuan" optional="YES" attributeType="String"/>
+        <attribute name="unit" optional="YES" attributeType="String"/>
     </entity>
     <entity name="DataProduct" representedClassName="DataProduct" syncable="YES" codeGenerationType="class">
         <attribute name="curStock" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
