@@ -12,6 +12,7 @@ struct Material: View {
     @State private var searchText = ""
     let columns = [GridItem(.flexible()), GridItem(.flexible())]
     @State var showingAlert: Bool = false
+    @StateObject var materialDataManager:MaterialDataManager = MaterialDataManager.shared
     
     var body: some View {
         NavigationView{
@@ -26,23 +27,59 @@ struct Material: View {
                         RoundedRectangle(cornerRadius: 50, style:.continuous)
                             .fill(.white)
                             .frame(maxHeight: .infinity)
-                        
-                        VStack{
-                            LazyVGrid(columns: columns){
-                                NavigationLink{
-                                    Material_Detail()
-                                }label: {
-                                    Main_Card_View()
+                        if(materialDataManager.materialList.count > 0 ){
+                            VStack{
+                                LazyVGrid(columns: columns){
+                                    ForEach(materialDataManager.materialList,id:\.id){ material in
+                                        NavigationLink{
+                                            Material_Detail()
+                                        }label: {
+                                            Main_Card_View(materialName: material.name ?? "")
+                                        }
+                                    }
+                                    //                                    NavigationLink{
+                                    //                                        Material_Detail()
+                                    //                                    }label: {
+                                    //                                        Main_Card_View()
+                                    //                                    }
+                                    //                                    NavigationLink{
+                                    //                                        Material_Detail()
+                                    //                                    }label: {
+                                    //                                        Main_Card_View()
+                                    //                                    }
                                 }
-                                NavigationLink{
-                                    Material_Detail()
-                                }label: {
-                                    Main_Card_View()
-                                }
+                                Spacer()
                             }
-                            Spacer()
+                            .padding()
+                            
+                        } else {
+                            VStack {
+                                Text("There is no material yet.")
+                                    .font(.system(size: 22))
+                                    .foregroundColor(Color(hex: 0x8E8E93))
+                                
+                                HStack {
+                                    Text("Please tap")
+                                        .font(.system(size: 22))
+                                        .foregroundColor(Color(hex: 0x8E8E93))
+                                    Image(systemName: "plus")
+                                        .font(.system(size: 22))
+                                        .foregroundColor(.blue)
+                                    Text("to add your material")
+                                        .font(.system(size: 22))
+                                        .foregroundColor(Color(hex: 0x8E8E93))
+                                }
+                                
+                                Image("material_no_data")
+                                    .resizable()
+                                    .frame(width: 393, height: 256)
+                                
+                                Image("material_no_data_wave")
+                                    .resizable()
+                                    .frame(width: 393, height: 104)
+                                    .offset(y: 65)
+                            }.padding()
                         }
-                        .padding()
                     }
                 }
             }
