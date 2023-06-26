@@ -16,39 +16,39 @@ struct Production_No_Data: View {
                     .fill(Color(hex: 0xf2f4ff))
                     .ignoresSafeArea()
                 
-                    ZStack{
-                        RoundedRectangle(cornerRadius: 50, style: .continuous)
-                            .fill(.white)
-                            .frame(maxHeight: .infinity)
-                            
-                        VStack {
-                            Text("There is no production yet.")
+                ZStack{
+                    RoundedRectangle(cornerRadius: 50, style: .continuous)
+                        .fill(.white)
+                        .frame(maxHeight: .infinity)
+                    
+                    VStack {
+                        Text("There is no production yet.")
+                            .font(.system(size: 22))
+                            .foregroundColor(Color(hex: 0x8E8E93))
+                        
+                        HStack {
+                            Text("Please tap")
                                 .font(.system(size: 22))
                                 .foregroundColor(Color(hex: 0x8E8E93))
-                            
-                            HStack {
-                                Text("Please tap")
-                                    .font(.system(size: 22))
-                                    .foregroundColor(Color(hex: 0x8E8E93))
-                                Image(systemName: "plus")
-                                    .font(.system(size: 22))
-                                    .foregroundColor(.blue)
-                                Text("to start your production")
-                                    .font(.system(size: 22))
-                                    .foregroundColor(Color(hex: 0x8E8E93))
-                            }
-                            
-                                Image("production_no_data")
-                                    .resizable()
-                                    .frame(width: 393, height: 248)
-                                
-                                Image("production_no_data_wave")
-                                    .resizable()
-                                    .frame(width: 395, height: 104)
-                                    .offset(y: 70)
+                            Image(systemName: "plus")
+                                .font(.system(size: 22))
+                                .foregroundColor(.blue)
+                            Text("to start your production")
+                                .font(.system(size: 22))
+                                .foregroundColor(Color(hex: 0x8E8E93))
                         }
+                        
+                        Image("production_no_data")
+                            .resizable()
+                            .frame(width: 393, height: 248)
+                        
+                        Image("production_no_data_wave")
+                            .resizable()
+                            .frame(width: 395, height: 104)
+                            .offset(y: 70)
                     }
                 }
+            }
             
             .navigationBarTitle("Production")
             .navigationBarTitleDisplayMode(.large)

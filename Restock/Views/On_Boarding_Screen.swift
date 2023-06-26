@@ -35,28 +35,28 @@ struct On_Boarding_Screen: View {
                         .onEnded({ value in
                             onEnded(value: value)
                         })
-                    )
+                )
             }
             
             VStack(spacing: 20) {
                 Spacer()
-                    HStack(spacing: 6){
-                        ForEach(0..<data.count) { i in
-                            if i == currentPage {
-                                Circle()
-                                    .matchedGeometryEffect(id: "page", in: namespace)
-                                    .frame(width: 10, height: 10)
-                                    .animation(.default)
-                                    .foregroundColor(Color(hex: 0x3C6EE1))
-                                    .offset(y: -50)
-                            } else {
-                                Circle()
-                                    .frame(width: 8, height: 8)
-                                    .foregroundColor(Color(hex: 0x999999))
-                                    .offset(y: -50)
-                            }
+                HStack(spacing: 6){
+                    ForEach(0..<data.count) { i in
+                        if i == currentPage {
+                            Circle()
+                                .matchedGeometryEffect(id: "page", in: namespace)
+                                .frame(width: 10, height: 10)
+                                .animation(.default)
+                                .foregroundColor(Color(hex: 0x3C6EE1))
+                                .offset(y: -50)
+                        } else {
+                            Circle()
+                                .frame(width: 8, height: 8)
+                                .foregroundColor(Color(hex: 0x999999))
+                                .offset(y: -50)
                         }
                     }
+                }
                 
                 ZStack {
                     if currentPage != lastPage {
@@ -89,29 +89,21 @@ struct On_Boarding_Screen: View {
                         .frame(height: 60)
                         .foregroundColor(.white)
                     } else {
-                       // NavigationLink( destination: ContentView())
                         NavigationLink(destination: ContentView(), label: {
-                                                        Text("Get Started ")
-                                                            .foregroundColor(.white)
-                                                            .fontWeight(.semibold)
-                                                            .frame(maxWidth: .infinity)
-                                                            .frame(height: 60)
-                                                            .background(Capsule().fill(Color(hex: 0x3C6EE1)))
-                                                    })
-//                        Button(action: {
-//
-//                        }, label: {
-//                            Text("Get Started ")
-//                                .foregroundColor(.white)
-//                                .fontWeight(.semibold)
-//                                .frame(maxWidth: .infinity)
-//                                .frame(height: 60)
-//                                .background(Capsule().fill(Color(hex: 0x3C6EE1)))
-//                        })
+                            Text("Get Started ")
+                                .foregroundColor(.white)
+                                .fontWeight(.semibold)
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 60)
+                                .background(Capsule().fill(Color(hex: 0x3C6EE1)))
+                        })
                     }
                 }
                 .padding(.horizontal)
             }
+        }
+        .onAppear() {
+            print("On Boarding Screen")
         }
     }
     func onChanged(value: DragGesture.Value) {

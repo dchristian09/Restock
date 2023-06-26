@@ -13,6 +13,7 @@ struct ContentView: View {
     var body: some View {
         TabView(selection: $selection){
             Summary_No_Reminder()
+                .preferredColorScheme(.light)
                 .tabItem(){
                     if selection == 0{
                         Image(systemName: "doc.text")
@@ -20,10 +21,11 @@ struct ContentView: View {
                         Image(systemName: "doc.text").environment(\.symbolVariants, .none)
                     }
                     Text("Summary")
-                        
+                    
                 }
                 .tag(0)
             Production_No_Data()
+                .preferredColorScheme(.light)
                 .tabItem(){
                     if selection == 1{
                         Image(systemName: "wrench.and.screwdriver.fill")
@@ -31,10 +33,11 @@ struct ContentView: View {
                         Image(systemName: "wrench.and.screwdriver").environment(\.symbolVariants, .none)
                     }
                     Text("Production")
-                        
+                    
                 }
                 .tag(1)
             Product_No_Data()
+                .preferredColorScheme(.light)
                 .tabItem(){
                     if selection == 2{
                         Image(systemName: "tray")
@@ -45,6 +48,7 @@ struct ContentView: View {
                 }
                 .tag(2)
             Material_No_Data()
+                .preferredColorScheme(.light)
                 .tabItem {
                     if selection == 3{
                         Image(systemName: "shippingbox")

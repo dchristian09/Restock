@@ -111,7 +111,7 @@ struct Material_Add: View {
                         
                         Section{
                             TextField("Note", text: $materialNote)
-
+                            
                         }
                         
                         HStack {
