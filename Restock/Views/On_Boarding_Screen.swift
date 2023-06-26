@@ -141,9 +141,10 @@ struct ItemView: View {
             VStack(spacing: 20) {
                 Image(item.image)
                     .resizable()
+                    .scaledToFill()
                     .frame(width: 294, height: 243)
                     .padding(80)
-                    .offset(y: 50)
+                    .offset(y: 100)
                 
                 VStack(spacing: 15) {
                     Text(item.title)
@@ -154,6 +155,7 @@ struct ItemView: View {
                         .font(.system(size: 25, weight: .regular))
                         .animation(Animation.interpolatingSpring(stiffness: 40, damping: 8))
                 }
+                .offset(y: 30)
                 .padding(.horizontal)
                 Spacer()
             }
