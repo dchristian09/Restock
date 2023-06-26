@@ -12,7 +12,7 @@ struct RestockApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack{
-                On_Boarding_Screen()
+                Splash_Screen()
             }
             //ContentView()
         }

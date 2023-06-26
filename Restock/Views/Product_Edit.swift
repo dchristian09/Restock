@@ -34,19 +34,19 @@ struct Product_Edit: View {
                             .padding(.top)
                         
                         //icon
-//                        HStack{
-//                            Spacer()
-//                            if let data = dataProductImage, let uiimage = UIImage(data: data){
-//                                Image(uiImage: uiimage)
-//                                    .resizable()
-//                                    .frame(width: 180, height: 180)
-//                            }else{
-//                                Image(systemName: "photo")
-//                                    .resizable()
-//                                    .frame(width: 180, height: 180)
-//                            }
-//                            Spacer()
-//                        }
+                        //                        HStack{
+                        //                            Spacer()
+                        //                            if let data = dataProductImage, let uiimage = UIImage(data: data){
+                        //                                Image(uiImage: uiimage)
+                        //                                    .resizable()
+                        //                                    .frame(width: 180, height: 180)
+                        //                            }else{
+                        //                                Image(systemName: "photo")
+                        //                                    .resizable()
+                        //                                    .frame(width: 180, height: 180)
+                        //                            }
+                        //                            Spacer()
+                        //                        }
                         
                         //edit photo
                         PhotosPicker(
@@ -80,25 +80,25 @@ struct Product_Edit: View {
                             //product
                             HStack{
                                 Text("Bouquet Rose")
-//                                TextField("Name", text: $productName)
-//                                    .keyboardType(.numberPad)
-//                                    .multilineTextAlignment(.trailing)
+                                //                                TextField("Name", text: $productName)
+                                //                                    .keyboardType(.numberPad)
+                                //                                    .multilineTextAlignment(.trailing)
                             }
                             
                             //minimal stock
                             HStack{
                                 Text("3")
-//                                TextField("Minimal Stock", text: $productMinimalStock)
-//                                    .keyboardType(.numberPad)
-//                                    .multilineTextAlignment(.trailing)
+                                //                                TextField("Minimal Stock", text: $productMinimalStock)
+                                //                                    .keyboardType(.numberPad)
+                                //                                    .multilineTextAlignment(.trailing)
                             }
                             
                             //current stock
                             HStack{
                                 Text("1").foregroundColor(.gray)
-//                                TextField("Current Stock", text: $productCurrentStock)
-//                                    .keyboardType(.numberPad)
-//                                    .multilineTextAlignment(.trailing)
+                                //                                TextField("Current Stock", text: $productCurrentStock)
+                                //                                    .keyboardType(.numberPad)
+                                //                                    .multilineTextAlignment(.trailing)
                             }
                         }
                         

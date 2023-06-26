@@ -21,7 +21,7 @@ struct Production: View {
                         RoundedRectangle(cornerRadius: 50, style:.continuous)
                             .fill(.white)
                             .frame(maxHeight: .infinity)
-                            
+                        
                         VStack{
                             LazyVGrid(columns: columns){
                                 NavigationLink{
