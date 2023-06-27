@@ -15,14 +15,14 @@ struct On_Boarding_Screen: View {
     var lastPage = data.count - 1
     var firstPage = 0
     var secondPage = 0
-    @Namespace var namespace
     
+    @Namespace var namespace
     var body: some View {
         ZStack {
             GeometryReader { reader in
                 HStack(spacing: 0) {
                     ForEach(data) { item in
-                        ItemView(item: item)
+                        ItemView(item: item, imageBaseName: item.image,  itemImage: item.image)
                             .frame(width: screenWidth)
                     }
                 }
@@ -35,34 +35,27 @@ struct On_Boarding_Screen: View {
                         .onEnded({ value in
                             onEnded(value: value)
                         })
-                    )
+                )
             }
             
             VStack(spacing: 20) {
                 Spacer()
-                ZStack {
-                    HStack(spacing: 6) {
-                        ForEach(0..<data.count + 1) { i in
-                             Circle()
-                                .frame(width: 6, height: 6)
+                HStack(spacing: 6){
+                    ForEach(0..<data.count) { i in
+                        if i == currentPage {
+                            Circle()
+                                .matchedGeometryEffect(id: "page", in: namespace)
+                                .frame(width: 10, height: 10)
+                                .animation(.default)
+                                .foregroundColor(Color(hex: 0x3C6EE1))
+                                .offset(y: -50)
+                        } else {
+                            Circle()
+                                .frame(width: 8, height: 8)
+                                .foregroundColor(Color(hex: 0x999999))
+                                .offset(y: -50)
                         }
                     }
-                    .foregroundColor(.white)
-                    
-                    HStack(spacing: 6){
-                        ForEach(0..<data.count) { i in
-                            if i == currentPage {
-                                Capsule()
-                                    .matchedGeometryEffect(id: "page", in: namespace)
-                                    .frame(width: 18, height: 6)
-                                    .animation(.default)
-                            } else {
-                                Circle()
-                                    .frame(width: 6, height: 6)
-                            }
-                        }
-                    }
-                    .foregroundColor(Color(hex: 0x3C6EE1))
                 }
                 
                 ZStack {
@@ -96,9 +89,7 @@ struct On_Boarding_Screen: View {
                         .frame(height: 60)
                         .foregroundColor(.white)
                     } else {
-                        Button(action: {
-                            
-                        }, label: {
+                        NavigationLink(destination: ContentView(), label: {
                             Text("Get Started ")
                                 .foregroundColor(.white)
                                 .fontWeight(.semibold)
@@ -110,6 +101,9 @@ struct On_Boarding_Screen: View {
                 }
                 .padding(.horizontal)
             }
+        }
+        .onAppear() {
+            print("On Boarding Screen")
         }
     }
     func onChanged(value: DragGesture.Value) {
@@ -138,6 +132,9 @@ struct On_Boarding_Screen_Previews: PreviewProvider {
 
 struct ItemView: View {
     var item: Item
+    var imageBaseName: String
+    @State var itemImage: String 
+    
     
     var body: some View {
         ZStack {
@@ -145,10 +142,12 @@ struct ItemView: View {
                 .ignoresSafeArea(.all, edges: .all)
             
             VStack(spacing: 20) {
-                Image(item.image)
+                Image(itemImage)
                     .resizable()
+                    .scaledToFill()
                     .frame(width: 294, height: 243)
                     .padding(80)
+                    .offset(y: 100)
                 
                 VStack(spacing: 15) {
                     Text(item.title)
@@ -159,10 +158,31 @@ struct ItemView: View {
                         .font(.system(size: 25, weight: .regular))
                         .animation(Animation.interpolatingSpring(stiffness: 40, damping: 8))
                 }
+                .offset(y: 30)
                 .padding(.horizontal)
                 Spacer()
             }
             .foregroundColor(.black)
+        }.onAppear(){
+            if(item.animationCount > 0 ){
+                timerImage()
+            }
+        }
+    }
+    
+    func timerImage(){
+        var index = 1
+        let timer = Timer.scheduledTimer(withTimeInterval: 0.08, repeats: true){ Timer in
+            
+            itemImage = "\(imageBaseName)\(index)"
+            
+            index += 1
+            
+            if (index > item.animationCount ){
+                index = 1
+            }
+            
+            
         }
     }
 }

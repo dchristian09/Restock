@@ -96,7 +96,7 @@ struct Product_Add: View {
                                     .keyboardType(.numberPad)
                                     .multilineTextAlignment(.trailing)
                             }
-                     
+                            
                         }
                         
                         Section{
@@ -138,8 +138,8 @@ struct Product_Add: View {
                                         }else{
                                             Text("\(arrayMaterialIngredients[index].materialUnit)")
                                                 .frame(maxWidth:100,maxHeight:30)
-//                                                .lineLimit(1)
-//                                                .truncationMode(.trailing)
+                                            //                                                .lineLimit(1)
+                                            //                                                .truncationMode(.trailing)
                                         }
                                     }
                                     

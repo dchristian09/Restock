@@ -20,6 +20,10 @@ struct Material_Add: View {
     @State var dataProductImage: Data?
     let unitList = ["pcs", "gram", "liter", "ml", "sheet", "bottle"]
     let product = ["Bouquet Rose", "Chocolate Bouquet", "Saya suka sama milo dinosaurus"]
+    
+    @StateObject var materialDataManager:MaterialDataManager = MaterialDataManager.shared
+    
+    
     var body: some View {
         NavigationView{
             ZStack {
@@ -111,7 +115,7 @@ struct Material_Add: View {
                         
                         Section{
                             TextField("Note", text: $materialNote)
-
+                            
                         }
                         
                         HStack {
@@ -130,12 +134,18 @@ struct Material_Add: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing){
                     Button("Add") {
+                        saveData()
+                        self.presentationMode.wrappedValue.dismiss()
                         //function
                     }
                 }
             }
         }
         .navigationBarBackButtonHidden(true)
+    }
+    
+    func saveData(){
+        materialDataManager.addDataToCoreData(materialName: materialName, currentStock: Int32(materialCurrentStock) ?? 0, minimumStock: Int32(materialMinimalStock) ?? 0, isActive: true, unit: selectedUnitList, note: materialNote)
     }
 }
 

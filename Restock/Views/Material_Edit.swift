@@ -33,20 +33,20 @@ struct Material_Edit: View {
                             .frame(width: 150, height: 150)
                             .padding(.top)
                         
-//                        //icon
-//                        HStack{
-//                            Spacer()
-//                            if let data = dataMaterialImage, let uiimage = UIImage(data: data){
-//                                Image(uiImage: uiimage)
-//                                    .resizable()
-//                                    .frame(width: 180, height: 180)
-//                            }else{
-//                                Image(systemName: "photo")
-//                                    .resizable()
-//                                    .frame(width: 180, height: 180)
-//                            }
-//                            Spacer()
-//                        }
+                        //                        //icon
+                        //                        HStack{
+                        //                            Spacer()
+                        //                            if let data = dataMaterialImage, let uiimage = UIImage(data: data){
+                        //                                Image(uiImage: uiimage)
+                        //                                    .resizable()
+                        //                                    .frame(width: 180, height: 180)
+                        //                            }else{
+                        //                                Image(systemName: "photo")
+                        //                                    .resizable()
+                        //                                    .frame(width: 180, height: 180)
+                        //                            }
+                        //                            Spacer()
+                        //                        }
                         
                         //pick photo
                         PhotosPicker(
@@ -81,25 +81,25 @@ struct Material_Edit: View {
                             //product
                             HStack{
                                 Text("Bouquet Rose")
-//                                TextField("Name", text: $materialName)
-//                                    .keyboardType(.numberPad)
-//                                    .multilineTextAlignment(.trailing)
+                                //                                TextField("Name", text: $materialName)
+                                //                                    .keyboardType(.numberPad)
+                                //                                    .multilineTextAlignment(.trailing)
                             }
                             
                             //minimal stock
                             HStack{
                                 Text("3")
-//                                TextField("Minimal Stock", text: $materialMinimalStock)
-//                                    .keyboardType(.numberPad)
-//                                    .multilineTextAlignment(.trailing)
+                                //                                TextField("Minimal Stock", text: $materialMinimalStock)
+                                //                                    .keyboardType(.numberPad)
+                                //                                    .multilineTextAlignment(.trailing)
                             }
                             
                             //current stock
                             HStack{
                                 Text("1")
-//                                TextField("Current Stock", text: $materialCurrentStock)
-//                                    .keyboardType(.numberPad)
-//                                    .multilineTextAlignment(.trailing)
+                                //                                TextField("Current Stock", text: $materialCurrentStock)
+                                //                                    .keyboardType(.numberPad)
+                                //                                    .multilineTextAlignment(.trailing)
                             }
                         }
                         
