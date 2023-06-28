@@ -32,5 +32,9 @@ let data = [
          title: "Production",
          subtitle: "Take control of your \r\n production process by tracking \r\n inventory stock with ease and precision.",
          animationCount: 27),
-//    Item(backgroundColor: Color("color"), image: "material_gif-", title: "Summary", subtitle: "Get your stock reminder", animationCount: 13)
+    Item(backgroundColor: Color("color"),
+         image: "summary_gif-",
+         title: "Summary",
+         subtitle: "Streamline your business operations \r\n with our inventory reminder feature. \r\n Keep a close eye on stock levels and \r\n receive alerts for low quantities.",
+         animationCount: 35)
 ]
