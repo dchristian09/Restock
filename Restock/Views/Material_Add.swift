@@ -38,7 +38,8 @@ struct Material_Add: View {
                             if let data = dataProductImage, let uiimage = UIImage(data: data){
                                 Image(uiImage: uiimage)
                                     .resizable()
-                                    .frame(width: 150, height: 150)
+                                    .scaledToFit()
+                                    .frame(width: 300, height: 250)
                             }else{
                                 Image(systemName: "photo")
                                     .resizable()
@@ -81,7 +82,7 @@ struct Material_Add: View {
                             HStack{
                                 Text("Product Name")
                                 TextField("Name", text: $materialName)
-                                    .keyboardType(.numberPad)
+                                    .keyboardType(.default)
                                     .multilineTextAlignment(.trailing)
                             }
       

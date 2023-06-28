@@ -27,26 +27,22 @@ struct Material_Edit: View {
                     .ignoresSafeArea()
                 VStack{
                     VStack {
-                        Image("bouquet")
-                            .resizable()
-                            .cornerRadius(16)
-                            .frame(width: 150, height: 150)
-                            .padding(.top)
                         
-                        //                        //icon
-                        //                        HStack{
-                        //                            Spacer()
-                        //                            if let data = dataMaterialImage, let uiimage = UIImage(data: data){
-                        //                                Image(uiImage: uiimage)
-                        //                                    .resizable()
-                        //                                    .frame(width: 180, height: 180)
-                        //                            }else{
-                        //                                Image(systemName: "photo")
-                        //                                    .resizable()
-                        //                                    .frame(width: 180, height: 180)
-                        //                            }
-                        //                            Spacer()
-                        //                        }
+                        //icon
+                        HStack{
+                            Spacer()
+                            if let data = dataMaterialImage, let uiimage = UIImage(data: data){
+                                Image(uiImage: uiimage)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 300, height: 250)
+                            }else{
+                                Image(systemName: "photo")
+                                    .resizable()
+                                    .frame(width: 180, height: 180)
+                            }
+                            Spacer()
+                        }
                         
                         //pick photo
                         PhotosPicker(
@@ -82,7 +78,7 @@ struct Material_Edit: View {
                             HStack{
                                 Text("Bouquet Rose")
                                 //                                TextField("Name", text: $materialName)
-                                //                                    .keyboardType(.numberPad)
+                                //                                    .keyboardType(.default)
                                 //                                    .multilineTextAlignment(.trailing)
                             }
                             
