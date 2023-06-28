@@ -17,9 +17,20 @@ struct Item: Identifiable {
 }
 
 let data = [
-    Item(backgroundColor: Color("color"), image: "material_gif-", title: "Material", subtitle: "Input & track your material", animationCount: 13),
-    //Item(backgroundColor: Color("color"), image: "material_on_boarding_screen", title: "Material", subtitle: "Input & track your material", animationCount: 13),
-    Item(backgroundColor: Color("color"), image: "product_on_boarding_screen", title: "Product", subtitle: "Input & track your product", animationCount: 0),
-    Item(backgroundColor: Color("color"), image: "production_on_boarding_screen", title: "Production", subtitle: "Produce or reduce your stock", animationCount: 0),
-    Item(backgroundColor: Color("color"), image: "summary_on_boarding_screen", title: "Summary", subtitle: "Get your stock reminder", animationCount: 0)
+    Item(backgroundColor: Color("color"),
+         image: "material_gif-",
+         title: "Material",
+         subtitle: "Easily track and manage your \r\n raw material inventory for \r\n a smooth production process.",
+         animationCount: 13),
+    Item(backgroundColor: Color("color"),
+         image: "product_gif-",
+         title: "Product",
+         subtitle: "Monitor and manage your \r\n diverse product effortlessly.",
+         animationCount: 27),
+    Item(backgroundColor: Color("color"),
+         image: "production_gif-",
+         title: "Production",
+         subtitle: "Take control of your \r\n production process by tracking \r\n inventory stock with ease and precision.",
+         animationCount: 27),
+//    Item(backgroundColor: Color("color"), image: "material_gif-", title: "Summary", subtitle: "Get your stock reminder", animationCount: 13)
 ]
