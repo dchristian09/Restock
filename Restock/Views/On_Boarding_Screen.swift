@@ -155,7 +155,7 @@ struct ItemView: View {
                         .animation(Animation.interpolatingSpring(stiffness: 40, damping: 8))
                     
                     Text(item.subtitle)
-                        .font(.system(size: 20, weight: .regular))
+                        .font(.system(size: 18, weight: .regular))
                         .animation(Animation.interpolatingSpring(stiffness: 40, damping: 8))
                         .multilineTextAlignment(.center)
                 }
