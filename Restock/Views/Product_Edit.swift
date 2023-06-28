@@ -116,7 +116,7 @@ struct Product_Edit: View {
                         Section{
                             ForEach(arrayMaterialIngredients.indices, id:\.self) { index in
                                 HStack{
-                                    Picker("a", selection: $arrayMaterialIngredients[index].materialUnit){
+                                    Picker("a", selection: $arrayMaterialIngredients[index].data){
                                         ForEach (product, id: \.self){
                                             Text($0)
                                         }
@@ -133,7 +133,7 @@ struct Product_Edit: View {
                             }
                             HStack{
                                 Button{
-                                    arrayMaterialIngredients.append(MaterialIngredients(materialUnit: "", materialQuantity: ""))
+                                    arrayMaterialIngredients.append(MaterialIngredients(data:nil, materialQuantity: ""))
                                 }label:{
                                     HStack{
                                         Image(systemName: "plus.circle.fill")
