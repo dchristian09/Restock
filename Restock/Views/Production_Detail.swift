@@ -19,6 +19,7 @@ struct Production_Detail: View {
                     Image("bouquet")
                         .resizable()
                         .cornerRadius(16)
+                        .scaledToFill()
                         .frame(width: 150, height: 150)
                         .padding(.top)
                     Text("Bouquet Rose")

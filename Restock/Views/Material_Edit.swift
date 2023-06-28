@@ -86,18 +86,18 @@ struct Material_Edit: View {
                                 //                                    .multilineTextAlignment(.trailing)
                             }
                             
-                            //minimal stock
-                            HStack{
-                                Text("3")
-                                //                                TextField("Minimal Stock", text: $materialMinimalStock)
-                                //                                    .keyboardType(.numberPad)
-                                //                                    .multilineTextAlignment(.trailing)
-                            }
-                            
                             //current stock
                             HStack{
                                 Text("1")
                                 //                                TextField("Current Stock", text: $materialCurrentStock)
+                                //                                    .keyboardType(.numberPad)
+                                //                                    .multilineTextAlignment(.trailing)
+                            }
+                            
+                            //minimal stock
+                            HStack{
+                                Text("3")
+                                //                                TextField("Minimal Stock", text: $materialMinimalStock)
                                 //                                    .keyboardType(.numberPad)
                                 //                                    .multilineTextAlignment(.trailing)
                             }

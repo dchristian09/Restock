@@ -20,7 +20,7 @@ struct Product_Add: View {
     @State var selectedProductImage: [PhotosPickerItem] = []
     @State var dataProductImage: Data?
     let unitList = ["pcs", "gram", "liter", "ml", "sheet", "bottle"]
-   
+    
     @State var material = ["Bouquet Rose", "Chocolate Bouquet", "Saya suka sama milo dinosaurus"]
     @State var arrayMaterialIngredients: [MaterialIngredients] = []
     
@@ -39,15 +39,16 @@ struct Product_Add: View {
                             if let data = dataProductImage, let uiimage = UIImage(data: data){
                                 Image(uiImage: uiimage)
                                     .resizable()
-                                    .frame(width: 150, height: 150)
-                            }else{
-                                Image(systemName: "photo")
-                                    .resizable()
+                                    .scaledToFit()
                                     .frame(width: 150, height: 120)
-                                    .foregroundColor(.gray)
-                            }
+                            } else {
+                                    Image(systemName: "photo")
+                                        .resizable()
+                                        .frame(width: 150, height: 120)
+                                        .foregroundColor(.gray)
+                                }
                             Spacer()
-                        }
+                        }.padding(.top)
                         
                         //pick photo
                         PhotosPicker(
@@ -82,15 +83,7 @@ struct Product_Add: View {
                             HStack{
                                 Text("Product Name")
                                 TextField("Name", text: $productName)
-                                    .keyboardType(.numberPad)
-                                    .multilineTextAlignment(.trailing)
-                            }
-                            
-                            //minimal stock
-                            HStack{
-                                Text("Minimal Stock")
-                                TextField("Minimal Stock", text: $productMinimalStock)
-                                    .keyboardType(.numberPad)
+                                    .keyboardType(.default)
                                     .multilineTextAlignment(.trailing)
                             }
                             
@@ -102,6 +95,13 @@ struct Product_Add: View {
                                     .multilineTextAlignment(.trailing)
                             }
                             
+                            //minimal stock
+                            HStack{
+                                Text("Minimal Stock")
+                                TextField("Minimal Stock", text: $productMinimalStock)
+                                    .keyboardType(.numberPad)
+                                    .multilineTextAlignment(.trailing)
+                            }
                         }
                         
                         Section{
@@ -195,7 +195,7 @@ struct Product_Add: View {
         .navigationBarBackButtonHidden(true)
     }
     
-   
+    
     func saveData(){
         productDataManager.addDataToCoreData(productName: productName, currentStock: Int32(productCurrentStock) ?? 0, minimumStock: Int32(productMinimalStock) ?? 0, isActive: true, unit: selectedUnitList)
     }

@@ -31,54 +31,60 @@ struct Production_Stock: View {
                     .fill(Color(hex: 0xf2f4ff))
                     .ignoresSafeArea()
                 VStack{
-                    Form {
+                    Spacer()
+                    HStack{
+                        Spacer()
                         Picker("Appearance", selection: $selectedTheme) {
                             ForEach(themes, id: \.self) {
                                 Text($0)
                             }
                         }
                         .pickerStyle(.segmented)
-                        if selectedTheme == "Produce Stock"{
-                            VStack {
-                                HStack{
-                                    Spacer()
-                                    if let data = dataProduce, let uiimage = UIImage(data: data){
-                                        Image(uiImage: uiimage)
-                                            .resizable()
-                                            .frame(width: 150, height: 120)
-                                    }else{
-                                        Image(systemName: "photo")
-                                            .resizable()
-                                            .frame(width: 150, height: 120)
-                                            .foregroundColor(.gray)
-                                    }
-                                    Spacer()
+                        Spacer()
+                    }.padding(.all)
+                    
+                    if selectedTheme == "Produce Stock"{
+                        VStack {
+                            HStack{
+                                Spacer()
+                                if let data = dataProduce, let uiimage = UIImage(data: data){
+                                    Image(uiImage: uiimage)
+                                        .resizable()
+                                        .frame(width: 150, height: 120)
+                                }else{
+                                    Image(systemName: "photo")
+                                        .resizable()
+                                        .frame(width: 150, height: 120)
+                                        .foregroundColor(.gray)
                                 }
-                                PhotosPicker(
-                                    selection: $selectedProduceItems,
-                                    maxSelectionCount: 1,
-                                    matching: .images
-                                ){
-                                    Text("Add Photo")
-                                }.onChange(of: selectedProduceItems){ newValue in
-                                    guard let item = selectedProduceItems.first else{
-                                        return
-                                    }
-                                    item.loadTransferable(type: Data.self){result in
-                                        switch result{
-                                        case.success(let data):
-                                            if let data = data {
-                                                self.dataProduce = data
-                                            }else{
-                                                print("Data is nil")
-                                            }
-                                        case.failure(let failure):
-                                            fatalError("\(failure)")
+                                Spacer()
+                            }.padding(.top)
+                            PhotosPicker(
+                                selection: $selectedProduceItems,
+                                maxSelectionCount: 1,
+                                matching: .images
+                            ){
+                                Text("Add Photo")
+                            }.onChange(of: selectedProduceItems){ newValue in
+                                guard let item = selectedProduceItems.first else{
+                                    return
+                                }
+                                item.loadTransferable(type: Data.self){result in
+                                    switch result{
+                                    case.success(let data):
+                                        if let data = data {
+                                            self.dataProduce = data
+                                        }else{
+                                            print("Data is nil")
                                         }
+                                    case.failure(let failure):
+                                        fatalError("\(failure)")
                                     }
                                 }
-                                
                             }
+                            
+                        }
+                        Form {
                             Picker("Product", selection: $selectedProduct){
                                 ForEach (product, id: \.self){
                                     Text($0)
@@ -109,46 +115,49 @@ struct Production_Stock: View {
                             }
                             TextField("Notes", text: $itemNote)
                                 .keyboardType(.default)
-                        }else{
-                            VStack {
-                                HStack{
-                                    Spacer()
-                                    if let data = dataReduce, let uiimage = UIImage(data: data){
-                                        Image(uiImage: uiimage)
-                                            .resizable()
-                                            .frame(width: 150, height: 120)
-                                    }else{
-                                        Image(systemName: "photo")
-                                            .resizable()
-                                            .frame(width: 150, height: 120)
-                                            .foregroundColor(.gray)
-                                    }
-                                    Spacer()
+                        }
+                        
+                    }else{
+                        VStack {
+                            HStack{
+                                Spacer()
+                                if let data = dataReduce, let uiimage = UIImage(data: data){
+                                    Image(uiImage: uiimage)
+                                        .resizable()
+                                        .frame(width: 150, height: 120)
+                                }else{
+                                    Image(systemName: "photo")
+                                        .resizable()
+                                        .frame(width: 150, height: 120)
+                                        .foregroundColor(.gray)
                                 }
-                                PhotosPicker(
-                                    selection: $selectedReduceItems,
-                                    maxSelectionCount: 1,
-                                    matching: .images
-                                ){
-                                    Text("Add Photo")
-                                }.onChange(of: selectedReduceItems){ newValue in
-                                    guard let item = selectedReduceItems.first else{
-                                        return
-                                    }
-                                    item.loadTransferable(type: Data.self){result in
-                                        switch result{
-                                        case.success(let data):
-                                            if let data = data {
-                                                self.dataReduce = data
-                                            }else{
-                                                print("Data is nil")
-                                            }
-                                        case.failure(let failure):
-                                            fatalError("\(failure)")
+                                Spacer()
+                            }.padding(.top)
+                            PhotosPicker(
+                                selection: $selectedReduceItems,
+                                maxSelectionCount: 1,
+                                matching: .images
+                            ){
+                                Text("Add Photo")
+                            }.onChange(of: selectedReduceItems){ newValue in
+                                guard let item = selectedReduceItems.first else{
+                                    return
+                                }
+                                item.loadTransferable(type: Data.self){result in
+                                    switch result{
+                                    case.success(let data):
+                                        if let data = data {
+                                            self.dataReduce = data
+                                        }else{
+                                            print("Data is nil")
                                         }
+                                    case.failure(let failure):
+                                        fatalError("\(failure)")
                                     }
                                 }
                             }
+                        }
+                        Form {
                             Picker("Product", selection: $selectedProduct){
                                 ForEach (product, id: \.self){
                                     Text($0)
@@ -181,6 +190,8 @@ struct Production_Stock: View {
                         }
                         
                     }
+                    
+                    
                 }
                 
             }

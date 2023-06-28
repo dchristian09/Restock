@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Main_Card_View: View {
-    var materialName:String = "Rose Flower"
+    var materialName:String = "Ros"
     var body: some View {
         ZStack{
             RoundedRectangle(cornerRadius: 16, style:.continuous)
@@ -30,8 +30,10 @@ struct Main_Card_View: View {
                         .font(.subheadline)
                         .foregroundColor(.white)
                         .bold()
+                        .padding(.trailing)
                     
-                }
+                }.padding(.leading)
+                    .frame(maxWidth:.infinity, alignment: .leading)
                 Circle()
                     .fill(.white)
                     .offset(x: 67, y: 25)
