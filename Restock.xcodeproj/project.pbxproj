@@ -39,6 +39,8 @@
 		C233D0472A4968D5003B8ED3 /* mainData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C233D0452A4968D5003B8ED3 /* mainData.xcdatamodeld */; };
 		C233D04A2A496A7A003B8ED3 /* MaterialDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C233D0492A496A7A003B8ED3 /* MaterialDataManager.swift */; };
 		C2816AD02A498A86007E2DCE /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2816ACF2A498A86007E2DCE /* PersistenceController.swift */; };
+		D07B62762A4AC55B0002585A /* ProductDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07B62752A4AC55B0002585A /* ProductDataManager.swift */; };
+		D07B62782A4AC5720002585A /* ProductionDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07B62772A4AC5720002585A /* ProductionDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +77,10 @@
 		C233D0462A4968D5003B8ED3 /* mainData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = mainData.xcdatamodel; sourceTree = "<group>"; };
 		C233D0492A496A7A003B8ED3 /* MaterialDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialDataManager.swift; sourceTree = "<group>"; };
 		C2816ACF2A498A86007E2DCE /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
+		D00173222A4BDFD300A45FDB /* mainData 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mainData 3.xcdatamodel"; sourceTree = "<group>"; };
+		D07B62752A4AC55B0002585A /* ProductDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDataManager.swift; sourceTree = "<group>"; };
+		D07B62772A4AC5720002585A /* ProductionDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductionDataManager.swift; sourceTree = "<group>"; };
+		D08BD6972A4BA4E3003D4233 /* mainData 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mainData 2.xcdatamodel"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -195,6 +201,8 @@
 			isa = PBXGroup;
 			children = (
 				C233D0492A496A7A003B8ED3 /* MaterialDataManager.swift */,
+				D07B62752A4AC55B0002585A /* ProductDataManager.swift */,
+				D07B62772A4AC5720002585A /* ProductionDataManager.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -282,6 +290,7 @@
 				36CB894E2A38527C000BDA6D /* Material.swift in Sources */,
 				58E245612A4762C300DC9B6E /* Item.swift in Sources */,
 				58E2455E2A475D5C00DC9B6E /* Material_No_Data.swift in Sources */,
+				D07B62762A4AC55B0002585A /* ProductDataManager.swift in Sources */,
 				36CB895C2A3B04D5000BDA6D /* Production_Card_View.swift in Sources */,
 				C2816AD02A498A86007E2DCE /* PersistenceController.swift in Sources */,
 				36CB894C2A385272000BDA6D /* Product.swift in Sources */,
@@ -291,6 +300,7 @@
 				58E245632A47641B00DC9B6E /* On_Boarding_Screen.swift in Sources */,
 				3634D6212A442D9400C31903 /* Product_Add.swift in Sources */,
 				36CB893B2A385137000BDA6D /* ContentView.swift in Sources */,
+				D07B62782A4AC5720002585A /* ProductionDataManager.swift in Sources */,
 				3634D6292A45ACB900C31903 /* Material_Add.swift in Sources */,
 				36CB89512A386934000BDA6D /* Main_Card_View.swift in Sources */,
 				58E245652A49766900DC9B6E /* Splash_Screen.swift in Sources */,
@@ -522,9 +532,11 @@
 		C233D0452A4968D5003B8ED3 /* mainData.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				D00173222A4BDFD300A45FDB /* mainData 3.xcdatamodel */,
+				D08BD6972A4BA4E3003D4233 /* mainData 2.xcdatamodel */,
 				C233D0462A4968D5003B8ED3 /* mainData.xcdatamodel */,
 			);
-			currentVersion = C233D0462A4968D5003B8ED3 /* mainData.xcdatamodel */;
+			currentVersion = D00173222A4BDFD300A45FDB /* mainData 3.xcdatamodel */;
 			path = mainData.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

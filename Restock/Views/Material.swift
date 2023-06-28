@@ -12,7 +12,9 @@ struct Material: View {
     @State private var searchText = ""
     let columns = [GridItem(.flexible()), GridItem(.flexible())]
     @State var showingAlert: Bool = false
-    @StateObject var materialDataManager:MaterialDataManager = MaterialDataManager.shared
+    @StateObject var materialDataManager: MaterialDataManager = MaterialDataManager.shared
+    
+    
     
     var body: some View {
         NavigationView{
@@ -35,6 +37,7 @@ struct Material: View {
                                             Material_Detail()
                                         }label: {
                                             Main_Card_View(materialName: material.name ?? "")
+                                            
                                         }
                                     }
                                     //                                    NavigationLink{

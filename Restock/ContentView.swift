@@ -36,7 +36,7 @@ struct ContentView: View {
                     
                 }
                 .tag(1)
-            Product_No_Data()
+            Product()
                 .preferredColorScheme(.light)
                 .tabItem(){
                     if selection == 2{
