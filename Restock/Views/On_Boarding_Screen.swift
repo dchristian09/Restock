@@ -48,12 +48,12 @@ struct On_Boarding_Screen: View {
                                 .frame(width: 10, height: 10)
                                 .animation(.default)
                                 .foregroundColor(Color(hex: 0x3C6EE1))
-                                .offset(y: -50)
+                                .offset(y: -30)
                         } else {
                             Circle()
                                 .frame(width: 8, height: 8)
                                 .foregroundColor(Color(hex: 0x999999))
-                                .offset(y: -50)
+                                .offset(y: -30)
                         }
                     }
                 }
@@ -133,7 +133,7 @@ struct On_Boarding_Screen_Previews: PreviewProvider {
 struct ItemView: View {
     var item: Item
     var imageBaseName: String
-    @State var itemImage: String 
+    @State var itemImage: String
     
     
     var body: some View {
@@ -155,8 +155,9 @@ struct ItemView: View {
                         .animation(Animation.interpolatingSpring(stiffness: 40, damping: 8))
                     
                     Text(item.subtitle)
-                        .font(.system(size: 25, weight: .regular))
+                        .font(.system(size: 20, weight: .regular))
                         .animation(Animation.interpolatingSpring(stiffness: 40, damping: 8))
+                        .multilineTextAlignment(.center)
                 }
                 .offset(y: 30)
                 .padding(.horizontal)
@@ -181,8 +182,6 @@ struct ItemView: View {
             if (index > item.animationCount ){
                 index = 1
             }
-            
-            
         }
     }
 }
