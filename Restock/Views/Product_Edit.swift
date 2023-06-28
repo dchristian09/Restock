@@ -27,26 +27,21 @@ struct Product_Edit: View {
                     .ignoresSafeArea()
                 VStack{
                     VStack {
-                        Image("bouquet")
-                            .resizable()
-                            .cornerRadius(20)
-                            .frame(width: 150, height: 150)
-                            .padding(.top)
                         
-                        //icon
-                        //                        HStack{
-                        //                            Spacer()
-                        //                            if let data = dataProductImage, let uiimage = UIImage(data: data){
-                        //                                Image(uiImage: uiimage)
-                        //                                    .resizable()
-                        //                                    .frame(width: 180, height: 180)
-                        //                            }else{
-                        //                                Image(systemName: "photo")
-                        //                                    .resizable()
-                        //                                    .frame(width: 180, height: 180)
-                        //                            }
-                        //                            Spacer()
-                        //                        }
+                        HStack{
+                            Spacer()
+                            if let data = dataProductImage, let uiimage = UIImage(data: data){
+                                Image(uiImage: uiimage)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 300, height: 250)
+                            }else{
+                                Image(systemName: "photo")
+                                    .resizable()
+                                    .frame(width: 180, height: 180)
+                            }
+                            Spacer()
+                        }
                         
                         //edit photo
                         PhotosPicker(
@@ -81,7 +76,7 @@ struct Product_Edit: View {
                             HStack{
                                 Text("Bouquet Rose")
                                 //                                TextField("Name", text: $productName)
-                                //                                    .keyboardType(.numberPad)
+                                //                                    .keyboardType(.default)
                                 //                                    .multilineTextAlignment(.trailing)
                             }
                             

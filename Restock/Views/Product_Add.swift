@@ -40,13 +40,13 @@ struct Product_Add: View {
                                 Image(uiImage: uiimage)
                                     .resizable()
                                     .scaledToFit()
-                                    .frame(width: 150, height: 120)
+                                    .frame(width: 300, height: 250)
                             } else {
                                     Image(systemName: "photo")
                                         .resizable()
                                         .frame(width: 150, height: 120)
                                         .foregroundColor(.gray)
-                                }
+                            }
                             Spacer()
                         }.padding(.top)
                         
