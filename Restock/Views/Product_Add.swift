@@ -119,8 +119,8 @@ struct Product_Add: View {
                             ForEach(arrayMaterialIngredients.indices, id:\.self) { index in
                                 HStack{
                                     Menu{
-                                        Picker("Materials", selection: $arrayMaterialIngredients[index].materialUnit){
-                                            ForEach (materialDataManager.materialList, id: \.self){ material in
+                                        Picker("Materials", selection: $arrayMaterialIngredients[index].data){
+                                            ForEach (materialDataManager.materialList, id: \.id){ material in
                                                 Text(material.name ?? "You are short of material")
                                                     .fixedSize(horizontal: true, vertical: true)
                                                     .frame(maxWidth:100,maxHeight:30)
@@ -128,6 +128,7 @@ struct Product_Add: View {
                                                     .truncationMode(.tail)
                                                     .background(.gray)
                                                     .allowsTightening(false)
+                                                    .tag(material as DataMaterial?)
                                             }
                                         }
                                         .pickerStyle(.menu)
@@ -137,11 +138,11 @@ struct Product_Add: View {
                                         .frame(maxWidth: 100,maxHeight:50)
                                         .labelsHidden()
                                     }label:{
-                                        if arrayMaterialIngredients[index].materialUnit == "" {
+                                        if arrayMaterialIngredients[index].data == nil {
                                             Text("Choose")
                                                 .frame(maxWidth:100,maxHeight:30)
                                         }else{
-                                            Text("\(arrayMaterialIngredients[index].materialUnit)")
+                                            Text("\(arrayMaterialIngredients[index].data?.name ?? "")")
                                                 .frame(maxWidth:100,maxHeight:30)
                                             //                                                .lineLimit(1)
                                             //                                                .truncationMode(.trailing)
@@ -159,7 +160,7 @@ struct Product_Add: View {
                             }
                             HStack{
                                 Button{
-                                    arrayMaterialIngredients.append(MaterialIngredients(materialUnit: "", materialQuantity: ""))
+                                    arrayMaterialIngredients.append(MaterialIngredients(data: nil, materialQuantity: ""))
                                 }label:{
                                     HStack{
                                         Image(systemName: "plus.circle.fill")
@@ -213,9 +214,11 @@ struct Product_Add_Previews: PreviewProvider {
     }
 }
 
-struct MaterialIngredients: Identifiable, Equatable {
-    var id = UUID()
-    var materialUnit: String
+//struct MaterialIngredients: Identifiable, Equatable {
+struct MaterialIngredients {
+    var data:DataMaterial? = nil
+    //var id = UUID()
+    //var materialUnit: String
     var materialQuantity: String
 }
 
