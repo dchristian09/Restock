@@ -10,6 +10,9 @@ import SwiftUI
 
 struct Product_Add: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @StateObject var productDataManager: ProductDataManager = ProductDataManager.shared
+    @StateObject var materialDataManager: MaterialDataManager = MaterialDataManager.shared
+    
     @State var selectedUnitList:String = "pcs"
     @State var productName: String = ""
     @State var productCurrentStock: String = ""
@@ -17,8 +20,10 @@ struct Product_Add: View {
     @State var selectedProductImage: [PhotosPickerItem] = []
     @State var dataProductImage: Data?
     let unitList = ["pcs", "gram", "liter", "ml", "sheet", "bottle"]
-    let product = ["Bouquet Rose", "Chocolate Bouquet", "Saya suka sama milo dinosaurus"]
+   
+    @State var material = ["Bouquet Rose", "Chocolate Bouquet", "Saya suka sama milo dinosaurus"]
     @State var arrayMaterialIngredients: [MaterialIngredients] = []
+    
     var body: some View {
         NavigationView{
             ZStack {
@@ -115,8 +120,8 @@ struct Product_Add: View {
                                 HStack{
                                     Menu{
                                         Picker("Materials", selection: $arrayMaterialIngredients[index].materialUnit){
-                                            ForEach (product, id: \.self){
-                                                Text($0)
+                                            ForEach (materialDataManager.materialList, id: \.self){ material in
+                                                Text(material.name ?? "You are short of material")
                                                     .fixedSize(horizontal: true, vertical: true)
                                                     .frame(maxWidth:100,maxHeight:30)
                                                     .lineLimit(1)
@@ -181,13 +186,26 @@ struct Product_Add: View {
                 ToolbarItem(placement: .navigationBarTrailing){
                     Button("Add") {
                         //function
+                        saveData()
+                        self.presentationMode.wrappedValue.dismiss()
                     }
                 }
             }
         }
         .navigationBarBackButtonHidden(true)
     }
+    
+   
+    func saveData(){
+        productDataManager.addDataToCoreData(productName: productName, currentStock: Int32(productCurrentStock) ?? 0, minimumStock: Int32(productMinimalStock) ?? 0, isActive: true, unit: selectedUnitList)
+    }
+    
+    
 }
+
+//func fetchMaterialNames() {
+//    materialNames = materialDataManager.materialList.map { $0.name }
+//}
 
 struct Product_Add_Previews: PreviewProvider {
     static var previews: some View {
