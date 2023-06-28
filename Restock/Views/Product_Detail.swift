@@ -27,14 +27,14 @@ struct Product_Detail: View {
                         List {
                             Section{
                                 HStack {
-                                    Text("Minimal Stock")
-                                    Spacer()
-                                    Text("3 pcs")
-                                }
-                                HStack {
                                     Text("Current Stock")
                                     Spacer()
                                     Text("1 pcs")
+                                }
+                                HStack {
+                                    Text("Minimal Stock")
+                                    Spacer()
+                                    Text("3 pcs")
                                 }
                                 HStack {
                                     Text("Tissue Paper")

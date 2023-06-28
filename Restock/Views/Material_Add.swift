@@ -84,19 +84,19 @@ struct Material_Add: View {
                                     .keyboardType(.numberPad)
                                     .multilineTextAlignment(.trailing)
                             }
+      
+                            //current stock
+                            HStack{
+                                Text("Current Stock")
+                                TextField("Current Stock", text: $materialCurrentStock)
+                                    .keyboardType(.numberPad)
+                                    .multilineTextAlignment(.trailing)
+                            }
                             
                             //minimal stock
                             HStack{
                                 Text("Minimal Stock")
                                 TextField("Minimal Stock", text: $materialMinimalStock)
-                                    .keyboardType(.numberPad)
-                                    .multilineTextAlignment(.trailing)
-                            }
-                            
-                            //current stock
-                            HStack{
-                                Text("Current Stock")
-                                TextField("Current Stock", text: $materialCurrentStock)
                                     .keyboardType(.numberPad)
                                     .multilineTextAlignment(.trailing)
                             }
