@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var selection = 0
-    
+    @AppStorage("isUser") var isUser: Bool = false
     var body: some View {
         TabView(selection: $selection){
             Summary_No_Reminder()
@@ -61,6 +61,9 @@ struct ContentView: View {
             
         }
         .navigationBarBackButtonHidden(true)
+        .onAppear(){
+            isUser = true
+        }
     }
 }
 

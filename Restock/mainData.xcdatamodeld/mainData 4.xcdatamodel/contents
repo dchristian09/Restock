@@ -30,9 +30,9 @@
         <relationship name="resep" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DataResep" inverseName="production" inverseEntity="DataResep"/>
     </entity>
     <entity name="DataResep" representedClassName="DataResep" syncable="YES" codeGenerationType="class">
-        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="id_material" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="id_product" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="id_material" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="id_product" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="qty" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="material" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DataMaterial" inverseName="bahanResep" inverseEntity="DataMaterial"/>
         <relationship name="product" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DataProduct" inverseName="resep" inverseEntity="DataProduct"/>

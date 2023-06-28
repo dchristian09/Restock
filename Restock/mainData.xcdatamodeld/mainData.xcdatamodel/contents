@@ -17,7 +17,6 @@
         <attribute name="minimalStock" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="nama" optional="YES" attributeType="String"/>
         <attribute name="unit" optional="YES" attributeType="String"/>
-        <relationship name="production" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DataProduction"/>
         <relationship name="resep" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DataResep" inverseName="product" inverseEntity="DataResep"/>
     </entity>
     <entity name="DataProduction" representedClassName="DataProduction" syncable="YES" codeGenerationType="class">

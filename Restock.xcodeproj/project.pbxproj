@@ -78,6 +78,8 @@
 		C233D0492A496A7A003B8ED3 /* MaterialDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialDataManager.swift; sourceTree = "<group>"; };
 		C2816ACF2A498A86007E2DCE /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		D00173222A4BDFD300A45FDB /* mainData 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mainData 3.xcdatamodel"; sourceTree = "<group>"; };
+		D07248EA2A4C10B400C1459D /* mainData 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mainData 4.xcdatamodel"; sourceTree = "<group>"; };
+		D07248EB2A4C133000C1459D /* mainData 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mainData 5.xcdatamodel"; sourceTree = "<group>"; };
 		D07B62752A4AC55B0002585A /* ProductDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDataManager.swift; sourceTree = "<group>"; };
 		D07B62772A4AC5720002585A /* ProductionDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductionDataManager.swift; sourceTree = "<group>"; };
 		D08BD6972A4BA4E3003D4233 /* mainData 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mainData 2.xcdatamodel"; sourceTree = "<group>"; };
@@ -532,11 +534,13 @@
 		C233D0452A4968D5003B8ED3 /* mainData.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				D07248EB2A4C133000C1459D /* mainData 5.xcdatamodel */,
+				D07248EA2A4C10B400C1459D /* mainData 4.xcdatamodel */,
 				D00173222A4BDFD300A45FDB /* mainData 3.xcdatamodel */,
 				D08BD6972A4BA4E3003D4233 /* mainData 2.xcdatamodel */,
 				C233D0462A4968D5003B8ED3 /* mainData.xcdatamodel */,
 			);
-			currentVersion = D00173222A4BDFD300A45FDB /* mainData 3.xcdatamodel */;
+			currentVersion = D07248EB2A4C133000C1459D /* mainData 5.xcdatamodel */;
 			path = mainData.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

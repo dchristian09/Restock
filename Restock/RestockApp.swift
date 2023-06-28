@@ -9,12 +9,19 @@ import SwiftUI
 
 @main
 struct RestockApp: App {
+    @AppStorage("isUser") var isUser: Bool = false
+    
     var body: some Scene {
         WindowGroup {
-            NavigationStack{
-                Splash_Screen()
+            if(!isUser){
+                NavigationStack{
+                    Splash_Screen()
+                }
+            }else{
+                ContentView()
             }
-            //ContentView()
+            
+            
         }
     }
 }

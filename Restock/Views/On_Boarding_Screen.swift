@@ -9,6 +9,7 @@ import SwiftUI
 
 struct On_Boarding_Screen: View {
     
+    @AppStorage("isUser") var isUser: Bool = false
     var screenWidth = UIScreen.main.bounds.width
     @State var xOffset: CGFloat = 0
     @State var currentPage = 0
@@ -89,6 +90,7 @@ struct On_Boarding_Screen: View {
                         .frame(height: 60)
                         .foregroundColor(.white)
                     } else {
+                        
                         NavigationLink(destination: ContentView(), label: {
                             Text("Get Started ")
                                 .foregroundColor(.white)
