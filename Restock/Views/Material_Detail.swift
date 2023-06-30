@@ -9,6 +9,7 @@ import SwiftUI
 
 struct Material_Detail: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Binding var material: DataMaterial
     var body: some View {
         NavigationView{
             ZStack {
@@ -22,7 +23,7 @@ struct Material_Detail: View {
                         .scaledToFit()
                         .frame(width: 300, height: 250)
                         .padding(.top)
-                    Text("Bouquet Rose")
+                    Text($material.wrappedValue.name ?? "")
                         .font(.largeTitle)
                     VStack{
                         List {
@@ -30,17 +31,17 @@ struct Material_Detail: View {
                                 HStack {
                                     Text("Current Stock")
                                     Spacer()
-                                    Text("1 pcs")
+                                    Text(String($material.wrappedValue.currentStock) + " " + ($material.wrappedValue.unit ?? ""))
                                 }
                                 HStack {
                                     Text("Minimal Stock")
                                     Spacer()
-                                    Text("3 pcs")
+                                    Text(String($material.wrappedValue.currentStock) + " " + ($material.wrappedValue.unit ?? ""))
                                 }
                                 HStack {
                                     Text("Notes")
                                     Spacer()
-                                    Text("-")
+                                    Text($material.wrappedValue.note ?? "-")
                                 }
                             }
                         }
@@ -76,8 +77,8 @@ struct Material_Detail: View {
     }
 }
 
-struct Material_Detail_Previews: PreviewProvider {
-    static var previews: some View {
-        Material_Detail()
-    }
-}
+//struct Material_Detail_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Material_Detail()
+//    }
+//}

@@ -27,11 +27,11 @@ struct Product: View {
                         if(productDataManager.productList.count > 0){
                             VStack{
                                 LazyVGrid(columns: columns){
-                                    ForEach(productDataManager.productList,id:\.id){ product in
+                                    ForEach(productDataManager.productList.indices,id:\.self){ index in
                                         NavigationLink{
-                                            Product_Detail()
+                                            Product_Detail(product: $productDataManager.productList[index])
                                         }label: {
-                                            Main_Card_View(materialName: product.nama ?? "")
+                                            Main_Card_View(materialName: productDataManager.productList[index].nama ?? "")
                                         }
                                     }
                                 }
