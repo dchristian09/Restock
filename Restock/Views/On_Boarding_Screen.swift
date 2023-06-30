@@ -14,7 +14,7 @@ struct On_Boarding_Screen: View {
     @State var xOffset: CGFloat = 0
     @State var currentPage = 0
     var lastPage = data.count - 1
-    var firstPage = 0
+    var firstPage = 0 
     var secondPage = 0
     
     @Namespace var namespace
