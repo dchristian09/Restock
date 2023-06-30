@@ -9,6 +9,7 @@ import SwiftUI
 
 struct Product_Detail: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Binding var product: DataProduct
     var body: some View {
         NavigationView{
             ZStack {
@@ -22,7 +23,7 @@ struct Product_Detail: View {
                         .scaledToFit()
                         .frame(width: 300, height: 250)
                         .padding(.top)
-                    Text("Bouquet Rose")
+                    Text($product.wrappedValue.nama ?? "")
                         .font(.largeTitle)
                     VStack{
                         List {
@@ -30,12 +31,12 @@ struct Product_Detail: View {
                                 HStack {
                                     Text("Current Stock")
                                     Spacer()
-                                    Text("1 pcs")
+                                    Text(String($product.wrappedValue.currentStock) + " " + ($product.wrappedValue.unit ?? ""))
                                 }
                                 HStack {
                                     Text("Minimal Stock")
                                     Spacer()
-                                    Text("3 pcs")
+                                    Text(String($product.wrappedValue.minimalStock) + " " + ($product.wrappedValue.unit ?? ""))
                                 }
                                 HStack {
                                     Text("Tissue Paper")
@@ -92,9 +93,9 @@ struct Product_Detail: View {
     }
 }
 
-
-struct Product_Detail_Previews: PreviewProvider {
-    static var previews: some View {
-        Product_Detail()
-    }
-}
+//
+//struct Product_Detail_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Product_Detail(product: product)
+//    }
+//}
