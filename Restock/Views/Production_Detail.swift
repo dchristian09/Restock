@@ -28,7 +28,7 @@ struct Production_Detail: View {
                         List {
                             Section {
                                 HStack {
-                                    Text("Produce Amount")
+                                    Text("Product Amount")
                                     Spacer()
                                     Text("4 pcs")
                                 }
