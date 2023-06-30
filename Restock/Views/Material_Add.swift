@@ -80,7 +80,7 @@ struct Material_Add: View {
                         Section{
                             //product
                             HStack{
-                                Text("Product Name")
+                                Text("Material Name")
                                 TextField("Name", text: $materialName)
                                     .keyboardType(.default)
                                     .multilineTextAlignment(.trailing)
