@@ -23,6 +23,9 @@ struct Product_Add: View {
     
     @State var material = ["Bouquet Rose", "Chocolate Bouquet", "Saya suka sama milo dinosaurus"]
     @State var arrayMaterialIngredients: [MaterialIngredients] = []
+    //@State var arrayMaterialIngredients2: [DataMaterial] = []
+    @State var arrayMaterialn: [String] = []
+
     
     var body: some View {
         NavigationView{
@@ -129,8 +132,10 @@ struct Product_Add: View {
                                                     .background(.gray)
                                                     .allowsTightening(false)
                                                     .tag(material as DataMaterial?)
+
                                             }
                                         }
+                                        
                                         .pickerStyle(.menu)
                                         .lineLimit(nil)
                                         .truncationMode(.head)
@@ -144,12 +149,9 @@ struct Product_Add: View {
                                         }else{
                                             Text("\(arrayMaterialIngredients[index].data?.name ?? "")")
                                                 .frame(maxWidth:100,maxHeight:30)
-                                            //                                                .lineLimit(1)
-                                            //                                                .truncationMode(.trailing)
                                         }
                                     }
-                                    
-                                    
+
                                     Divider()
                                     TextField("Quantity", text: $arrayMaterialIngredients[index].materialQuantity)
                                         .keyboardType(.numberPad)
@@ -160,7 +162,9 @@ struct Product_Add: View {
                             }
                             HStack{
                                 Button{
+
                                     arrayMaterialIngredients.append(MaterialIngredients(data: nil, materialQuantity: ""))
+
                                 }label:{
                                     HStack{
                                         Image(systemName: "plus.circle.fill")
@@ -169,6 +173,8 @@ struct Product_Add: View {
                                             .foregroundColor(.black)
                                     }
                                 }
+                                
+                                
                                 
                             }
                             
@@ -194,6 +200,12 @@ struct Product_Add: View {
             }
         }
         .navigationBarBackButtonHidden(true)
+//        .onAppear {
+//            print("jum:", materialDataManager.materialList.count)
+//            for materialn in materialDataManager.materialList {
+//                arrayMaterialn.append(materialn.name ?? "")
+//            }
+//        }
     }
     
     
@@ -213,6 +225,7 @@ struct Product_Add_Previews: PreviewProvider {
         Product_Add()
     }
 }
+
 
 //struct MaterialIngredients: Identifiable, Equatable {
 struct MaterialIngredients {

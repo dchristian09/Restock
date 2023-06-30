@@ -116,7 +116,10 @@ struct Product_Edit: View {
                         Section{
                             ForEach(arrayMaterialIngredients.indices, id:\.self) { index in
                                 HStack{
+
                                     Picker("a", selection: $arrayMaterialIngredients[index].data){
+
+
                                         ForEach (product, id: \.self){
                                             Text($0)
                                         }
@@ -129,11 +132,13 @@ struct Product_Edit: View {
                                         .keyboardType(.numberPad)
                                         .multilineTextAlignment(.leading)
                                 }
-                                
+                                    
                             }
                             HStack{
                                 Button{
+
                                     arrayMaterialIngredients.append(MaterialIngredients(data:nil, materialQuantity: ""))
+
                                 }label:{
                                     HStack{
                                         Image(systemName: "plus.circle.fill")
