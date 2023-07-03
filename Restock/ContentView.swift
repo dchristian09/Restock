@@ -12,7 +12,7 @@ struct ContentView: View {
     @AppStorage("isUser") var isUser: Bool = false
     var body: some View {
         TabView(selection: $selection){
-            Summary_No_Reminder()
+            Summary()
                 .preferredColorScheme(.light)
                 .tabItem(){
                     if selection == 0{

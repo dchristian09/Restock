@@ -20,6 +20,15 @@ extension Color {
 }
 
 struct Summary: View {
+    init() {
+        getUrgentStock()
+    }
+    @State var urgentMaterial: [DataMaterial] = []
+    @State var urgentProduct: [DataProduct] = []
+    
+    @StateObject var productDataManager: ProductDataManager = ProductDataManager.shared
+    @StateObject var materialDataManager: MaterialDataManager = MaterialDataManager.shared
+    
     @State private var showingSheet = false
     @Environment(\.dismiss) var dismiss
     @State var showingAlert: Bool = false
@@ -55,76 +64,123 @@ struct Summary: View {
                                 Indicator_Modal_View(showSheetView: $showingSheet)
                             }
                         }
-                        HStack{
-                            Image(systemName: "shippingbox")
-                            Text("Material Reminder")
-                                .font(.title2.bold())
-                            Spacer()
-                            NavigationLink {
-                                Material_Reminder()
-                            } label: {
-                                Text("View Another")
-                                    .font(.footnote)
-                                    .foregroundColor(.blue)
+                        
+                        //if still no material. Summary_no_reminder
+                        if(productDataManager.productList.count == 0 && materialDataManager.materialList.count == 0){
+                            VStack {
+                                Text("There is no summary yet.")
+                                    .font(.system(size: 22))
+                                    .foregroundColor(Color(hex: 0x8E8E93))
+                                
+                                HStack {
+                                    Text("Please jump to the")
+                                        .font(.system(size: 22))
+                                        .foregroundColor(Color(hex: 0x8E8E93))
+                                    Image(systemName: "shippingbox")
+                                        .font(.system(size: 22))
+                                        .foregroundColor(Color(hex: 0x8E8E93))
+                                    Text("material tab")
+                                        .font(.system(size: 22))
+                                        .foregroundColor(Color(hex: 0x8E8E93))
+                                }
+                                
+                                Image("summary_no_reminder")
+                                    .resizable()
+                                    .frame(width: 389, height: 327)
+                                
+                                Image("summary_no_reminder_wave")
+                                    .resizable()
+                                    .frame(width: 416, height: 104)
+                                    .offset(y: 55)
+                            }.padding(35)
+                        }else{
+//                            if there is urgent material
+                            if (urgentMaterial.count > 0 ){
+        //                        Material Reminder
+                                HStack{
+                                    Image(systemName: "shippingbox")
+                                    Text("Material Reminder")
+                                        .font(.title2.bold())
+                                    Spacer()
+                                    NavigationLink {
+                                        Material_Reminder()
+                                    } label: {
+                                        Text("View Another")
+                                            .font(.footnote)
+                                            .foregroundColor(.blue)
+                                    }
+                                }.padding()
+                                
+        //                        Material Card
+                                LazyVGrid (columns: columns){
+                                    Main_Card_View()
+                                        .onLongPressGesture(minimumDuration: 1) {
+                                            showingAlert = true
+                                        }.alert("Reminder - Red Ribbon", isPresented: $showingAlert, actions: {
+                                            Button("Produce Material", action: {})
+                                            Button("Deactivate Material", role: .destructive, action: {})
+                                        }, message: {
+                                            Text("Choose your next step for this reminder")
+                                        })
+                                    Main_Card_View()
+                                        .onLongPressGesture(minimumDuration: 1) {
+                                            showingAlert = true
+                                        }.alert("Reminder - Red Ribbon", isPresented: $showingAlert, actions: {
+                                            Button("Produce Material", action: {})
+                                            Button("Deactivate Material", role: .destructive, action: {})
+                                        }, message: {
+                                            Text("Choose your next step for this reminder")
+                                        })
+                                }
                             }
-                        }.padding()
-                        
-                        LazyVGrid (columns: columns){
-                            Main_Card_View()
-                                .onLongPressGesture(minimumDuration: 1) {
-                                    showingAlert = true
-                                }.alert("Reminder - Red Ribbon", isPresented: $showingAlert, actions: {
-                                    Button("Produce Material", action: {})
-                                    Button("Deactivate Material", role: .destructive, action: {})
-                                }, message: {
-                                    Text("Choose your next step for this reminder")
-                                })
-                            Main_Card_View()
-                                .onLongPressGesture(minimumDuration: 1) {
-                                    showingAlert = true
-                                }.alert("Reminder - Red Ribbon", isPresented: $showingAlert, actions: {
-                                    Button("Produce Material", action: {})
-                                    Button("Deactivate Material", role: .destructive, action: {})
-                                }, message: {
-                                    Text("Choose your next step for this reminder")
-                                })
-                        }
-                        
-                        HStack{
-                            Image(systemName: "tray")
-                            Text("Product Reminder")
-                                .font(.title2.bold())
-                            Spacer()
-                            NavigationLink {
-                                Product_Reminder()
-                            } label: {
-                                Text("View Another")
-                                    .font(.footnote)
-                                    .foregroundColor(.blue)
+                            
+//                            if there is urgent product
+                            if (urgentProduct.count > 0 ){
+        //                        Product Reminder
+                                HStack{
+                                    Image(systemName: "tray")
+                                    Text("Product Reminder")
+                                        .font(.title2.bold())
+                                    Spacer()
+                                    NavigationLink {
+                                        Product_Reminder()
+                                    } label: {
+                                        Text("View Another")
+                                            .font(.footnote)
+                                            .foregroundColor(.blue)
+                                    }
+                                }.padding()
+                                
+        //                        Product Card
+                                LazyVGrid (columns: columns){
+                                    Main_Card_View()
+                                        .onLongPressGesture(minimumDuration: 1) {
+                                            cekekek = true
+                                        }.alert("Reminder - Red Ribbon", isPresented: $cekekek, actions: {
+                                            Button("Produce Product", action: {})
+                                            Button("Deactivate Product", role: .destructive, action: {})
+                                        }, message: {
+                                            Text("Choose your next step for this reminder")
+                                        })
+                                    Main_Card_View()
+                                        .onLongPressGesture(minimumDuration: 1) {
+                                            cekekek = true
+                                        }.alert("Reminder - Red Ribbon", isPresented: $cekekek, actions: {
+                                            Button("Produce Product", action: {})
+                                            Button("Deactivate Product", role: .destructive, action: {})
+                                        }, message: {
+                                            Text("Choose your next step for this reminder")
+                                        })
+                                    
+                                }
                             }
-                        }.padding()
-                        
-                        LazyVGrid (columns: columns){
-                            Main_Card_View()
-                                .onLongPressGesture(minimumDuration: 1) {
-                                    cekekek = true
-                                }.alert("Reminder - Red Ribbon", isPresented: $cekekek, actions: {
-                                    Button("Produce Product", action: {})
-                                    Button("Deactivate Product", role: .destructive, action: {})
-                                }, message: {
-                                    Text("Choose your next step for this reminder")
-                                })
-                            Main_Card_View()
-                                .onLongPressGesture(minimumDuration: 1) {
-                                    cekekek = true
-                                }.alert("Reminder - Red Ribbon", isPresented: $cekekek, actions: {
-                                    Button("Produce Product", action: {})
-                                    Button("Deactivate Product", role: .destructive, action: {})
-                                }, message: {
-                                    Text("Choose your next step for this reminder")
-                                })
                             
                         }
+                        
+//
+
+                
+
                         
                         Spacer()
                     }
@@ -133,8 +189,20 @@ struct Summary: View {
             }
         }
         
+        
+    }
+    func getUrgentStock(){
+        urgentMaterial = materialDataManager.materialList.filter { material in
+                return material.minimalStock > material.currentStock
+            }
+        
+        urgentProduct = productDataManager.productList.filter { product in
+                return product.minimalStock > product.currentStock
+            }
     }
 }
+
+
 
 struct Summary_Previews: PreviewProvider {
     static var previews: some View {

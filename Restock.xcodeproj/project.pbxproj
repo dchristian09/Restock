@@ -540,7 +540,7 @@
 				D08BD6972A4BA4E3003D4233 /* mainData 2.xcdatamodel */,
 				C233D0462A4968D5003B8ED3 /* mainData.xcdatamodel */,
 			);
-			currentVersion = D07248EB2A4C133000C1459D /* mainData 5.xcdatamodel */;
+			currentVersion = D07248EA2A4C10B400C1459D /* mainData 4.xcdatamodel */;
 			path = mainData.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
