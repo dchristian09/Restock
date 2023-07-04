@@ -31,7 +31,7 @@ class ProductDataManager: ObservableObject {
     func addDataToCoreData(productName: String, currentStock: Int32, minimumStock: Int32, isActive: Bool, unit: String) {
         let product = DataProduct(context: viewContext)
         product.id = UUID()
-        product.nama = productName
+        product.name = productName
         product.currentStock = currentStock
         product.minimalStock = minimumStock
         product.isActive = isActive

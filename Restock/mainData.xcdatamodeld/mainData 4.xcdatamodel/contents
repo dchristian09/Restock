@@ -8,32 +8,32 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="note" optional="YES" attributeType="String"/>
         <attribute name="unit" optional="YES" attributeType="String"/>
-        <relationship name="bahanResep" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DataResep" inverseName="material" inverseEntity="DataResep"/>
+        <relationship name="bahanResep" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DataRecipe" inverseName="material" inverseEntity="DataRecipe"/>
     </entity>
     <entity name="DataProduct" representedClassName="DataProduct" syncable="YES" codeGenerationType="class">
         <attribute name="currentStock" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="isActive" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="minimalStock" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="nama" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="unit" optional="YES" attributeType="String"/>
-        <relationship name="resep" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DataResep" inverseName="product" inverseEntity="DataResep"/>
+        <relationship name="resep" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DataRecipe" inverseName="product" inverseEntity="DataRecipe"/>
     </entity>
     <entity name="DataProduction" representedClassName="DataProduction" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="id_product" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="idProduct" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="isProduce" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="label" optional="YES" attributeType="String"/>
         <attribute name="notes" optional="YES" attributeType="String"/>
         <attribute name="qty" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="resep" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DataResep" inverseName="production" inverseEntity="DataResep"/>
+        <relationship name="resep" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DataRecipe" inverseName="production" inverseEntity="DataRecipe"/>
     </entity>
-    <entity name="DataResep" representedClassName="DataResep" syncable="YES" codeGenerationType="class">
+    <entity name="DataRecipe" representedClassName="DataRecipe" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="id_material" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="id_product" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
-        <attribute name="qty" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="idMaterial" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="idProduct" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="quantity" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="material" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DataMaterial" inverseName="bahanResep" inverseEntity="DataMaterial"/>
         <relationship name="product" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DataProduct" inverseName="resep" inverseEntity="DataProduct"/>
         <relationship name="production" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DataProduction" inverseName="resep" inverseEntity="DataProduction"/>

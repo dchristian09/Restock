@@ -36,7 +36,7 @@ struct Material_Detail: View {
                                 HStack {
                                     Text("Minimal Stock")
                                     Spacer()
-                                    Text(String($material.wrappedValue.currentStock) + " " + ($material.wrappedValue.unit ?? ""))
+                                    Text(String($material.wrappedValue.minimalStock) + " " + ($material.wrappedValue.unit ?? ""))
                                 }
                                 HStack {
                                     Text("Notes")

@@ -12,6 +12,7 @@ struct Product_Add: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @StateObject var productDataManager: ProductDataManager = ProductDataManager.shared
     @StateObject var materialDataManager: MaterialDataManager = MaterialDataManager.shared
+    @StateObject var recipeDataManager: RecipeDataManager = RecipeDataManager.shared
     
     @State var selectedUnitList:String = "pcs"
     @State var productName: String = ""
@@ -210,7 +211,24 @@ struct Product_Add: View {
     
     
     func saveData(){
-       var newProduct =  productDataManager.addDataToCoreData(productName: productName, currentStock: Int32(productCurrentStock) ?? 0, minimumStock: Int32(productMinimalStock) ?? 0, isActive: true, unit: selectedUnitList)
+        var newProduct: () =  productDataManager.addDataToCoreData(productName: productName, currentStock: Int32(productCurrentStock) ?? 0, minimumStock: Int32(productMinimalStock) ?? 0, isActive: true, unit: selectedUnitList)
+        
+//        ForEach(arrayMaterialIngredients, id: \.self){
+//            materialIngredient in
+//
+//            let materialData = materialDataManager.materialList.filter { material in
+//                materialIngredient.data?.name == material.name ?? ""
+//            }
+//
+//            if let material = materialData.first {
+//                    recipeDataManager.addDataToCoreData(idProduct: newProduct.id, idMaterial: <#T##UUID#>, quantity: <#T##Int32#>)
+//                print(materialData)
+//            }else{
+//                Text("Failed to Add Product")
+//            }
+//
+//
+//        }
         
     }
     
@@ -229,7 +247,7 @@ struct Product_Add_Previews: PreviewProvider {
 
 
 //struct MaterialIngredients: Identifiable, Equatable {
-struct MaterialIngredients {
+struct MaterialIngredients : Hashable {
     var data:DataMaterial? = nil
     //var id = UUID()
     //var materialUnit: String

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct Main_Card_View: View {
     var materialName:String = "Ros"
+    var materialUnit: String = "pcs"
+    var materialStock: Int32 = 0
     var body: some View {
         ZStack{
             RoundedRectangle(cornerRadius: 16, style:.continuous)
@@ -38,12 +40,12 @@ struct Main_Card_View: View {
                     .fill(.white)
                     .offset(x: 67, y: 25)
                     .frame(width: 56, height: 56)
-                Text("100")
+                Text(String(materialStock))
                     .font(.title2)
                     .bold()
                     .foregroundColor(Color(hex: 0x3C6EE1))
                     .offset(x: 67, y: 20)
-                Text("pcs")
+                Text(materialUnit)
                     .font(.caption2)
                     .foregroundColor(Color(hex: 0x3C6EE1))
                     .offset(x: 67, y: 35)

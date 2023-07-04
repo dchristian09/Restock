@@ -23,7 +23,7 @@ struct Product_Detail: View {
                         .scaledToFit()
                         .frame(width: 300, height: 250)
                         .padding(.top)
-                    Text($product.wrappedValue.nama ?? "")
+                    Text($product.wrappedValue.name ?? "")
                         .font(.largeTitle)
                     VStack{
                         List {
