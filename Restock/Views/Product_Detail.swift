@@ -23,7 +23,7 @@ struct Product_Detail: View {
                         .scaledToFit()
                         .frame(width: 300, height: 250)
                         .padding(.top)
-                    Text($product.wrappedValue.nama ?? "")
+                    Text($product.wrappedValue.name ?? "")
                         .font(.largeTitle)
                     VStack{
                         List {
@@ -93,9 +93,10 @@ struct Product_Detail: View {
     }
 }
 
-//
+
 //struct Product_Detail_Previews: PreviewProvider {
+//    @State static var teamp:DataProduct  = DataProduct()
 //    static var previews: some View {
-//        Product_Detail(product: product)
+//        Product_Detail(product: $teamp)
 //    }
 //}

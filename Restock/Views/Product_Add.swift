@@ -12,6 +12,7 @@ struct Product_Add: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @StateObject var productDataManager: ProductDataManager = ProductDataManager.shared
     @StateObject var materialDataManager: MaterialDataManager = MaterialDataManager.shared
+    @StateObject var recipeDataManager: RecipeDataManager = RecipeDataManager.shared
     
     @State var selectedUnitList:String = "pcs"
     @State var productName: String = ""
@@ -210,7 +211,16 @@ struct Product_Add: View {
     
     
     func saveData(){
-       var newProduct =  productDataManager.addDataToCoreData(productName: productName, currentStock: Int32(productCurrentStock) ?? 0, minimumStock: Int32(productMinimalStock) ?? 0, isActive: true, unit: selectedUnitList)
+        var newProduct:DataProduct =  productDataManager.addDataToCoreData(productName: productName, currentStock: Int32(productCurrentStock) ?? 0, minimumStock: Int32(productMinimalStock) ?? 0, isActive: true, unit: selectedUnitList)
+        
+        for materialIngredient in arrayMaterialIngredients {
+            let idProduct : UUID =  newProduct.id!
+            let idMaterial : UUID = materialIngredient.data!.id!
+            let qtyMaterial: Int32 = Int32(materialIngredient.materialQuantity) ?? 0
+
+            recipeDataManager.addDataToCoreData(idProduct: idProduct, idMaterial: idMaterial, quantity: qtyMaterial)
+            
+        }
         
     }
     
@@ -229,7 +239,7 @@ struct Product_Add_Previews: PreviewProvider {
 
 
 //struct MaterialIngredients: Identifiable, Equatable {
-struct MaterialIngredients {
+struct MaterialIngredients : Hashable {
     var data:DataMaterial? = nil
     //var id = UUID()
     //var materialUnit: String

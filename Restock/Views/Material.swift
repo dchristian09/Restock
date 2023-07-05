@@ -36,7 +36,7 @@ struct Material: View {
                                         NavigationLink{
                                             Material_Detail(material: $materialDataManager.materialList[index])
                                         }label: {
-                                            Main_Card_View(materialName:materialDataManager.materialList[index].name ?? "")
+                                            Main_Card_View(materialName:materialDataManager.materialList[index].name ?? "", materialUnit: materialDataManager.materialList[index].unit ?? "", materialStock: materialDataManager.materialList[index].currentStock)
                                             
                                         }
                                     }

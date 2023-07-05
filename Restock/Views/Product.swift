@@ -31,7 +31,7 @@ struct Product: View {
                                         NavigationLink{
                                             Product_Detail(product: $productDataManager.productList[index])
                                         }label: {
-                                            Main_Card_View(materialName: productDataManager.productList[index].nama ?? "")
+                                            Main_Card_View(materialName: productDataManager.productList[index].name ?? "",  materialUnit: productDataManager.productList[index].unit ?? "", materialStock: productDataManager.productList[index].currentStock)
                                         }
                                     }
                                 }

@@ -39,6 +39,7 @@
 		C233D0472A4968D5003B8ED3 /* mainData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C233D0452A4968D5003B8ED3 /* mainData.xcdatamodeld */; };
 		C233D04A2A496A7A003B8ED3 /* MaterialDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C233D0492A496A7A003B8ED3 /* MaterialDataManager.swift */; };
 		C2816AD02A498A86007E2DCE /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2816ACF2A498A86007E2DCE /* PersistenceController.swift */; };
+		D07248F02A52D3B100C1459D /* RecipeDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07248EF2A52D3B100C1459D /* RecipeDataManager.swift */; };
 		D07B62762A4AC55B0002585A /* ProductDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07B62752A4AC55B0002585A /* ProductDataManager.swift */; };
 		D07B62782A4AC5720002585A /* ProductionDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07B62772A4AC5720002585A /* ProductionDataManager.swift */; };
 /* End PBXBuildFile section */
@@ -80,6 +81,7 @@
 		D00173222A4BDFD300A45FDB /* mainData 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mainData 3.xcdatamodel"; sourceTree = "<group>"; };
 		D07248EA2A4C10B400C1459D /* mainData 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mainData 4.xcdatamodel"; sourceTree = "<group>"; };
 		D07248EB2A4C133000C1459D /* mainData 5.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mainData 5.xcdatamodel"; sourceTree = "<group>"; };
+		D07248EF2A52D3B100C1459D /* RecipeDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDataManager.swift; sourceTree = "<group>"; };
 		D07B62752A4AC55B0002585A /* ProductDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDataManager.swift; sourceTree = "<group>"; };
 		D07B62772A4AC5720002585A /* ProductionDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductionDataManager.swift; sourceTree = "<group>"; };
 		D08BD6972A4BA4E3003D4233 /* mainData 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mainData 2.xcdatamodel"; sourceTree = "<group>"; };
@@ -205,6 +207,7 @@
 				C233D0492A496A7A003B8ED3 /* MaterialDataManager.swift */,
 				D07B62752A4AC55B0002585A /* ProductDataManager.swift */,
 				D07B62772A4AC5720002585A /* ProductionDataManager.swift */,
+				D07248EF2A52D3B100C1459D /* RecipeDataManager.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 			files = (
 				36CB89602A403BE1000BDA6D /* Production_Detail.swift in Sources */,
 				36CB895A2A3AEB4E000BDA6D /* Product_Reminder.swift in Sources */,
+				D07248F02A52D3B100C1459D /* RecipeDataManager.swift in Sources */,
 				36CB89562A39A158000BDA6D /* Indicator_Modal_View.swift in Sources */,
 				3634D6232A45880100C31903 /* Product_Edit.swift in Sources */,
 				C233D0472A4968D5003B8ED3 /* mainData.xcdatamodeld in Sources */,
