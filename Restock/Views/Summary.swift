@@ -33,6 +33,7 @@ struct Summary: View {
     @Environment(\.dismiss) var dismiss
     @State var showingAlert: Bool = false //showAlertProduct
     @State var cekekek: Bool = false //showAlertMaterial
+    @State var sapimanSha = ""
     let columns = [GridItem(.flexible()), GridItem(.flexible())]
     var body: some View {
         NavigationView{
@@ -94,6 +95,33 @@ struct Summary: View {
                                     .offset(y: 55)
                             }.padding(35)
                         }else{
+//                             if there is no data to show
+                            if (urgentMaterials.count == 0 && urgentProducts.count == 0){
+                                ZStack{
+                                    RoundedRectangle(cornerRadius: 50, style:.continuous)
+                                        .fill(.white)
+                                        .frame(maxHeight: .infinity)
+                                    
+                                    VStack {
+                                        Text("All of your material & product")
+                                            .font(.system(size: 22))
+                                            .foregroundColor(Color(hex: 0x8E8E93))
+                                        
+                                        Text("are at a safe level.")
+                                            .font(.system(size: 22))
+                                            .foregroundColor(Color(hex: 0x8E8E93))
+                                        
+                                        Image("summary_safe_reminder")
+                                            .resizable()
+                                            .frame(width: 390, height: 349)
+                                        
+                                        Image("summary_safe_reminder_wave")
+                                            .resizable()
+                                            .frame(width: 514, height: 104)
+                                            .offset(y: 45)
+                                    }
+                                }
+                            }
                             // if there is urgent material
                             if (urgentMaterials.count > 0 ){
                                 //                        Material Reminder
@@ -118,12 +146,8 @@ struct Summary: View {
                                         Main_Card_View(materialName: urgentMaterial.name ?? "No Material", materialUnit: urgentMaterial.unit ?? "pcs", materialStock: urgentMaterial.currentStock)
                                             .onLongPressGesture(minimumDuration: 1) {
                                                 showingAlert = true
-                                            }.alert( urgentMaterial.name ?? "", isPresented: $showingAlert, actions: {
-                                                Button("Produce Material", action: {})
-                                                Button("Deactivate Material", role: .destructive, action: {})
-                                            }, message: {
-                                                Text("Choose your next step for this reminder")
-                                            })
+                                                sapimanSha = urgentMaterial.name ?? ""
+                                            }
                                         
                                     }
                                 }
@@ -154,14 +178,11 @@ struct Summary: View {
                                         Main_Card_View(materialName: urgentProduct.name ?? "No Material", materialUnit: urgentProduct.unit ?? "pcs", materialStock: urgentProduct.currentStock)
                                             .onLongPressGesture(minimumDuration: 1) {
                                                 showingAlert = true
-                                            }.alert( urgentProduct.name ?? "", isPresented: $showingAlert, actions: {
-                                                Button("Produce Material", action: {})
-                                                Button("Deactivate Material", role: .destructive, action: {})
-                                            }, message: {
-                                                Text("Choose your next step for this reminder")
-                                            })
+                                                sapimanSha = urgentProduct.name ?? ""
+                                            }
                                         
                                     }
+                                    
                                     
                                     
                                 }
@@ -182,6 +203,13 @@ struct Summary: View {
         }.onAppear{
             getUrgentStock()
         }
+//        Alert for card on long press
+        .alert( sapimanSha, isPresented: $showingAlert, actions: {
+            Button("Produce Material", action: {})
+            Button("Deactivate Material", role: .destructive, action: {})
+        }, message: {
+            Text("Choose your next step for this reminder")
+        })
         
         
     }

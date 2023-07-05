@@ -38,7 +38,7 @@ class RecipeDataManager: ObservableObject {
 
         save()
         self.fetchRecipeData()
-        print(recipeList.count)
+        print(recipeList)
     }
     
     func save() {

@@ -211,24 +211,16 @@ struct Product_Add: View {
     
     
     func saveData(){
-        var newProduct: () =  productDataManager.addDataToCoreData(productName: productName, currentStock: Int32(productCurrentStock) ?? 0, minimumStock: Int32(productMinimalStock) ?? 0, isActive: true, unit: selectedUnitList)
+        var newProduct:DataProduct =  productDataManager.addDataToCoreData(productName: productName, currentStock: Int32(productCurrentStock) ?? 0, minimumStock: Int32(productMinimalStock) ?? 0, isActive: true, unit: selectedUnitList)
         
-//        ForEach(arrayMaterialIngredients, id: \.self){
-//            materialIngredient in
-//
-//            let materialData = materialDataManager.materialList.filter { material in
-//                materialIngredient.data?.name == material.name ?? ""
-//            }
-//
-//            if let material = materialData.first {
-//                    recipeDataManager.addDataToCoreData(idProduct: newProduct.id, idMaterial: <#T##UUID#>, quantity: <#T##Int32#>)
-//                print(materialData)
-//            }else{
-//                Text("Failed to Add Product")
-//            }
-//
-//
-//        }
+        for materialIngredient in arrayMaterialIngredients {
+            let idProduct : UUID =  newProduct.id!
+            let idMaterial : UUID = materialIngredient.data!.id!
+            let qtyMaterial: Int32 = Int32(materialIngredient.materialQuantity) ?? 0
+
+            recipeDataManager.addDataToCoreData(idProduct: idProduct, idMaterial: idMaterial, quantity: qtyMaterial)
+            
+        }
         
     }
     
