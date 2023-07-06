@@ -21,7 +21,7 @@ extension Color {
 
 struct Summary: View {
     init() {
-//        getUrgentStock()
+        //        getUrgentStock()
     }
     @State var urgentMaterials: [DataMaterial] = []
     @State var urgentProducts: [DataProduct] = []
@@ -42,61 +42,87 @@ struct Summary: View {
                     .fill(Color(hex: 0xf2f4ff))
                     .ignoresSafeArea()
                 ZStack {
-                    RoundedRectangle(cornerRadius: 50, style:.continuous)
+                    RoundedRectangle(cornerRadius: 80, style:.continuous)
                         .fill(.white)
                         .offset(y:90)
                     VStack {
-                        HStack {
-                            Text("Summary")
-                                .font(.largeTitle.bold())
-                            
-                            Spacer()
-                            
-                            Button {
-                                withAnimation {
-                                    showingSheet = true
-                                }
-                            } label: {
-                                Image(systemName: "info.circle")
-                                    .font(.title2)
-                                    .foregroundColor(.blue)
-                                    .padding()
-                            }.sheet(isPresented: $showingSheet){
-                                Indicator_Modal_View(showSheetView: $showingSheet)
-                            }
-                        }
-                        
                         //if still no material. Summary_no_reminder
                         if(productDataManager.productList.count == 0 && materialDataManager.materialList.count == 0){
-                            VStack {
-                                Text("There is no summary yet.")
-                                    .font(.system(size: 22))
-                                    .foregroundColor(Color(hex: 0x8E8E93))
+                            HStack {
+                                Text("Summary")
+                                    .font(.largeTitle.bold())
+                                    .padding(.leading)
                                 
-                                HStack {
-                                    Text("Please jump to the")
-                                        .font(.system(size: 22))
-                                        .foregroundColor(Color(hex: 0x8E8E93))
-                                    Image(systemName: "shippingbox")
-                                        .font(.system(size: 22))
-                                        .foregroundColor(Color(hex: 0x8E8E93))
-                                    Text("material tab")
-                                        .font(.system(size: 22))
-                                        .foregroundColor(Color(hex: 0x8E8E93))
+                                Spacer()
+                                
+                                Button {
+                                    withAnimation {
+                                        showingSheet = true
+                                    }
+                                } label: {
+                                    Image(systemName: "info.circle")
+                                        .font(.title2)
+                                        .foregroundColor(.blue)
+                                        .padding(.trailing)
+                                }.sheet(isPresented: $showingSheet){
+                                    Indicator_Modal_View(showSheetView: $showingSheet)
                                 }
-                                
-                                Image("summary_no_reminder")
-                                    .resizable()
-                                    .frame(width: 389, height: 327)
-                                
-                                Image("summary_no_reminder_wave")
-                                    .resizable()
-                                    .frame(width: 416, height: 104)
-                                    .offset(y: 55)
-                            }.padding(35)
+                            }.padding([.top, .leading, .trailing])
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 50, style:.continuous)
+                                    .fill(.white)
+                                    .frame(maxHeight: .infinity)
+                                VStack {
+                                    Text("There is no summary yet.")
+                                        .font(.system(size: 22))
+                                        .foregroundColor(Color(hex: 0x8E8E93))
+                                    
+                                    HStack {
+                                        Text("Please jump to the")
+                                            .font(.system(size: 22))
+                                            .foregroundColor(Color(hex: 0x8E8E93))
+                                        Image(systemName: "shippingbox")
+                                            .font(.system(size: 22))
+                                            .foregroundColor(Color(hex: 0x8E8E93))
+                                        Text("material tab")
+                                            .font(.system(size: 22))
+                                            .foregroundColor(Color(hex: 0x8E8E93))
+                                    }
+                                    
+                                    Image("summary_no_reminder")
+                                        .resizable()
+                                        .frame(width: 389, height: 327)
+                                    
+                                    Image("summary_no_reminder_wave")
+                                        .resizable()
+                                        .frame(width: 416, height: 104)
+                                        .offset(y: 55)
+                                }
+                            }
                         }else{
-//                             if there is no data to show
+                            //                             if there is no data to show
                             if (urgentMaterials.count == 0 && urgentProducts.count == 0){
+                                HStack {
+                                    Text("Summary")
+                                        .font(.largeTitle.bold())
+    
+                                    Spacer()
+                                    
+                                    Button {
+                                        withAnimation {
+                                            showingSheet = true
+                                        }
+                                    } label: {
+                                        Image(systemName: "info.circle")
+                                            .font(.title2)
+                                            .foregroundColor(.blue)
+                                            .padding(.trailing)
+                                    }.sheet(isPresented: $showingSheet){
+                                        Indicator_Modal_View(showSheetView: $showingSheet)
+                                    }
+                                    
+                                }.padding([.top, .leading, .trailing])
+                                    .border(.black)
                                 ZStack{
                                     RoundedRectangle(cornerRadius: 50, style:.continuous)
                                         .fill(.white)
@@ -203,7 +229,7 @@ struct Summary: View {
         }.onAppear{
             getUrgentStock()
         }
-//        Alert for card on long press
+        //        Alert for card on long press
         .alert( sapimanSha, isPresented: $showingAlert, actions: {
             Button("Produce Material", action: {})
             Button("Deactivate Material", role: .destructive, action: {})
@@ -228,8 +254,8 @@ struct Summary: View {
 
 
 
-struct Summary_Previews: PreviewProvider {
-    static var previews: some View {
-        Summary()
-    }
-}
+//struct Summary_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Summary()
+//    }
+//}
