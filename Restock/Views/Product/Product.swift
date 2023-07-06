@@ -11,6 +11,7 @@ struct Product: View {
     @State private var searchText = ""
     let columns = [GridItem(.flexible()), GridItem(.flexible())]
     @State var showingAlert: Bool = false
+    @State var showingSheet: Bool = false
     @StateObject var productDataManager: ProductDataManager = ProductDataManager.shared
     var body: some View {
         NavigationView{
@@ -24,8 +25,45 @@ struct Product: View {
                         RoundedRectangle(cornerRadius: 50, style:.continuous)
                             .fill(.white)
                             .frame(maxHeight: .infinity)
+                        
+                        //there is product
                         if(productDataManager.productList.count > 0){
                             VStack{
+                                //low stock product
+                                HStack{
+                                    Image(systemName: "shippingbox")
+                                    Text("Low Stock Product")
+                                        .font(.title2.bold())
+                                    Spacer()
+                                    NavigationLink {
+                                        Product_Reminder()
+                                    } label: {
+                                        Text("View Another")
+                                            .font(.footnote)
+                                            .foregroundColor(.blue)
+                                    }
+                                }.padding()
+                                
+                                // Product Card
+                                LazyVGrid(columns: columns){
+                                    ForEach(productDataManager.productList.indices,id:\.self){ index in
+                                        NavigationLink{
+                                            Product_Detail(product: $productDataManager.productList[index])
+                                        }label: {
+                                            Main_Card_View(materialName: productDataManager.productList[index].name ?? "",  materialUnit: productDataManager.productList[index].unit ?? "", materialStock: productDataManager.productList[index].currentStock)
+                                        }
+                                    }
+                                }
+                                
+                                //safe product
+                                HStack{
+                                    Image(systemName: "shippingbox")
+                                    Text("Safe Product")
+                                        .font(.title2.bold())
+                                    Spacer()
+                                }.padding()
+                                
+                                // Product Card
                                 LazyVGrid(columns: columns){
                                     ForEach(productDataManager.productList.indices,id:\.self){ index in
                                         NavigationLink{
@@ -39,6 +77,7 @@ struct Product: View {
                             }
                             .padding()
                         }
+                        //no product
                         else{
                             ZStack{
                                 Rectangle()
@@ -90,10 +129,22 @@ struct Product: View {
             .searchable(text: $searchText)
             .toolbar{
                 ToolbarItem(placement: .navigationBarTrailing){
-                    NavigationLink {
-                        Product_Add()
-                    }label: {
-                        Image(systemName: "plus")
+                    HStack{
+                        Button {
+                            withAnimation {
+                                showingSheet = true
+                            }
+                        }label: {
+                            Image(systemName: "info.circle")
+                        }.sheet(isPresented: $showingSheet){
+                            Indicator_Modal_View(showSheetView: $showingSheet)
+                        }
+                        
+                        NavigationLink {
+                            Product_Add()
+                        }label: {
+                            Image(systemName: "plus")
+                        }
                     }
                 }
             }
@@ -102,8 +153,8 @@ struct Product: View {
 }
 
 
-struct Product_Previews: PreviewProvider {
-    static var previews: some View {
-        Product()
-    }
-}
+//struct Product_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Product()
+//    }
+//}

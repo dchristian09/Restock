@@ -122,12 +122,20 @@ struct Product_Add: View {
                         Section{
                             ForEach(arrayMaterialIngredients.indices, id:\.self) { index in
                                 HStack{
+                                    Button(action: {
+                                        arrayMaterialIngredients.remove(at: index)
+                                    }){
+                                        HStack {
+                                            Image(systemName: "minus.circle")
+                                                .foregroundColor(.red)
+                                        }
+                                    }
                                     Menu{
                                         Picker("Materials", selection: $arrayMaterialIngredients[index].data){
                                             ForEach (materialDataManager.materialList, id: \.id){ material in
                                                 Text(material.name ?? "You are short of material")
                                                     .fixedSize(horizontal: true, vertical: true)
-                                                    .frame(maxWidth:100,maxHeight:30)
+                                                    .frame(maxWidth:75,maxHeight:30)
                                                     .lineLimit(1)
                                                     .truncationMode(.tail)
                                                     .background(.gray)
@@ -141,15 +149,15 @@ struct Product_Add: View {
                                         .lineLimit(nil)
                                         .truncationMode(.head)
                                         .fixedSize(horizontal: true, vertical: true)
-                                        .frame(maxWidth: 100,maxHeight:50)
+                                        .frame(maxWidth: 75,maxHeight:30)
                                         .labelsHidden()
                                     }label:{
                                         if arrayMaterialIngredients[index].data == nil {
                                             Text("Choose")
-                                                .frame(maxWidth:100,maxHeight:30)
+                                                .frame(maxWidth:75,maxHeight:30)
                                         }else{
                                             Text("\(arrayMaterialIngredients[index].data?.name ?? "")")
-                                                .frame(maxWidth:100,maxHeight:30)
+                                                .frame(maxWidth:75,maxHeight:30)
                                         }
                                     }
 
@@ -157,6 +165,12 @@ struct Product_Add: View {
                                     TextField("Quantity", text: $arrayMaterialIngredients[index].materialQuantity)
                                         .keyboardType(.numberPad)
                                         .multilineTextAlignment(.leading)
+                                    Spacer()
+                                    if arrayMaterialIngredients[index].data == nil {
+                                        Text("Unit")
+                                    }else{
+                                        Text("\(arrayMaterialIngredients[index].data?.unit ?? "")")
+                                    }
                                     
                                 }
                                 
@@ -231,11 +245,11 @@ struct Product_Add: View {
 //    materialNames = materialDataManager.materialList.map { $0.name }
 //}
 
-struct Product_Add_Previews: PreviewProvider {
-    static var previews: some View {
-        Product_Add()
-    }
-}
+//struct Product_Add_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Product_Add()
+//    }
+//}
 
 
 //struct MaterialIngredients: Identifiable, Equatable {

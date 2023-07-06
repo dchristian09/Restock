@@ -17,17 +17,50 @@ struct Product_Detail: View {
                     .fill(Color(hex: 0xf2f4ff))
                     .ignoresSafeArea()
                 VStack{
+                    //image
                     Image("bouquet")
                         .resizable()
                         .cornerRadius(16)
                         .scaledToFit()
                         .frame(width: 300, height: 250)
                         .padding(.top)
+                    //text
                     Text($product.wrappedValue.name ?? "")
                         .font(.largeTitle)
+                    //button
+                    HStack{
+                        NavigationLink{
+                            Product_Stock(stockOption: "Produce")
+                        }label: {
+                            HStack {
+                                Image(systemName: "plus.circle")
+                                Text("Produce") // 2
+                            }.padding(15)
+                                .foregroundColor(.white)
+                                .background(.green)
+                                .cornerRadius(8)
+                            
+                        }
+                        NavigationLink{
+                            Product_Stock(stockOption: "Reduce")
+                        }label: {
+                            HStack {
+                                Image(systemName: "minus.circle")
+                                Text("Reduce") // 2
+                            }.padding(15)
+                                .foregroundColor(Color(hex: 0xff605c))
+                                .background(.white)
+                                .cornerRadius(8)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 8)
+                                        .stroke(Color(hex: 0xff605c))
+                                )
+                        }
+                    }
                     VStack{
                         List {
-                            Section{
+                            //stock section
+                            Section(header: Text("Stock")){
                                 HStack {
                                     Text("Current Stock")
                                     Spacer()
@@ -38,6 +71,9 @@ struct Product_Detail: View {
                                     Spacer()
                                     Text(String($product.wrappedValue.minimalStock) + " " + ($product.wrappedValue.unit ?? ""))
                                 }
+                            }
+                            //materials section
+                            Section(header: Text("Materials")){
                                 HStack {
                                     Text("Tissue Paper")
                                     Spacer()

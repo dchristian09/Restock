@@ -8,52 +8,60 @@
 import SwiftUI
 
 struct Main_Card_View: View {
-    var materialName:String = "Ros"
+    var materialName:String = "Rose Bouquet"
     var materialUnit: String = "pcs"
     var materialStock: Int32 = 0
     var body: some View {
         ZStack{
             RoundedRectangle(cornerRadius: 16, style:.continuous)
-                .fill(Color(hex: 0x3C6EE1))
+                .fill(Color(hex: 0xF2F4FF))
             ZStack {
                 HStack(alignment: .top){
-                    VStack {
-                        Image("bouquet")
-                            .resizable()
-                            .frame(width: 60, height: 60)
-                            .cornerRadius(12)
-                            .foregroundColor(.white)
-                        Text("Min. Stock: 3 pcs")
-                            .font(.system(size: 7))
-                            .foregroundColor(.white)
-                            .bold()
-                    }
-                    Text(materialName)
-                        .font(.subheadline)
-                        .foregroundColor(.white)
-                        .bold()
-                        .padding(.trailing)
                     
-                }.padding(.leading)
-                    .frame(maxWidth:.infinity, alignment: .leading)
-                Circle()
-                    .fill(.white)
-                    .offset(x: 67, y: 25)
-                    .frame(width: 56, height: 56)
-                Text(String(materialStock))
-                    .font(.title2)
-                    .bold()
-                    .foregroundColor(Color(hex: 0x3C6EE1))
-                    .offset(x: 67, y: 20)
-                Text(materialUnit)
-                    .font(.caption2)
-                    .foregroundColor(Color(hex: 0x3C6EE1))
-                    .offset(x: 67, y: 35)
+                    //image
+                    Image("bouquet")
+                        .resizable()
+                        .frame(width: 53, height: 54)
+                        .cornerRadius(12)
+                        .foregroundColor(.white)
+                        .padding(.leading, 7.0)
+                    
+                    VStack(alignment:.leading){
+                        
+                        //stock name
+                        Text(materialName)
+                            .font(.system(size: 14))
+                            .foregroundColor(.black)
+                            .bold()
+                            .lineLimit(1)
+                            .truncationMode(.tail)
+                            .multilineTextAlignment(.leading)
+                        
+                        //current stock
+                        Text(String(materialStock)+" "+(materialUnit)+" left")
+                            .font(.system(size: 12))
+                            .foregroundColor(.black)
+                            .padding(.trailing)
+                        
+                        //spacer
+                        Text("")
+                            .font(.system(size: 11))
+                        
+                        //min stock
+                        Text("Min Stock: "+(String(materialStock))+" "+(materialUnit))
+                            .font(.system(size: 10))
+                            .fontWeight(.thin)
+                            .foregroundColor(.black)
+                    }.multilineTextAlignment(.leading)
+                    Circle()
+                        .fill(.red)
+                        .frame(width: 8, height: 8)
+                        .padding(.trailing, 4.0)
+                }
+                .frame(maxWidth:.infinity, alignment: .leading)
             }
-
         }
-        .frame(width:177, height: 98)
-        
+        .frame(width:172, height: 68)
     }
 }
 

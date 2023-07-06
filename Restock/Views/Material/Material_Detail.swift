@@ -10,6 +10,7 @@ import SwiftUI
 struct Material_Detail: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @Binding var material: DataMaterial
+    //    var stockOption:String = ""
     var body: some View {
         NavigationView{
             ZStack {
@@ -25,9 +26,40 @@ struct Material_Detail: View {
                         .padding(.top)
                     Text($material.wrappedValue.name ?? "")
                         .font(.largeTitle)
+                    HStack{
+                        
+                        NavigationLink{
+                            Material_Stock(stockOption: "Restock")
+                        }label: {
+                            HStack {
+                                Image(systemName: "plus.circle")
+                                Text("Restock") // 2
+                            }.padding(15)
+                                .foregroundColor(.white)
+                                .background(.green)
+                                .cornerRadius(8)
+                            
+                        }
+                        NavigationLink{
+                            Material_Stock(stockOption: "Reduce")
+                        }label: {
+                            HStack {
+                                Image(systemName: "minus.circle")
+                                Text("Reduce") // 2
+                            }.padding(15)
+                                .foregroundColor(Color(hex: 0xff605c))
+                                .background(.white)
+                                .cornerRadius(8)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 8)
+                                        .stroke(Color(hex: 0xff605c))
+                                )
+                        }
+                        
+                    }
                     VStack{
                         List {
-                            Section{
+                            Section(header: Text("Stock")){
                                 HStack {
                                     Text("Current Stock")
                                     Spacer()
@@ -38,6 +70,8 @@ struct Material_Detail: View {
                                     Spacer()
                                     Text(String($material.wrappedValue.minimalStock) + " " + ($material.wrappedValue.unit ?? ""))
                                 }
+                            }
+                            Section(header: Text("Notes")){
                                 HStack {
                                     Text("Notes")
                                     Spacer()
