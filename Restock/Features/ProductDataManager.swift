@@ -19,7 +19,9 @@ class ProductDataManager: ObservableObject {
     }
     
     func fetchProductData() {
+        
         let request = NSFetchRequest<DataProduct>(entityName: "DataProduct")
+//        request.sortDescriptors = [NSSortDescriptor(key: "currentStock", ascending: true)]
         
         do {
             productList = try viewContext.fetch(request)

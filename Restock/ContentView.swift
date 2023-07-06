@@ -24,7 +24,7 @@ struct ContentView: View {
                     
                 }
                 .tag(0)
-            Production_No_Data()
+            Production()
                 .preferredColorScheme(.light)
                 .tabItem(){
                     if selection == 1{

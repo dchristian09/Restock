@@ -11,7 +11,10 @@ struct Product: View {
     @State private var searchText = ""
     let columns = [GridItem(.flexible()), GridItem(.flexible())]
     @State var showingAlert: Bool = false
+    @State var isNoMaterialAlert = false
     @StateObject var productDataManager: ProductDataManager = ProductDataManager.shared
+    @StateObject var materialDataManager: MaterialDataManager = MaterialDataManager.shared
+    
     var body: some View {
         NavigationView{
             ZStack{
@@ -90,11 +93,21 @@ struct Product: View {
             .searchable(text: $searchText)
             .toolbar{
                 ToolbarItem(placement: .navigationBarTrailing){
-                    NavigationLink {
-                        Product_Add()
-                    }label: {
-                        Image(systemName: "plus")
-                    }
+                    if materialDataManager.materialList.count > 0 {
+                                NavigationLink(destination: Product_Add()) {
+                                    Image(systemName: "plus")
+                                }
+                            } else {
+                                Button(action: {
+                                    // Handle the case where materials list is empty
+                                    isNoMaterialAlert = true
+                                }) {
+                                    Image(systemName: "plus")
+                                }
+                                .alert(isPresented: $isNoMaterialAlert) {
+                                    Alert(title: Text("No Material"), message: Text("Please add material first."), dismissButton: .default(Text("OK")))
+                                }
+                            }
                 }
             }
         }

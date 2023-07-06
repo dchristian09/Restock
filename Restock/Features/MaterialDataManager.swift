@@ -45,6 +45,8 @@ class MaterialDataManager: ObservableObject {
         self.fetchMaterialData()
     }
     
+    func editDataInCoreData(
+    
     func save() {
         do {
             try viewContext.save()

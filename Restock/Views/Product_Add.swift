@@ -14,6 +14,7 @@ struct Product_Add: View {
     @StateObject var materialDataManager: MaterialDataManager = MaterialDataManager.shared
     @StateObject var recipeDataManager: RecipeDataManager = RecipeDataManager.shared
     
+    @State var pickerData: [DataMaterial] = []
     @State var selectedUnitList:String = "pcs"
     @State var productName: String = ""
     @State var productCurrentStock: String = ""
@@ -22,11 +23,15 @@ struct Product_Add: View {
     @State var dataProductImage: Data?
     let unitList = ["pcs", "gram", "liter", "ml", "sheet", "bottle"]
     
+    //    ALERT CHECKER
+    @State private var isDataIncomplete = false
+    @State private var isMaterialIncomplete = false
+    
     @State var material = ["Bouquet Rose", "Chocolate Bouquet", "Saya suka sama milo dinosaurus"]
     @State var arrayMaterialIngredients: [MaterialIngredients] = []
     //@State var arrayMaterialIngredients2: [DataMaterial] = []
     @State var arrayMaterialn: [String] = []
-
+    
     
     var body: some View {
         NavigationView{
@@ -46,10 +51,10 @@ struct Product_Add: View {
                                     .scaledToFit()
                                     .frame(width: 300, height: 250)
                             } else {
-                                    Image(systemName: "photo")
-                                        .resizable()
-                                        .frame(width: 150, height: 120)
-                                        .foregroundColor(.gray)
+                                Image(systemName: "photo")
+                                    .resizable()
+                                    .frame(width: 150, height: 120)
+                                    .foregroundColor(.gray)
                             }
                             Spacer()
                         }.padding(.top)
@@ -124,7 +129,7 @@ struct Product_Add: View {
                                 HStack{
                                     Menu{
                                         Picker("Materials", selection: $arrayMaterialIngredients[index].data){
-                                            ForEach (materialDataManager.materialList, id: \.id){ material in
+                                            ForEach (pickerData, id: \.id){ material in
                                                 Text(material.name ?? "You are short of material")
                                                     .fixedSize(horizontal: true, vertical: true)
                                                     .frame(maxWidth:100,maxHeight:30)
@@ -133,7 +138,7 @@ struct Product_Add: View {
                                                     .background(.gray)
                                                     .allowsTightening(false)
                                                     .tag(material as DataMaterial?)
-
+                                                
                                             }
                                         }
                                         
@@ -143,6 +148,9 @@ struct Product_Add: View {
                                         .fixedSize(horizontal: true, vertical: true)
                                         .frame(maxWidth: 100,maxHeight:50)
                                         .labelsHidden()
+                                        .onAppear{
+                                            fetchPickerData()
+                                        }
                                     }label:{
                                         if arrayMaterialIngredients[index].data == nil {
                                             Text("Choose")
@@ -152,20 +160,19 @@ struct Product_Add: View {
                                                 .frame(maxWidth:100,maxHeight:30)
                                         }
                                     }
-
+                                    
                                     Divider()
                                     TextField("Quantity", text: $arrayMaterialIngredients[index].materialQuantity)
                                         .keyboardType(.numberPad)
                                         .multilineTextAlignment(.leading)
                                     
-                                }
-                                
+                                                                    }
                             }
                             HStack{
                                 Button{
-
+                                    
                                     arrayMaterialIngredients.append(MaterialIngredients(data: nil, materialQuantity: ""))
-
+                                    
                                 }label:{
                                     HStack{
                                         Image(systemName: "plus.circle.fill")
@@ -195,41 +202,75 @@ struct Product_Add: View {
                     Button("Add") {
                         //function
                         saveData()
-                        self.presentationMode.wrappedValue.dismiss()
+                        
                     }
                 }
             }
         }
         .navigationBarBackButtonHidden(true)
-//        .onAppear {
-//            print("jum:", materialDataManager.materialList.count)
-//            for materialn in materialDataManager.materialList {
-//                arrayMaterialn.append(materialn.name ?? "")
-//            }
-//        }
-    }
-    
-    
-    func saveData(){
-        var newProduct:DataProduct =  productDataManager.addDataToCoreData(productName: productName, currentStock: Int32(productCurrentStock) ?? 0, minimumStock: Int32(productMinimalStock) ?? 0, isActive: true, unit: selectedUnitList)
         
-        for materialIngredient in arrayMaterialIngredients {
-            let idProduct : UUID =  newProduct.id!
-            let idMaterial : UUID = materialIngredient.data!.id!
-            let qtyMaterial: Int32 = Int32(materialIngredient.materialQuantity) ?? 0
-
-            recipeDataManager.addDataToCoreData(idProduct: idProduct, idMaterial: idMaterial, quantity: qtyMaterial)
+        
+        .alert(isPresented: $isDataIncomplete) {
+            if(isMaterialIncomplete){
+                //        Material Alert
+                return Alert(title: Text("Ingredient Incomplete"), message: Text("Please enter product ingredient."), dismissButton: .default(Text("OK")))
+            }else{
+                //        Product Data Alert
+                return Alert(title: Text("Product Data Incomplete"), message: Text("Please enter product information."), dismissButton: .default(Text("OK")))
+            }
+            
+            
+            
             
         }
         
     }
     
     
+    func saveData(){
+        print(arrayMaterialIngredients.count)
+        if(productName.isEmpty || productMinimalStock.isEmpty || productCurrentStock.isEmpty || selectedUnitList.isEmpty){
+            isDataIncomplete = true
+        }
+        
+        if(arrayMaterialIngredients.count > 0){
+            print(isMaterialIncomplete)
+            let newProduct:DataProduct =  productDataManager.addDataToCoreData(productName: productName, currentStock: Int32(productCurrentStock) ?? 0, minimumStock: Int32(productMinimalStock) ?? 0, isActive: true, unit: selectedUnitList)
+            
+            for materialIngredient in arrayMaterialIngredients {
+                if(materialIngredient.data == nil || materialIngredient.materialQuantity.isEmpty){
+                    isMaterialIncomplete = true
+                    isDataIncomplete = true
+                    
+                }else{
+                    let idProduct : UUID =  newProduct.id!
+                    let idMaterial : UUID = materialIngredient.data!.id!
+                    let qtyMaterial: Int32 = Int32(materialIngredient.materialQuantity) ?? 0
+                    
+                    recipeDataManager.addDataToCoreData(idProduct: idProduct, idMaterial: idMaterial, quantity: qtyMaterial)
+                    self.presentationMode.wrappedValue.dismiss()
+                }
+                
+            }
+            
+        }else{
+            isMaterialIncomplete = true
+            isDataIncomplete = true
+        }
+        
+    }
+    
+    
+    func fetchPickerData(){
+        pickerData = materialDataManager.materialList.filter { material in
+            !arrayMaterialIngredients.contains{ $0.data?.name == material.name}
+        }
+        
+    }
+    
 }
 
-//func fetchMaterialNames() {
-//    materialNames = materialDataManager.materialList.map { $0.name }
-//}
+
 
 struct Product_Add_Previews: PreviewProvider {
     static var previews: some View {
