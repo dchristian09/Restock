@@ -45,7 +45,7 @@ class MaterialDataManager: ObservableObject {
         self.fetchMaterialData()
     }
     
-    func editDataInCoreData(
+    func editDataInCoreData(){}
     
     func save() {
         do {
