@@ -14,55 +14,56 @@ struct Production_Card_View: View {
                 .fill(Color(hex: 0xF2F4FF))
             ZStack{
                 HStack(alignment: .top){
-                    VStack{
-                        Circle()
-                            .fill(.green)
-                            .frame(width: 8, height: 8, alignment: .leading)
-                            .padding([.top, .leading])
+                    VStack(alignment:.center){
+                        Spacer()
+                        //image barang
+                        Image("bouquet")
+                            .resizable()
+                            .frame(width: 55, height: 55)
+                            .cornerRadius(12)
+                            .foregroundColor(.white)
+                            .padding(.leading, 10.0)
                         Spacer()
                     }
-                    VStack(alignment: .leading){
-                        HStack{
-                            // keterangan stock
-                            Text("Produce Stock")
-                                .font(.subheadline)
-                                .foregroundColor(.black)
-                            Text("-")
-                                .font(.subheadline)
-                                .foregroundColor(.black)
-                            // keterangan stock
-                            Text("Event Graduation")
-                                .font(.subheadline)
-                                .foregroundColor(.black)
-                        }.padding(.top, 10)
                         
+                    VStack(alignment: .leading){
+                        Spacer()
                         // nama barang
                         Text("Bouquet Rose")
-                            .font(.title)
+                            .font(.system(size: 20))
                             .bold()
-                            .padding([.bottom], 0.1)
+                            .padding(.bottom, 0.5)
                             .foregroundColor(.black)
-                        //tanggal barang
-                        Text("14/07/2023")
-                            .font(.caption2)
+                        // keterangan barang
+                        Text("Event Graduation")
+                            .font(.system(size: 11))
+                            .foregroundColor(Color(hex: 0x8E8E93))
+                            .fontWeight(.regular)
                             .foregroundColor(.black)
-                        
+                        Spacer()
                     }
+                    
                     Spacer()
                     
+                    
+                    VStack(alignment: .trailing){
+                        Spacer()
+                        //jumlah plus minus stock
+                        Text("+1")
+                            .font(.system(size: 20))
+                            .bold()
+                            .foregroundColor(Color(hex: 0x00CA4E))
+                        //produce/reduce stock
+                        Text("Produce")
+                            .font(.system(size: 11))
+                            .fontWeight(.regular)
+                            .foregroundColor(Color(hex: 0x00CA4E))
+                        Spacer()
+                    }.padding(.trailing)
                 }
-                //plus minus stock
-                Text("+1")
-                    .font(.largeTitle)
-                    .bold()
-                    .foregroundColor(.green)
-                    .offset(x: 120)
             }
-            
         }
-        
-        .frame(width:312, height: 94)
-        
+        .frame(width:312, height: 72)
     }
 }
 

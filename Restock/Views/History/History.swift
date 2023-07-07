@@ -69,8 +69,19 @@ struct History: View {
                                         Production_Detail()
                                     } label:{
                                         Production_Card_View()
-                                    }
-                                    
+                                    }.highPriorityGesture(DragGesture(minimumDistance: 25, coordinateSpace: .local)
+                                        .onEnded { value in
+                                            if abs(value.translation.height) < abs(value.translation.width) {
+                                                if abs(value.translation.width) > 50.0 {
+                                                    if value.translation.width < 0 {
+                                                        print("Kiri ke Kanan")
+                                                    }else{
+                                                        print("Kanan ke kiri")
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    )
                                 }
                             }
                             Section{
