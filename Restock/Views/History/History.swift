@@ -13,19 +13,21 @@ struct History: View {
     @State private var searchText = ""
     let themes = ["Product", "Material"]
     let columns = [GridItem(.fixed(35)), GridItem(.flexible())]
+    let tgls = ["1", "2"]
     var body: some View {
         NavigationView{
             ZStack{
                 Rectangle()
                     .fill(Color(hex: 0xf2f4ff))
                     .ignoresSafeArea()
-                ScrollView {
+             //   ScrollView {
                     ZStack{
                         RoundedRectangle(cornerRadius: 50, style:.continuous)
                             .fill(.white)
                             .frame(maxHeight: .greatestFiniteMagnitude)
                         
                         VStack{
+                            
                             HStack{
                                 Spacer()
                                 Picker("Appearance", selection: $selectedTheme) {
@@ -62,27 +64,41 @@ struct History: View {
                                     Spacer()
                                 }
                                 Divider()
-                                LazyVGrid(columns: columns){
-                                    Text("1")
-                                        .font(.title)
-                                    NavigationLink{
-                                        Production_Detail()
-                                    } label:{
-                                        Production_Card_View()
-                                    }.highPriorityGesture(DragGesture(minimumDistance: 25, coordinateSpace: .local)
-                                        .onEnded { value in
-                                            if abs(value.translation.height) < abs(value.translation.width) {
-                                                if abs(value.translation.width) > 50.0 {
-                                                    if value.translation.width < 0 {
-                                                        print("Kiri ke Kanan")
-                                                    }else{
-                                                        print("Kanan ke kiri")
-                                                    }
-                                                }
+                        
+                        
+                                List{
+                                    ForEach(tgls, id: \.self){ tgl in
+                                        History_card_view(tanggal: tgl)
+                                            .swipeActions() {
+                                                Button("Delete") {
+                                                    
+                                                }.tint(.red)
+                                                Button("Edit") {
+                                                }.tint(.blue)
                                             }
-                                        }
-                                    )
-                                }
+                                    }
+                                }.listStyle(.plain)
+//                                LazyVGrid(columns: columns){
+//                                    Text("1")
+//                                        .font(.title)
+//                                    NavigationLink{
+//                                        Production_Detail()
+//                                    } label:{
+//                                        Production_Card_View()
+//                                    }.highPriorityGesture(DragGesture(minimumDistance: 25, coordinateSpace: .local)
+//                                        .onEnded { value in
+//                                            if abs(value.translation.height) < abs(value.translation.width) {
+//                                                if abs(value.translation.width) > 50.0 {
+//                                                    if value.translation.width < 0 {
+//                                                        print("Kiri ke Kanan")
+//                                                    }else{
+//                                                        print("Kanan ke kiri")
+//                                                    }
+//                                                }
+//                                            }
+//                                        }
+//                                    )
+//                                }
                             }
                             Section{
                                 HStack{
@@ -105,7 +121,7 @@ struct History: View {
                         }
                         .padding()
                     }
-                }
+                //}
             }
             .navigationBarTitle("History")
             .navigationBarTitleDisplayMode(.large)
@@ -115,8 +131,8 @@ struct History: View {
     }
 }
 
-//struct History_Previews: PreviewProvider {
-//    static var previews: some View {
-//        History()
-//    }
-//}
+struct History_Previews: PreviewProvider {
+    static var previews: some View {
+        History()
+    }
+}
