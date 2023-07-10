@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct Production_Card_View: View {
+    var historyDetail:HistoryDetail? = nil
     var body: some View {
         ZStack{
             RoundedRectangle(cornerRadius: 16, style:.continuous)
@@ -29,13 +30,13 @@ struct Production_Card_View: View {
                     VStack(alignment: .leading){
                         Spacer()
                         // nama barang
-                        Text("Bouquet Rose")
+                        Text(historyDetail?.itemName ?? "Bouquet")
                             .font(.system(size: 20))
                             .bold()
                             .padding(.bottom, 0.5)
                             .foregroundColor(.black)
                         // keterangan barang
-                        Text("Event Graduation")
+                        Text(historyDetail?.productionLabel ?? "Event Graduation")
                             .font(.system(size: 11))
                             .foregroundColor(Color(hex: 0x8E8E93))
                             .fontWeight(.regular)
@@ -49,12 +50,12 @@ struct Production_Card_View: View {
                     VStack(alignment: .trailing){
                         Spacer()
                         //jumlah plus minus stock
-                        Text("+1")
+                        Text("\(historyDetail?.isProduce ?? true ? "+" : "-")\(historyDetail?.quantity ?? 7)")
                             .font(.system(size: 20))
                             .bold()
                             .foregroundColor(Color(hex: 0x00CA4E))
                         //produce/reduce stock
-                        Text("Produce")
+                        Text("\(historyDetail?.isProduce ?? true ? "Produce" : "Reduce")")
                             .font(.system(size: 11))
                             .fontWeight(.regular)
                             .foregroundColor(Color(hex: 0x00CA4E))
