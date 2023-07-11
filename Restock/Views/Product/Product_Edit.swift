@@ -9,13 +9,13 @@ import SwiftUI
 import PhotosUI
 
 struct Product_Edit: View {
-    //    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @Environment(\.presentationMode) var presentationMode
     
     @StateObject var productDataManager: ProductDataManager = ProductDataManager.shared
     @StateObject var materialDataManager: MaterialDataManager = MaterialDataManager.shared
     @StateObject var recipeDataManager: RecipeDataManager = RecipeDataManager.shared
     
-    @State var selectedUnitList:String = "pcs"
+    @State var selectedUnitList:String = ""
     
     //    Variable from Product_Detail
     @Binding var product: DataProduct
@@ -265,7 +265,9 @@ struct Product_Edit: View {
             ToolbarItem(placement: .navigationBarLeading){
                 Button("Cancel") {
 //                        cancelEdit()
+                    self.presentationMode.wrappedValue.dismiss()
                     self.toPreviousPage = false
+                    print("inCancel: ", toPreviousPage)
 //                        self.presentationMode.wrappedValue.dismiss()
                     
                 }
@@ -273,7 +275,8 @@ struct Product_Edit: View {
             ToolbarItem(placement: .navigationBarTrailing){
                 Button("Done") {
                     //function
-//                    saveEdit()
+                    saveEdit()
+                    
                     self.toPreviousPage = false
                     print("inDone: ", toPreviousPage)
                 }
@@ -307,7 +310,7 @@ struct Product_Edit: View {
             arrayMaterialIngredients.append(MaterialIngredients(data: materialData[0], materialQuantity: String(recipe.quantity)))
             oldArrayMaterialIngredients.append(MaterialIngredients(data: materialData[0], materialQuantity: String(recipe.quantity)))
             
-            recipeDataManager.deleteData(recipe: recipe)
+//            recipeDataManager.deleteData(recipe: recipe)
             
         }
         
@@ -336,7 +339,7 @@ struct Product_Edit: View {
             isDataIncomplete = true
         }
         
-        productDataManager.editDataFromCoreData(product: product, productName: productName, minimalStock: productMinimalStock, isActive: true)
+//        productDataManager.editDataFromCoreData(product: product, productName: productName, minimalStock: productMinimalStock, isActive: true)
         
         if(arrayMaterialIngredients.count > 0){
             for materialIngredient in arrayMaterialIngredients {
@@ -345,8 +348,8 @@ struct Product_Edit: View {
                     isDataIncomplete = true
                     
                     //if data incomplete, delete product
-                    cancelEdit()
-                    return
+//                    cancelEdit()
+                    break
                 }
                 isMaterialIncomplete = false
                 isDataIncomplete = false
@@ -354,6 +357,20 @@ struct Product_Edit: View {
             
             //            If all data already completed
             if !isMaterialIncomplete && !isDataIncomplete{
+                
+                productDataManager.editDataFromCoreData(product: product, productName: productName, minimalStock: productMinimalStock, isActive: true)
+//                get old data from core data
+                let arrayRecipe = recipeDataManager.recipeList.filter { recipe in
+                    recipe.idProduct ==  product.id
+                    
+                }
+                
+//                delete old data from core data
+                for recipe in arrayRecipe{
+                    recipeDataManager.deleteData(recipe: recipe)
+                }
+                
+//                add new data to coredata
                 for materialIngredient in arrayMaterialIngredients {
                     
                     let idProduct : UUID =  product.id!
@@ -364,6 +381,7 @@ struct Product_Edit: View {
                     
                     
                 }
+                self.presentationMode.wrappedValue.dismiss()
                 //                print("Sha Sha", recipeDataManager.recipeList.count)
                 //                self.presentationMode.wrappedValue.dismiss()
                 self.toPreviousPage = false

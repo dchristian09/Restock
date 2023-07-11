@@ -110,6 +110,7 @@ struct Product_Detail: View {
                 
 //            }
             .navigationBarTitle("Product Detail", displayMode: .inline)
+        
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading){
                     Button(action: {
@@ -121,15 +122,14 @@ struct Product_Detail: View {
                         }
                     })
                 }
+               
+                
                 ToolbarItem(placement: .navigationBarTrailing){
-                    
-                    NavigationLink(destination: Product_Edit(recipeDataManager: recipeDataManager, product: $product, productName: productName, productCurrentStock: productCurrentStock, productMinimalStock: productMinimalStock, productUnit: productUnit, toPreviousPage: $pindah), isActive: $pindah) {
-                        Button("Edit"){
-                            
-                            pindah = true
-                            
-                        }
+                    NavigationLink(destination: Product_Edit(recipeDataManager: recipeDataManager, product: $product, productName: productName, productCurrentStock: productCurrentStock, productMinimalStock: productMinimalStock, productUnit: productUnit, toPreviousPage: $pindah)) {
+                        Text("Edit")
                     }
+                    
+                    
                     
                 }
                 

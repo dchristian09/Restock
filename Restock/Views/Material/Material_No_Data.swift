@@ -10,7 +10,7 @@ import SwiftUI
 struct Material_No_Data: View {
     @State private var searchText = ""
     var body: some View {
-        NavigationView{
+//        NavigationView{
             ZStack{
                 Rectangle()
                     .fill(Color(hex: 0xf2f4ff))
@@ -49,20 +49,20 @@ struct Material_No_Data: View {
                     }
                 }
             }
-            .navigationBarTitle("Material")
-            .navigationBarTitleDisplayMode(.large)
-            .navigationBarBackButtonHidden(true)
-            .searchable(text: $searchText)
-            .toolbar{
-                ToolbarItem(placement: .navigationBarTrailing){
-                    NavigationLink {
-                        Material_Add()
-                    }label: {
-                        Image(systemName: "plus")
-                    }
-                }
-            }
-        }
+//            .navigationBarTitle("Material")
+//            .navigationBarTitleDisplayMode(.large)
+//            .navigationBarBackButtonHidden(true)
+//            .searchable(text: $searchText)
+//            .toolbar{
+//                ToolbarItem(placement: .navigationBarTrailing){
+//                    NavigationLink {
+//                        Material_Add()
+//                    }label: {
+//                        Image(systemName: "plus")
+//                    }
+//                }
+//            }
+//        }
     }
 }
 

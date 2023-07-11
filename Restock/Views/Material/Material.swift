@@ -100,7 +100,6 @@ struct Material: View {
                                             Material_Detail(material: $materialDataManager.materialList[index])
                                         }label: {
                                             Main_Card_View(materialName:materialDataManager.materialList[index].name ?? "", materialUnit: materialDataManager.materialList[index].unit ?? "", materialStock: materialDataManager.materialList[index].currentStock, materialMinStock: materialDataManager.materialList[index].minimalStock)
-                                            
                                         }
                                     }
                                 }
@@ -109,33 +108,35 @@ struct Material: View {
                             .padding()
                         //no material
                         } else {
-                            VStack {
-                                Text("There is no material yet.")
-                                    .font(.system(size: 22))
-                                    .foregroundColor(Color(hex: 0x8E8E93))
-                                
-                                HStack {
-                                    Text("Please tap")
-                                        .font(.system(size: 22))
-                                        .foregroundColor(Color(hex: 0x8E8E93))
-                                    Image(systemName: "plus")
-                                        .font(.system(size: 22))
-                                        .foregroundColor(.blue)
-                                    Text("to add your material")
-                                        .font(.system(size: 22))
-                                        .foregroundColor(Color(hex: 0x8E8E93))
-                                }
-                                
-                                Image("material_no_data")
-                                    .resizable()
-                                    .frame(width: 393, height: 256)
-                                
-                                Image("material_no_data_wave")
-                                    .resizable()
-                                    .frame(width: 393, height: 104)
-                                    .offset(y: 65)
-                            }.padding()
+                            Material_No_Data()
                         }
+//                            VStack {
+//                                Text("There is no material yet.")
+//                                    .font(.system(size: 22))
+//                                    .foregroundColor(Color(hex: 0x8E8E93))
+//
+//                                HStack {
+//                                    Text("Please tap")
+//                                        .font(.system(size: 22))
+//                                        .foregroundColor(Color(hex: 0x8E8E93))
+//                                    Image(systemName: "plus")
+//                                        .font(.system(size: 22))
+//                                        .foregroundColor(.blue)
+//                                    Text("to add your material")
+//                                        .font(.system(size: 22))
+//                                        .foregroundColor(Color(hex: 0x8E8E93))
+//                                }
+//
+//                                Image("material_no_data")
+//                                    .resizable()
+//                                    .frame(width: 393, height: 256)
+//
+//                                Image("material_no_data_wave")
+//                                    .resizable()
+//                                    .frame(width: 393, height: 104)
+//                                    .offset(y: 65)
+//                            }.padding()
+//                        }
                     }
                 }
             }
