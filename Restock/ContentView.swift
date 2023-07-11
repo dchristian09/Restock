@@ -12,52 +12,30 @@ struct ContentView: View {
     @AppStorage("isUser") var isUser: Bool = false
     var body: some View {
         TabView(selection: $selection){
-            Summary()
-                .preferredColorScheme(.light)
-                .tabItem(){
-                    if selection == 0{
-                        Image(systemName: "doc.text")
-                    }else{
-                        Image(systemName: "doc.text").environment(\.symbolVariants, .none)
-                    }
-                    Text("Summary")
-                    
-                }
-                .tag(0)
-            Production_No_Data()
-                .preferredColorScheme(.light)
-                .tabItem(){
-                    if selection == 1{
-                        Image(systemName: "wrench.and.screwdriver.fill")
-                    }else{
-                        Image(systemName: "wrench.and.screwdriver").environment(\.symbolVariants, .none)
-                    }
-                    Text("Production")
-                    
-                }
-                .tag(1)
             Product()
                 .preferredColorScheme(.light)
                 .tabItem(){
-                    if selection == 2{
-                        Image(systemName: "tray")
-                    }else{
-                        Image(systemName: "tray").environment(\.symbolVariants, .none)
-                    }
+//                    if selection == 0{
+//                        Image(systemName: "tray")
+//                    }else{
+//                        Image(systemName: "tray").environment(\.symbolVariants, .none)
+//                    }
+//                    Text("Product")
+                    Image(systemName: "tray").environment(\.symbolVariants, .none)
                     Text("Product")
                 }
-                .tag(2)
             Material()
                 .preferredColorScheme(.light)
                 .tabItem {
-                    if selection == 3{
-                        Image(systemName: "shippingbox")
-                    }else{
-                        Image(systemName: "shippingbox").environment(\.symbolVariants, .none)
-                    }
+                    Image(systemName: "shippingbox").environment(\.symbolVariants, .none)
                     Text("Material")
                 }
-                .tag(3)
+            History()
+                .preferredColorScheme(.light)
+                .tabItem {
+                    Image(systemName: "clock.arrow.circlepath")
+                    Text("History")
+                }
             
         }
         .navigationBarBackButtonHidden(true)

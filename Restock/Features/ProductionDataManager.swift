@@ -36,7 +36,7 @@ class ProductionDataManager: ObservableObject {
         production.notes = productionNotes
         production.isProduce = isProduce
         production.qty = productionQty
-        production.id_product = product_id
+        production.idProduct = product_id
 //        company.id = UUID()
 //        company.title = companyTitle
 //        company.owner = companyOwner

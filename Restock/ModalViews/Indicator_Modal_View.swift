@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 struct Indicator_Modal_View: View {
     @Binding var showSheetView: Bool
     
@@ -15,7 +14,7 @@ struct Indicator_Modal_View: View {
         NavigationView {
             ZStack (alignment: .top){
                 Rectangle()
-                    .fill(Color(hex: 0xf2f4ff))
+                    .fill(Color(hex: 0xF4F4FD))
                     .ignoresSafeArea()
                 ZStack{
                     RoundedRectangle(cornerRadius: 8, style:.continuous)
@@ -26,7 +25,7 @@ struct Indicator_Modal_View: View {
                                 Circle()
                                     .fill(.red)
                                     .frame(width: 28, height: 28)
-                                Text("Danger")
+                                Text("Critically Low")
                                     .bold()
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -37,11 +36,12 @@ struct Indicator_Modal_View: View {
                                     .multilineTextAlignment(.leading)
                                     .padding(.leading)
                             }
+                            Spacer()
                             HStack{
                                 Circle()
                                     .fill(.orange)
                                     .frame(width: 28, height: 28)
-                                Text("Warning")
+                                Text("Running Low")
                                     .bold()
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -52,11 +52,12 @@ struct Indicator_Modal_View: View {
                                     .multilineTextAlignment(.leading)
                                     .padding(.leading)
                             }
+                            Spacer()
                             HStack{
                                 Circle()
                                     .fill(.yellow)
                                     .frame(width: 28, height: 28)
-                                Text("Caution")
+                                Text("Minimum")
                                     .bold()
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)
@@ -68,7 +69,6 @@ struct Indicator_Modal_View: View {
                                     .padding(.leading)
                             }
                         }
-                        
                     }
                     .padding()
                     .multilineTextAlignment(.center)
@@ -79,7 +79,7 @@ struct Indicator_Modal_View: View {
                 .presentationDetents([.large])
                 
             }
-            .navigationBarTitle(Text("Summary Indicator"))
+            .navigationBarTitle(Text("Level Indicator"))
             .navigationBarTitleDisplayMode(.inline)
             .navigationBarItems(trailing:
             Button{

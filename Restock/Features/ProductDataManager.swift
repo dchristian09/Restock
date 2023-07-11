@@ -28,21 +28,20 @@ class ProductDataManager: ObservableObject {
         }
     }
     
-    func addDataToCoreData(productName: String, currentStock: Int32, minimumStock: Int32, isActive: Bool, unit: String) {
+    func addDataToCoreData(productName: String, currentStock: Int32, minimumStock: Int32, isActive: Bool, unit: String) -> DataProduct {
         let product = DataProduct(context: viewContext)
         product.id = UUID()
-        product.nama = productName
+        product.name = productName
         product.currentStock = currentStock
         product.minimalStock = minimumStock
         product.isActive = isActive
         product.unit = unit
-//        company.id = UUID()
-//        company.title = companyTitle
-//        company.owner = companyOwner
+        
         
         save()
         self.fetchProductData()
         print(productList.count)
+        return product
     }
     
     func save() {

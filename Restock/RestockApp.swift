@@ -15,7 +15,7 @@ struct RestockApp: App {
         WindowGroup {
             if(!isUser){
                 NavigationStack{
-                    Splash_Screen()
+                    Launch_Screen()
                 }
             }else{
                 ContentView()
