@@ -21,7 +21,7 @@ class ProductDataManager: ObservableObject {
     func fetchProductData() {
         
         let request = NSFetchRequest<DataProduct>(entityName: "DataProduct")
-//        request.sortDescriptors = [NSSortDescriptor(key: "currentStock", ascending: true)]
+        request.sortDescriptors = [NSSortDescriptor(key: "currentStock", ascending: true)]
         
         do {
             productList = try viewContext.fetch(request)
@@ -45,6 +45,32 @@ class ProductDataManager: ObservableObject {
         print(productList.count)
         return product
     }
+    
+    func editDataFromCoreData(product: DataProduct, productName: String, minimalStock: Int32, isActive: Bool) {
+        product.name = productName
+        product.minimalStock = minimalStock
+        product.isActive = isActive
+        
+        save()
+        self.fetchProductData()
+    }
+    
+    func deleteProduct(withID id: UUID) {
+        let fetchRequest: NSFetchRequest<DataProduct> = DataProduct.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+
+        do {
+            let products = try viewContext.fetch(fetchRequest)
+            if let product = products.first {
+                viewContext.delete(product)
+                save()
+                self.fetchProductData()
+            }
+        } catch {
+            print("Error deleting product: \(error.localizedDescription)")
+        }
+    }
+    
     
     func save() {
         do {

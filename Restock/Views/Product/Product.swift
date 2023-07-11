@@ -19,6 +19,8 @@ struct Product: View {
     @StateObject var productDataManager: ProductDataManager = ProductDataManager.shared
     @StateObject var materialDataManager: MaterialDataManager = MaterialDataManager.shared
     
+    @State var urgentProducts: [DataProduct] = []
+    
     var body: some View {
         NavigationView{
             ZStack{
@@ -41,24 +43,40 @@ struct Product: View {
                                     Text("Low Stock Product")
                                         .font(.title2.bold())
                                     Spacer()
-                                    NavigationLink {
-                                        Product_Reminder()
-                                    } label: {
-                                        Text("View Another")
-                                            .font(.footnote)
-                                            .foregroundColor(.blue)
+                                    
+                                    if urgentProducts.count > 4 {
+                                        NavigationLink {
+                                            Product_Reminder()
+                                        } label: {
+                                            Text("View Another " + String(urgentProducts.count))
+                                                .font(.footnote)
+                                                .foregroundColor(.blue)
+                                        }
                                     }
                                 }.padding()
                                 
                                 // Product Card
-                                LazyVGrid(columns: columns){
-                                    ForEach(productDataManager.productList.indices,id:\.self){ index in
-                                        NavigationLink{
-                                            Product_Detail(product: $productDataManager.productList[index])
-                                        }label: {
-                                            Main_Card_View(materialName: productDataManager.productList[index].name ?? "",  materialUnit: productDataManager.productList[index].unit ?? "", materialStock: productDataManager.productList[index].currentStock)
+                                if urgentProducts.count > 0 {
+                                    LazyVGrid(columns: columns){
+                                        ForEach(urgentProducts.indices,id:\.self){ index in
+                                            NavigationLink{
+                                                Product_Detail(product: $urgentProducts[index])
+                                            }label: {
+                                                Main_Card_View(materialName: urgentProducts[index].name ?? "",  materialUnit: urgentProducts[index].unit ?? "", materialStock: urgentProducts[index].currentStock, materialMinStock: urgentProducts[index].minimalStock)
+                                            }
                                         }
                                     }
+                                }else{
+                                    //Low stock empty state
+                                    VStack{
+                                        Spacer()
+                                        HStack(){
+                                            Spacer()
+                                            Text("Yay!  All your product at a safe level~")
+                                            Spacer()
+                                        }
+                                        Spacer()
+                                    }.padding(10)
                                 }
                                 
                                 //safe product
@@ -75,7 +93,7 @@ struct Product: View {
                                         NavigationLink{
                                             Product_Detail(product: $productDataManager.productList[index])
                                         }label: {
-                                            Main_Card_View(materialName: productDataManager.productList[index].name ?? "",  materialUnit: productDataManager.productList[index].unit ?? "", materialStock: productDataManager.productList[index].currentStock)
+                                            Main_Card_View(materialName: productDataManager.productList[index].name ?? "",  materialUnit: productDataManager.productList[index].unit ?? "", materialStock: productDataManager.productList[index].currentStock, materialMinStock: productDataManager.productList[index].minimalStock)
                                         }
                                     }
                                 }
@@ -172,6 +190,14 @@ struct Product: View {
 
                 }
             }
+        }.onAppear{
+            getUrgentStock()
+        }
+    }
+    
+    func getUrgentStock(){
+        urgentProducts = productDataManager.productList.filter { product in
+            product.minimalStock > product.currentStock
         }
     }
 }

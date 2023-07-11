@@ -8,6 +8,7 @@
 import PhotosUI
 import SwiftUI
 
+
 struct Product_Add: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @StateObject var productDataManager: ProductDataManager = ProductDataManager.shared
@@ -31,7 +32,7 @@ struct Product_Add: View {
     @State var arrayMaterialIngredients: [MaterialIngredients] = []
     //@State var arrayMaterialIngredients2: [DataMaterial] = []
     @State var arrayMaterialn: [String] = []
-    
+    @FocusState private var isQtyFocused: Bool
     
     var body: some View {
         NavigationView{
@@ -128,6 +129,7 @@ struct Product_Add: View {
                             ForEach(arrayMaterialIngredients.indices, id:\.self) { index in
                                 HStack{
                                     Button(action: {
+                                        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to:nil, from:nil, for:nil)
                                         arrayMaterialIngredients.remove(at: index)
                                     }){
                                         HStack {
@@ -136,28 +138,33 @@ struct Product_Add: View {
                                         }
                                     }
                                     Menu{
-                                        Picker("Materials", selection: $arrayMaterialIngredients[index].data){
-                                            ForEach (pickerData, id: \.id){ material in
-                                                Text(material.name ?? "You are short of material")
-                                                    .fixedSize(horizontal: true, vertical: true)
-                                                    .frame(maxWidth:75,maxHeight:30)
-                                                    .lineLimit(1)
-                                                    .truncationMode(.tail)
-                                                    .background(.gray)
-                                                    .allowsTightening(false)
-                                                    .tag(material as DataMaterial?)
+                                        if(pickerData.count > 0){
+                                            Picker("Materials", selection: $arrayMaterialIngredients[index].data){
+                                                
+                                                    ForEach (pickerData, id: \.id){ material in
+                                                        Text(material.name ?? "You are short of material")
+                                                            .fixedSize(horizontal: true, vertical: true)
+                                                            .frame(maxWidth:75,maxHeight:30)
+                                                            .lineLimit(1)
+                                                            .truncationMode(.tail)
+                                                            .background(.gray)
+                                                            .allowsTightening(false)
+                                                            .tag(material as DataMaterial?)
+                                                        
+                                                    }
                                                 
                                             }
-                                        }
-                                        
-                                        .pickerStyle(.menu)
-                                        .lineLimit(nil)
-                                        .truncationMode(.head)
-                                        .fixedSize(horizontal: true, vertical: true)
-                                        .frame(maxWidth: 75,maxHeight:30)
-                                        .labelsHidden()
-                                        .onAppear{
-                                            fetchPickerData()
+                                                
+                                            
+                                            .pickerStyle(.menu)
+                                            .lineLimit(nil)
+                                            .truncationMode(.head)
+                                            .fixedSize(horizontal: true, vertical: true)
+                                            .frame(maxWidth: 75,maxHeight:30)
+                                            .labelsHidden()
+                                            
+                                        }else{
+                                            Text("You have no more Material")
                                         }
                                     }label:{
                                         if arrayMaterialIngredients[index].data == nil {
@@ -167,8 +174,10 @@ struct Product_Add: View {
                                             Text("\(arrayMaterialIngredients[index].data?.name ?? "")")
                                                 .frame(maxWidth:75,maxHeight:30)
                                         }
+                                    }.onAppear{
+                                        fetchPickerData()
                                     }
-                                    
+                                        
                                     Divider()
                                     TextField("Quantity", text: $arrayMaterialIngredients[index].materialQuantity)
                                         .keyboardType(.numberPad)
@@ -180,7 +189,7 @@ struct Product_Add: View {
                                         Text("\(arrayMaterialIngredients[index].data?.unit ?? "")")
                                     }
                                     
-                                                                    }
+                                }
                             }
                             HStack{
                                 Button{
@@ -247,27 +256,41 @@ struct Product_Add: View {
             isDataIncomplete = true
         }
         
+        let newProduct:DataProduct =  productDataManager.addDataToCoreData(productName: productName, currentStock: Int32(productCurrentStock) ?? 0, minimumStock: Int32(productMinimalStock) ?? 0, isActive: true, unit: selectedUnitList)
+        
         if(arrayMaterialIngredients.count > 0){
-            print(isMaterialIncomplete)
-            let newProduct:DataProduct =  productDataManager.addDataToCoreData(productName: productName, currentStock: Int32(productCurrentStock) ?? 0, minimumStock: Int32(productMinimalStock) ?? 0, isActive: true, unit: selectedUnitList)
-            
             for materialIngredient in arrayMaterialIngredients {
                 if(materialIngredient.data == nil || materialIngredient.materialQuantity.isEmpty){
                     isMaterialIncomplete = true
                     isDataIncomplete = true
                     
-                }else{
-                    let idProduct : UUID =  newProduct.id!
-                    let idMaterial : UUID = materialIngredient.data!.id!
-                    let qtyMaterial: Int32 = Int32(materialIngredient.materialQuantity) ?? 0
+                    //if data incomplete, delete product
+                    productDataManager.deleteProduct(withID: newProduct.id!)
                     
-                    recipeDataManager.addDataToCoreData(idProduct: idProduct, idMaterial: idMaterial, quantity: qtyMaterial)
-                    self.presentationMode.wrappedValue.dismiss()
+                    return
                 }
+                isMaterialIncomplete = false
+                isDataIncomplete = false
+            }
+//            If all data already completed
+            print(recipeDataManager.recipeList.count)
+            if !isMaterialIncomplete && !isDataIncomplete{
+                for materialIngredient in arrayMaterialIngredients {
                 
+                        let idProduct : UUID =  newProduct.id!
+                        let idMaterial : UUID = materialIngredient.data!.id!
+                        let qtyMaterial: Int32 = Int32(materialIngredient.materialQuantity) ?? 0
+                        
+                        recipeDataManager.addDataToCoreData(idProduct: idProduct, idMaterial: idMaterial, quantity: qtyMaterial)
+                        
+                    }
+                self.presentationMode.wrappedValue.dismiss()
             }
             
         }else{
+            //if data incomplete, delete product
+            productDataManager.deleteProduct(withID: newProduct.id!)
+            
             isMaterialIncomplete = true
             isDataIncomplete = true
         }

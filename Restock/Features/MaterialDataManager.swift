@@ -36,16 +36,20 @@ class MaterialDataManager: ObservableObject {
         material.minimalStock = minimumStock
         material.isActive = isActive
         material.unit = unit
-        material.note = note
-//        company.id = UUID()
-//        company.title = companyTitle
-//        company.owner = companyOwner
-        
+        material.note = note        
         save()
         self.fetchMaterialData()
     }
     
-    func editDataInCoreData(){}
+    func editDataFromCoreData(material: DataMaterial, materialName: String, minimalStock: Int32, isActive: Bool, note: String) {
+        material.name = materialName
+        material.minimalStock = minimalStock
+        material.isActive = isActive
+        material.note = note
+        
+        save()
+        self.fetchMaterialData()
+    }
     
     func save() {
         do {

@@ -11,9 +11,14 @@ import PhotosUI
 struct Material: View {
     @State private var searchText = ""
     let columns = [GridItem(.flexible()), GridItem(.flexible())]
+    
     @State var showingAlert: Bool = false
     @State var showingSheet: Bool = false
+    
     @StateObject var materialDataManager: MaterialDataManager = MaterialDataManager.shared
+    
+    @State var urgentMaterials: [DataMaterial] = []
+    
     var body: some View {
         NavigationView{
             ZStack{
@@ -36,34 +41,50 @@ struct Material: View {
                                     Text("Low Stock Material")
                                         .font(.title2.bold())
                                     Spacer()
-                                    NavigationLink {
-                                        Material_Reminder()
-                                    } label: {
-                                        Text("View Another")
-                                            .font(.footnote)
-                                            .foregroundColor(.blue)
+                                    
+                                    if urgentMaterials.count > 4 {
+                                        NavigationLink {
+                                            Material_Reminder()
+                                        } label: {
+                                            Text("View More " + String(urgentMaterials.count))
+                                                .font(.footnote)
+                                                .foregroundColor(.blue)
+                                        }
                                     }
                                 }.padding()
                                 //material card
-                                LazyVGrid(columns: columns){
-                                    ForEach(materialDataManager.materialList.indices,id:\.self){ index in
-                                        NavigationLink{
-                                            Material_Detail(material: $materialDataManager.materialList[index])
-                                        }label: {
-                                            Main_Card_View(materialName:materialDataManager.materialList[index].name ?? "", materialUnit: materialDataManager.materialList[index].unit ?? "", materialStock: materialDataManager.materialList[index].currentStock)
-                                                .swipeActions{
-                                                    Button("Delete", role: .destructive){
-                                                        materialDataManager.materialList.remove(at: index)
+                                if urgentMaterials.count > 0 {
+                                    LazyVGrid(columns: columns){
+                                        ForEach(urgentMaterials.indices,id:\.self){ index in
+                                            NavigationLink{
+                                                Material_Detail(material: $urgentMaterials[index])
+                                            }label: {
+                                                Main_Card_View(materialName:urgentMaterials[index].name ?? "", materialUnit: urgentMaterials[index].unit ?? "", materialStock: urgentMaterials[index].currentStock, materialMinStock: urgentMaterials[index].minimalStock)
+                                                    .swipeActions{
+                                                        Button("Delete", role: .destructive){
+                                                            urgentMaterials.remove(at: index)
+                                                        }
                                                     }
+                                            }
+                                            .swipeActions{
+                                                Button("Delete", role: .destructive){
+                                                    urgentMaterials.remove(at: index)
                                                 }
-                                        }
-                                        .swipeActions{
-                                            Button("Delete", role: .destructive){
-                                                materialDataManager.materialList.remove(at: index)
                                             }
                                         }
+                                        
                                     }
-                                    
+                                }else{
+                                    //Low Stock empty state
+                                    VStack{
+                                        Spacer()
+                                        HStack(){
+                                            Spacer()
+                                            Text("Yay!  All your material at a safe level~")
+                                            Spacer()
+                                        }
+                                        Spacer()
+                                    }.padding(10)
                                 }
                                 // safe material
                                 HStack{
@@ -78,7 +99,7 @@ struct Material: View {
                                         NavigationLink{
                                             Material_Detail(material: $materialDataManager.materialList[index])
                                         }label: {
-                                            Main_Card_View(materialName:materialDataManager.materialList[index].name ?? "", materialUnit: materialDataManager.materialList[index].unit ?? "", materialStock: materialDataManager.materialList[index].currentStock)
+                                            Main_Card_View(materialName:materialDataManager.materialList[index].name ?? "", materialUnit: materialDataManager.materialList[index].unit ?? "", materialStock: materialDataManager.materialList[index].currentStock, materialMinStock: materialDataManager.materialList[index].minimalStock)
                                             
                                         }
                                     }
@@ -118,6 +139,9 @@ struct Material: View {
                     }
                 }
             }
+            .onAppear{
+                getUrgentStock()
+            }
             .navigationBarTitle("Material")
             .navigationBarTitleDisplayMode(.large)
             .navigationBarBackButtonHidden(true)
@@ -143,6 +167,12 @@ struct Material: View {
                     }
                 }
             }
+        }
+    }
+    
+    func getUrgentStock(){
+        urgentMaterials = materialDataManager.materialList.filter { material in
+            material.minimalStock > material.currentStock
         }
     }
 }

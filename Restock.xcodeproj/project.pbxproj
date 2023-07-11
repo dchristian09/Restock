@@ -46,6 +46,7 @@
 		D07248F02A52D3B100C1459D /* RecipeDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07248EF2A52D3B100C1459D /* RecipeDataManager.swift */; };
 		D07B62762A4AC55B0002585A /* ProductDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07B62752A4AC55B0002585A /* ProductDataManager.swift */; };
 		D07B62782A4AC5720002585A /* ProductionDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07B62772A4AC5720002585A /* ProductionDataManager.swift */; };
+		D0D5CE132A58188E0065B98D /* LabelDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D5CE122A58188E0065B98D /* LabelDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,6 +94,7 @@
 		D07B62752A4AC55B0002585A /* ProductDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDataManager.swift; sourceTree = "<group>"; };
 		D07B62772A4AC5720002585A /* ProductionDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductionDataManager.swift; sourceTree = "<group>"; };
 		D08BD6972A4BA4E3003D4233 /* mainData 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mainData 2.xcdatamodel"; sourceTree = "<group>"; };
+		D0D5CE122A58188E0065B98D /* LabelDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -252,6 +254,7 @@
 				D07B62752A4AC55B0002585A /* ProductDataManager.swift */,
 				D07B62772A4AC5720002585A /* ProductionDataManager.swift */,
 				D07248EF2A52D3B100C1459D /* RecipeDataManager.swift */,
+				D0D5CE122A58188E0065B98D /* LabelDataManager.swift */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -337,6 +340,7 @@
 				D07248F02A52D3B100C1459D /* RecipeDataManager.swift in Sources */,
 				36CB89562A39A158000BDA6D /* Indicator_Modal_View.swift in Sources */,
 				3634D6232A45880100C31903 /* Product_Edit.swift in Sources */,
+				D0D5CE132A58188E0065B98D /* LabelDataManager.swift in Sources */,
 				3634D6332A56D47F00C31903 /* Product_Stock.swift in Sources */,
 				C233D0472A4968D5003B8ED3 /* mainData.xcdatamodeld in Sources */,
 				36CB894E2A38527C000BDA6D /* Material.swift in Sources */,

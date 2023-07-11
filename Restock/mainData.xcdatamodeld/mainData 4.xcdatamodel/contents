@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22A380" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="DataLabel" representedClassName="DataLabel" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="transaction" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DataProduction" inverseName="transactionLabel" inverseEntity="DataProduction"/>
+    </entity>
     <entity name="DataMaterial" representedClassName="DataMaterial" syncable="YES" codeGenerationType="class">
         <attribute name="currentStock" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
@@ -28,6 +33,7 @@
         <attribute name="notes" optional="YES" attributeType="String"/>
         <attribute name="qty" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="resep" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DataRecipe" inverseName="production" inverseEntity="DataRecipe"/>
+        <relationship name="transactionLabel" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DataLabel" inverseName="transaction" inverseEntity="DataLabel"/>
     </entity>
     <entity name="DataRecipe" representedClassName="DataRecipe" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>

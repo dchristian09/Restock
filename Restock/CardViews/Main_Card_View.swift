@@ -11,6 +11,8 @@ struct Main_Card_View: View {
     var materialName:String = "Rose Bouquet"
     var materialUnit: String = "pcs"
     var materialStock: Int32 = 0
+    var materialMinStock: Int32 = 0
+    @State var color : Color = .red.opacity(0)
     var body: some View {
         ZStack{
             RoundedRectangle(cornerRadius: 16, style:.continuous)
@@ -48,13 +50,14 @@ struct Main_Card_View: View {
                             .font(.system(size: 11))
                         
                         //min stock
-                        Text("Min Stock: "+(String(materialStock))+" "+(materialUnit))
+                        Text("Min Stock: "+(String(materialMinStock))+" "+(materialUnit))
                             .font(.system(size: 10))
                             .fontWeight(.thin)
                             .foregroundColor(.black)
                     }.multilineTextAlignment(.leading)
+                    
                     Circle()
-                        .fill(.red)
+                        .fill(color)
                         .frame(width: 8, height: 8)
                         .padding(.trailing, 4.0)
                 }
@@ -62,8 +65,23 @@ struct Main_Card_View: View {
             }
         }
         .frame(width:172, height: 68)
+        .onAppear{
+            getColor()
+        }
+    }
+    
+    func getColor(){
+        if Float(materialStock)/Float(materialMinStock) <= 1.5 && Float(materialStock)/Float(materialMinStock) > 1.0 {
+            color = .yellow
+        }else if  Float(materialStock)/Float(materialMinStock) <= 1.0 && Float(materialStock)/Float(materialMinStock) > 0.5 {
+            color = .orange
+        }else if  Float(materialStock)/Float(materialMinStock) <= 0.5 {
+            color = .red
+        }
     }
 }
+
+
 
 struct Main_Card_View_Previews: PreviewProvider {
     static var previews: some View {
