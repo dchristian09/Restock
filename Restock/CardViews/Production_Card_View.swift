@@ -11,7 +11,7 @@ struct Production_Card_View: View {
     var body: some View {
         ZStack{
             RoundedRectangle(cornerRadius: 16, style:.continuous)
-                .fill(Color(hex: 0xF2F4FF))
+                .fill(Color(hex: 0xF4F4FD))
             ZStack{
                 HStack(alignment: .top){
                     VStack{

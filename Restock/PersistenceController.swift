@@ -17,7 +17,7 @@ struct PersistenceController {
     }
 
     
-    init(inMemory: Bool = false) {
+    init(inMemory: Bool = true) {
         container = NSPersistentContainer(name: "mainData")
         if inMemory {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")

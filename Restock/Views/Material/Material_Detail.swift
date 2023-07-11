@@ -15,7 +15,7 @@ struct Material_Detail: View {
         NavigationView{
             ZStack {
                 Rectangle()
-                    .fill(Color(hex: 0xf2f4ff))
+                    .fill(Color(hex: 0xF4F4FD))
                     .ignoresSafeArea()
                 VStack{
                     Image("bouquet")

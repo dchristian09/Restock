@@ -15,7 +15,7 @@ struct History_FilterDate: View {
         NavigationView {
             ZStack (alignment: .top){
                 Rectangle()
-                    .fill(Color(hex: 0xf2f4ff))
+                    .fill(Color(hex: 0xF4F4FD))
                     .ignoresSafeArea()
                 VStack{
                     List{

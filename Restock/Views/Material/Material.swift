@@ -18,7 +18,7 @@ struct Material: View {
         NavigationView{
             ZStack{
                 Rectangle()
-                    .fill(Color(hex: 0xf2f4ff))
+                    .fill(Color(hex: 0xF4F4FD))
                     .ignoresSafeArea()
                 
                 ScrollView {
@@ -88,32 +88,44 @@ struct Material: View {
                             .padding()
                         //no material
                         } else {
-                            VStack {
-                                Text("There is no material yet.")
-                                    .font(.system(size: 22))
-                                    .foregroundColor(Color(hex: 0x8E8E93))
+                            ZStack{
+                                Rectangle()
+                                    .fill(Color(hex: 0xF4F4FD))
+                                    .ignoresSafeArea()
                                 
-                                HStack {
-                                    Text("Please tap")
-                                        .font(.system(size: 22))
-                                        .foregroundColor(Color(hex: 0x8E8E93))
-                                    Image(systemName: "plus")
-                                        .font(.system(size: 22))
-                                        .foregroundColor(.blue)
-                                    Text("to add your material")
-                                        .font(.system(size: 22))
-                                        .foregroundColor(Color(hex: 0x8E8E93))
-                                }
-                                
-                                Image("material_no_data")
-                                    .resizable()
-                                    .frame(width: 393, height: 256)
-                                
-                                Image("material_no_data_wave")
-                                    .resizable()
-                                    .frame(width: 393, height: 104)
-                                    .offset(y: 65)
-                            }.padding()
+                                ZStack{
+                                    RoundedRectangle(cornerRadius: 50, style:.continuous)
+                                        .fill(.white)
+                                        .frame(maxHeight: .infinity)
+                                        .padding(.top, 5)
+                                    
+                                    VStack {
+                                        VStack {
+                                            Text("There is no material yet.")
+                                                .font(.system(size: 20))
+                                                .foregroundColor(Color(hex: 0x8E8E93))
+                                            
+                                            HStack {
+                                                Text("Please tap")
+                                                    .font(.system(size: 20))
+                                                    .foregroundColor(Color(hex: 0x8E8E93))
+                                                Image(systemName: "plus")
+                                                    .font(.system(size: 20))
+                                                    .foregroundColor(.blue)
+                                                Text("to add your material")
+                                                    .font(.system(size: 20))
+                                                    .foregroundColor(Color(hex: 0x8E8E93))
+                                            }
+                                        }
+                                        .padding(.top, 50)
+                                        
+                                        Image("material_no_data")
+                                            .resizable()
+                                            .frame(width: 300, height: 300)
+                                        Spacer()
+                                    }
+                                }.frame(height: 700)
+                            }
                         }
                     }
                 }
@@ -147,8 +159,8 @@ struct Material: View {
     }
 }
 
-//struct Material_Previews: PreviewProvider {
-//    static var previews: some View {
-//        Material()
-//    }
-//}
+struct Material_Previews: PreviewProvider {
+    static var previews: some View {
+        Material()
+    }
+}
