@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Production_Card_View: View {
-    var historyDetail:HistoryDetail? = nil
+    var dataProduction:DataProduction? = nil
     var body: some View {
         ZStack{
             RoundedRectangle(cornerRadius: 16, style:.continuous)
@@ -30,13 +30,13 @@ struct Production_Card_View: View {
                     VStack(alignment: .leading){
                         Spacer()
                         // nama barang
-                        Text(historyDetail?.itemName ?? "Bouquet")
+                        Text(dataProduction?.productRelation?.name ?? "Bouquet")
                             .font(.system(size: 20))
                             .bold()
                             .padding(.bottom, 0.5)
                             .foregroundColor(.black)
                         // keterangan barang
-                        Text(historyDetail?.productionLabel ?? "Event Graduation")
+                        Text(dataProduction?.label ?? "Event Graduation")
                             .font(.system(size: 11))
                             .foregroundColor(Color(hex: 0x8E8E93))
                             .fontWeight(.regular)
@@ -50,12 +50,12 @@ struct Production_Card_View: View {
                     VStack(alignment: .trailing){
                         Spacer()
                         //jumlah plus minus stock
-                        Text("\(historyDetail?.isProduce ?? true ? "+" : "-")\(historyDetail?.quantity ?? 7)")
+                        Text("\(dataProduction?.isProduce ?? true ? "+" : "-")\(dataProduction?.qty ?? 7)")
                             .font(.system(size: 20))
                             .bold()
                             .foregroundColor(Color(hex: 0x00CA4E))
                         //produce/reduce stock
-                        Text("\(historyDetail?.isProduce ?? true ? "Produce" : "Reduce")")
+                        Text("\(dataProduction?.isProduce ?? true ? "Produce" : "Reduce")")
                             .font(.system(size: 11))
                             .fontWeight(.regular)
                             .foregroundColor(Color(hex: 0x00CA4E))

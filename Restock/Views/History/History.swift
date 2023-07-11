@@ -4,7 +4,7 @@
 //
 //  Created by David Christian on 06/07/23.
 //
-
+//import CoreData
 import SwiftUI
 
 struct History: View {
@@ -13,20 +13,17 @@ struct History: View {
     @State private var searchText = ""
     let themes = ["Product", "Material"]
     let columns = [GridItem(.fixed(35)), GridItem(.flexible())]
-    let historyDatas:[HistoryData] = [
-        HistoryData(historyMonth: "June", historyDetails: [
-            HistoryDetail(historyDate: Date(), itemName: "Rose bouquet", productionLabel: "Graduation Ceremony", quantity: 5, isProduce: false),
-            HistoryDetail(historyDate: Date(), itemName: "Rose bouquet", productionLabel: "Graduation Ceremony", quantity: 5, isProduce: true)
-        ]),
-        HistoryData(historyMonth: "July", historyDetails: [
-            HistoryDetail(historyDate: Date(), itemName: "Rose bouquet", productionLabel: "Graduation Ceremonyx", quantity: 13, isProduce: true)
-        ])
-    ]
-    //    let tgls:[Date] = [
-    //        Calendar.current.date(byAdding: .month, value: -1, to: Date())!,
-    //        Calendar.current.date(byAdding: .day, value: -5, to: Date())!,
-    //        Date()
-    //    ]
+    @State var productionDataManager = ProductionDataManager.shared
+    //@State var historyDatas = ProductionDataManager.shared.historyDatas
+    //@State var historyDatas:[HistoryData] = []
+//        HistoryData(historyMonth: "June", historyDetails: [
+//            HistoryDetail(historyDate: Date(), itemName: "Rose bouquet", productionLabel: "Graduation Ceremony", quantity: 5, isProduce: false),
+//            HistoryDetail(historyDate: Date(), itemName: "Rose bouquet", productionLabel: "Graduation Ceremony", quantity: 5, isProduce: true)
+//        ]),
+//        HistoryData(historyMonth: "July", historyDetails: [
+//            HistoryDetail(historyDate: Date(), itemName: "Rose bouquet", productionLabel: "Graduation Ceremonyx", quantity: 13, isProduce: true)
+//        ])
+//    ]
     @State var currentMonth:String = "0"
     
     var body: some View {
@@ -75,7 +72,8 @@ struct History: View {
                         }.padding(.bottom)
                         
                         List {
-                            ForEach(historyDatas, id: \.historyMonth){ historyData in
+                            //ForEach(historyDatas, id: \.historyMonth){ historyData in
+                            ForEach(productionDataManager.historyDatas, id: \.historyMonth){ historyData in
                                 Section {
                                     HStack{
                                         Text(historyData.historyMonth)
@@ -83,7 +81,7 @@ struct History: View {
                                     }
                                     //Divider()
                                     ForEach(historyData.historyDetails, id:\.self){ historyDetail in
-                                        History_card_view(historyDetail: historyDetail)
+                                        History_card_view(dataProduction: historyDetail)
                                         
                                     }
                                     
@@ -104,6 +102,17 @@ struct History: View {
             .navigationBarBackButtonHidden(true)
             .searchable(text: $searchText)
         }
+//        .onAppear{
+//            let fetchRequest: NSFetchRequest<DataProduction> = DataProduction.fetchRequest()
+//            
+//            do {
+//                var pd:[DataProduction] = try PersistenceController.shared.container.viewContext.fetch(fetchRequest)
+//                print(pd)
+//                pd[0].productRelation?.name
+//            } catch {
+//                print("gagal")
+//            }
+//        }
     }
 }
 

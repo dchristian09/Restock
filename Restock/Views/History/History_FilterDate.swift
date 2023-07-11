@@ -9,6 +9,7 @@ import SwiftUI
 
 struct History_FilterDate: View {
     @Binding var showSheetView: Bool
+   // @Binding var historyDatas:[HistoryData]
     @State var startDate = Date.now
     @State var endDate = Date.now
     var body: some View {
@@ -50,7 +51,7 @@ struct History_FilterDate: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing){
                     Button{
-                        
+                        ProductionDataManager.shared.fetchProductionData(startDate: startDate, endDate: endDate)
                     }label: {
                         Text("Apply")
                     }
@@ -66,6 +67,7 @@ struct History_FilterDate: View {
 
 struct History_FilterDate_Previews: PreviewProvider {
     static var previews: some View {
+//        History_FilterDate(showSheetView: .constant(false), historyDatas: .constant([]))
         History_FilterDate(showSheetView: .constant(false))
     }
 }

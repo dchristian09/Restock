@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22A380" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22F82" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="DataMaterial" representedClassName="DataMaterial" syncable="YES" codeGenerationType="class">
         <attribute name="currentStock" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
@@ -17,6 +17,7 @@
         <attribute name="minimalStock" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="unit" optional="YES" attributeType="String"/>
+        <relationship name="productRelation" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DataProduction" inverseName="productRelation" inverseEntity="DataProduction"/>
         <relationship name="resep" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DataRecipe" inverseName="product" inverseEntity="DataRecipe"/>
     </entity>
     <entity name="DataProduction" representedClassName="DataProduction" syncable="YES" codeGenerationType="class">
@@ -27,6 +28,7 @@
         <attribute name="label" optional="YES" attributeType="String"/>
         <attribute name="notes" optional="YES" attributeType="String"/>
         <attribute name="qty" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="productRelation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DataProduct" inverseName="productRelation" inverseEntity="DataProduct"/>
         <relationship name="resep" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DataRecipe" inverseName="production" inverseEntity="DataRecipe"/>
     </entity>
     <entity name="DataRecipe" representedClassName="DataRecipe" syncable="YES" codeGenerationType="class">

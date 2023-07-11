@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct History_card_view: View {
-    var historyDetail:HistoryDetail
+    var dataProduction:DataProduction
     var body: some View {
         
             HStack{
-                Text("\(Calendar.current.dateComponents([.day], from: historyDetail.historyDate).day!)")
+                Text("\(Calendar.current.dateComponents([.day], from: dataProduction.date!).day!)")
                 .font(.title)
             
             NavigationLink{
                 Production_Detail()
             } label:{
-                Production_Card_View(historyDetail: historyDetail)
+                Production_Card_View(dataProduction: dataProduction)
             } .swipeActions() {
                 Button("Delete") {
                     
