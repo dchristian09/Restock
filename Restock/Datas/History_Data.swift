@@ -10,6 +10,7 @@ import Foundation
 class HistoryData: ObservableObject {
     @Published var historyMonth:String
     //@Published var historyDetails:[HistoryDetail]
+    
     @Published var historyDetails:[DataProduction]
     
     init(historyMonth: String, historyDetails:[DataProduction]) {

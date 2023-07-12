@@ -57,6 +57,7 @@ struct Production_Card_View: View {
                     
                 }
                 //plus minus stock
+                
                 Text("\(dataProduction?.isProduce ?? true ? "+" : "-")\(dataProduction?.qty ?? 7)")
                     .font(.largeTitle)
                     .bold()

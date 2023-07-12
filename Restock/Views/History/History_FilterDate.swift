@@ -11,6 +11,7 @@ struct History_FilterDate: View {
     @Binding var showSheetView: Bool
     @State var startDate = Date.now
     @State var endDate = Date.now
+    
     var body: some View {
         NavigationView {
             ZStack (alignment: .top){

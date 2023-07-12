@@ -18,6 +18,7 @@ struct History: View {
     @State var productionDataManager = ProductionDataManager.shared
     //@State var historyDatas = ProductionDataManager.shared.historyDatas
     //@State var historyDatas:[HistoryData] = []
+    
 //        HistoryData(historyMonth: "June", historyDetails: [
 //            HistoryDetail(historyDate: Date(), itemName: "Rose bouquet", productionLabel: "Graduation Ceremony", quantity: 5, isProduce: false),
 //            HistoryDetail(historyDate: Date(), itemName: "Rose bouquet", productionLabel: "Graduation Ceremony", quantity: 5, isProduce: true)

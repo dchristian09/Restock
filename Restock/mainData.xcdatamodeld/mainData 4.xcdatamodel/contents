@@ -18,6 +18,7 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="unit" optional="YES" attributeType="String"/>
         <relationship name="productRelation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DataProduction" inverseName="productRelation" inverseEntity="DataProduction"/>
+        <relationship name="relationship" optional="YES" maxCount="1" deletionRule="Nullify"/>
         <relationship name="resep" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DataRecipe" inverseName="product" inverseEntity="DataRecipe"/>
     </entity>
     <entity name="DataProduction" representedClassName="DataProduction" syncable="YES" codeGenerationType="class">
