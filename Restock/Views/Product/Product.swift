@@ -25,7 +25,7 @@ struct Product: View {
         NavigationView{
             ZStack{
                 Rectangle()
-                    .fill(Color(hex: 0xf2f4ff))
+                    .fill(Color(hex: 0xF4F4FD))
                     .ignoresSafeArea()
                 
                 ScrollView {
@@ -105,42 +105,41 @@ struct Product: View {
                         else{
                             ZStack{
                                 Rectangle()
-                                    .fill(Color(hex: 0xf2f4ff))
+                                    .fill(Color(hex: 0xF4F4FD))
                                     .ignoresSafeArea()
                                 
                                 ZStack{
                                     RoundedRectangle(cornerRadius: 50, style:.continuous)
                                         .fill(.white)
                                         .frame(maxHeight: .infinity)
+                                        .padding(.top, 5)
                                     
                                     VStack {
-                                        Text("There is no product yet.")
-                                            .font(.system(size: 22))
-                                            .foregroundColor(Color(hex: 0x8E8E93)).padding(EdgeInsets(top: 30, leading: 0, bottom: 0, trailing: 0))
+                                        VStack {
+                                            Text("There is no product yet.")
+                                                .font(.system(size: 20))
+                                                .foregroundColor(Color(hex: 0x8E8E93))
+                                            
+                                            HStack {
+                                                Text("Please tap")
+                                                    .font(.system(size: 20))
+                                                    .foregroundColor(Color(hex: 0x8E8E93))
+                                                Image(systemName: "plus")
+                                                    .font(.system(size: 20))
+                                                    .foregroundColor(.blue)
+                                                Text("to add your product")
+                                                    .font(.system(size: 20))
+                                                    .foregroundColor(Color(hex: 0x8E8E93))
+                                            }
+                                        }.padding(.top, 50)
                                         
-                                        HStack {
-                                            Text("Please tap")
-                                                .font(.system(size: 22))
-                                                .foregroundColor(Color(hex: 0x8E8E93))
-                                            Image(systemName: "plus")
-                                                .font(.system(size: 22))
-                                                .foregroundColor(.blue)
-                                            Text("to add your product")
-                                                .font(.system(size: 22))
-                                                .foregroundColor(Color(hex: 0x8E8E93))
-                                        }
                                         
                                         Image("product_no_data")
                                             .resizable()
-                                            .frame(width: 393, height: 255)
-                                        
+                                            .frame(width: 300, height: 300)
                                         Spacer()
-                                        Image("product_no_data_wave")
-                                            .resizable()
-                                            .frame(width: 416, height: 104)
-                                            .offset(y: 65)
                                     }
-                                }
+                                }.frame(height: 700)
                             }
                         }
                     }

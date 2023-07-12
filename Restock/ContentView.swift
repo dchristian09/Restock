@@ -12,7 +12,6 @@ struct ContentView: View {
     @AppStorage("isUser") var isUser: Bool = false
     var body: some View {
         TabView(selection: $selection){
-
             Product()
                 .preferredColorScheme(.light)
                 .tabItem(){

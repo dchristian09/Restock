@@ -22,6 +22,8 @@
         <attribute name="minimalStock" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="unit" optional="YES" attributeType="String"/>
+        <relationship name="productRelation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DataProduction" inverseName="productRelation" inverseEntity="DataProduction"/>
+        <relationship name="relationship" optional="YES" maxCount="1" deletionRule="Nullify"/>
         <relationship name="resep" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DataRecipe" inverseName="product" inverseEntity="DataRecipe"/>
     </entity>
     <entity name="DataProduction" representedClassName="DataProduction" syncable="YES" codeGenerationType="class">
@@ -32,6 +34,7 @@
         <attribute name="label" optional="YES" attributeType="String"/>
         <attribute name="notes" optional="YES" attributeType="String"/>
         <attribute name="qty" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="productRelation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DataProduct" inverseName="productRelation" inverseEntity="DataProduct"/>
         <relationship name="resep" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DataRecipe" inverseName="production" inverseEntity="DataRecipe"/>
         <relationship name="transactionLabel" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DataLabel" inverseName="transaction" inverseEntity="DataLabel"/>
     </entity>

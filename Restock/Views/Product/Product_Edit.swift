@@ -49,7 +49,7 @@ struct Product_Edit: View {
         //        NavigationView{
         ZStack {
             Rectangle()
-                .fill(Color(hex: 0xf2f4ff))
+                .fill(Color(hex: 0xF4F4fD))
                 .ignoresSafeArea()
             VStack{
                 VStack {
