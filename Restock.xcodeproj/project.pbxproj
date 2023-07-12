@@ -41,6 +41,8 @@
 		58E245652A49766900DC9B6E /* Launch_Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58E245642A49766900DC9B6E /* Launch_Screen.swift */; };
 		C233D0472A4968D5003B8ED3 /* mainData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C233D0452A4968D5003B8ED3 /* mainData.xcdatamodeld */; };
 		C233D04A2A496A7A003B8ED3 /* MaterialDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C233D0492A496A7A003B8ED3 /* MaterialDataManager.swift */; };
+		C23BE2D42A5E84F500372D60 /* History_card_view.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BE2D32A5E84F500372D60 /* History_card_view.swift */; };
+		C23BE2D72A5E860E00372D60 /* History_Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = C23BE2D62A5E860E00372D60 /* History_Data.swift */; };
 		C2816AD02A498A86007E2DCE /* PersistenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2816ACF2A498A86007E2DCE /* PersistenceController.swift */; };
 		D07248F02A52D3B100C1459D /* RecipeDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07248EF2A52D3B100C1459D /* RecipeDataManager.swift */; };
 		D07B62762A4AC55B0002585A /* ProductDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D07B62752A4AC55B0002585A /* ProductDataManager.swift */; };
@@ -83,6 +85,8 @@
 		58E245642A49766900DC9B6E /* Launch_Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Launch_Screen.swift; sourceTree = "<group>"; };
 		C233D0462A4968D5003B8ED3 /* mainData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = mainData.xcdatamodel; sourceTree = "<group>"; };
 		C233D0492A496A7A003B8ED3 /* MaterialDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialDataManager.swift; sourceTree = "<group>"; };
+		C23BE2D32A5E84F500372D60 /* History_card_view.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History_card_view.swift; sourceTree = "<group>"; };
+		C23BE2D62A5E860E00372D60 /* History_Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History_Data.swift; sourceTree = "<group>"; };
 		C2816ACF2A498A86007E2DCE /* PersistenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceController.swift; sourceTree = "<group>"; };
 		D00173222A4BDFD300A45FDB /* mainData 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mainData 3.xcdatamodel"; sourceTree = "<group>"; };
 		D07248EA2A4C10B400C1459D /* mainData 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "mainData 4.xcdatamodel"; sourceTree = "<group>"; };
@@ -197,6 +201,7 @@
 			children = (
 				36CB89502A386934000BDA6D /* Main_Card_View.swift */,
 				36CB895B2A3B04D5000BDA6D /* Production_Card_View.swift */,
+				C23BE2D32A5E84F500372D60 /* History_card_view.swift */,
 			);
 			path = CardViews;
 			sourceTree = "<group>";
@@ -227,6 +232,7 @@
 		58E9ABB02A42E666006FCA14 /* Restock */ = {
 			isa = PBXGroup;
 			children = (
+				C23BE2D52A5E860100372D60 /* Datas */,
 				C233D0482A496A61003B8ED3 /* Features */,
 				58E2455F2A4762B300DC9B6E /* Item */,
 				36CB89542A39A13B000BDA6D /* ModalViews */,
@@ -251,6 +257,14 @@
 				D07248EF2A52D3B100C1459D /* RecipeDataManager.swift */,
 			);
 			path = Features;
+			sourceTree = "<group>";
+		};
+		C23BE2D52A5E860100372D60 /* Datas */ = {
+			isa = PBXGroup;
+			children = (
+				C23BE2D62A5E860E00372D60 /* History_Data.swift */,
+			);
+			path = Datas;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -336,7 +350,9 @@
 				3634D6232A45880100C31903 /* Product_Edit.swift in Sources */,
 				3634D6332A56D47F00C31903 /* Product_Stock.swift in Sources */,
 				C233D0472A4968D5003B8ED3 /* mainData.xcdatamodeld in Sources */,
+				C23BE2D72A5E860E00372D60 /* History_Data.swift in Sources */,
 				36CB894E2A38527C000BDA6D /* Material.swift in Sources */,
+				C23BE2D42A5E84F500372D60 /* History_card_view.swift in Sources */,
 				58E245612A4762C300DC9B6E /* Item.swift in Sources */,
 				58E2455E2A475D5C00DC9B6E /* Material_No_Data.swift in Sources */,
 				D07B62762A4AC55B0002585A /* ProductDataManager.swift in Sources */,
