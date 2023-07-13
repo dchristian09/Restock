@@ -124,11 +124,11 @@ struct Product_Stock: View {
                     }
                     
                     materialDataManager.restockMaterial(material: materialData.first!, currentStock: materialData.first!.currentStock - (recipe.quantity * Int32(itemAmount)!))
-                    productionDataManager.addDataToCoreData(productionLabel: "Produce " + item.name!, productionDate: itemDate, productionNotes: itemNote, isProduce: true, productionQty: materialData.first!.currentStock - (recipe.quantity * Int32(itemAmount)!), product_id: materialData.first!.id!, itemType: "material")
+                    productionDataManager.addDataToCoreData(productionLabel: "Produce " + item.name!, productionDate: itemDate, productionNotes: itemNote, isProduce: true, productionQty: materialData.first!.currentStock - (recipe.quantity * Int32(itemAmount)!), product_id: materialData.first!.id!, itemType: "Material")
                 }
                 
                 productDataManager.produceProduct(product: item, currentStock: item.currentStock + (Int32(itemAmount)!))
-                productionDataManager.addDataToCoreData(productionLabel: itemLabel, productionDate: itemDate, productionNotes: itemNote, isProduce: true, productionQty: Int32(itemAmount)!, product_id: item.id!, itemType: "product")
+                productionDataManager.addDataToCoreData(productionLabel: itemLabel, productionDate: itemDate, productionNotes: itemNote, isProduce: true, productionQty: Int32(itemAmount)!, product_id: item.id!, itemType: "Product")
                 self.presentationMode.wrappedValue.dismiss()
             }
             
@@ -136,7 +136,7 @@ struct Product_Stock: View {
             
             if !showAlert{
                 productDataManager.produceProduct(product: item, currentStock: item.currentStock - (Int32(itemAmount)!))
-                productionDataManager.addDataToCoreData(productionLabel: itemLabel, productionDate: itemDate, productionNotes: itemNote, isProduce: false, productionQty: Int32(itemAmount)!, product_id: item.id!, itemType: "product")
+                productionDataManager.addDataToCoreData(productionLabel: itemLabel, productionDate: itemDate, productionNotes: itemNote, isProduce: false, productionQty: Int32(itemAmount)!, product_id: item.id!, itemType: "Product")
                 self.presentationMode.wrappedValue.dismiss()
             }
         }

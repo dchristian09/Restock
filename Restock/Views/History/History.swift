@@ -45,7 +45,7 @@ struct History: View {
                         
                         HStack{
                             Spacer()
-                            Picker("Appearance", selection: $selectedTheme) {
+                            Picker("Appearance", selection: $productionDataManager.selectedType) {
                                 ForEach(themes, id: \.self) {
                                     Text($0)
                                 }
@@ -78,18 +78,17 @@ struct History: View {
                             //ForEach(historyDatas, id: \.historyMonth){ historyData in
                             ForEach(productionDataManager.historyDatas, id: \.historyMonth){ historyData in
                                 Section {
-                                    HStack{
-                                        Text(historyData.historyMonth)
-                                        Spacer()
-                                    }
+                                    
                                     //Divider()
                                     ForEach(historyData.historyDetails, id:\.self){ historyDetail in
                                         History_card_view(dataProduction: historyDetail)
                                         
                                     }
-                                    
-                                    
-                                    
+                                } header: {
+//                                    HStack{
+                                    Text(String(historyData.historyMonth)).padding(5).font(.title2)
+//                                        Spacer()
+//                                    }
                                 }
                             }
                         }.listStyle(.plain)

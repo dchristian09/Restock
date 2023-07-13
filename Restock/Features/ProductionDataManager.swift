@@ -13,8 +13,14 @@ class ProductionDataManager: ObservableObject {
     static let shared = ProductionDataManager()
     private let viewContext = PersistenceController.shared.viewContext
     
-    @Published var productionList:[DataProduction] = []
-    @Published var historyDatas:[HistoryData] = []
+    @Published var productionList : [DataProduction] = []
+    @Published var historyDatas : [HistoryData] = []
+    
+    @Published var selectedType: String = "product" {
+        didSet {
+            fetchProductionData()
+        }
+    }
     
     init() {
         fetchProductionData()
@@ -22,13 +28,13 @@ class ProductionDataManager: ObservableObject {
     
     func fetchProductionData(startDate:Date? = nil, endDate:Date? = nil) {
         let request = NSFetchRequest<DataProduction>(entityName: "DataProduction")
-        request.resultType = .dictionaryResultType
+//        request.resultType = .dictionaryResultType
         request.propertiesToFetch = ["id", "date", "idProduct", "label", "qty", "isProduce"]
-        
+//
         if (startDate != nil && endDate != nil){
             let predicate = NSPredicate(format: "date >= %@ && date <= %@", startDate! as CVarArg, endDate! as CVarArg)
             //let predicate = NSPredicate(format: "%K >= %@ && %K < %@", "date", firstDayOfTheMonth! as NSDate, "date", beginningOfNextMonth! as NSDate)
-            let sortDescriptors = [NSSortDescriptor(key: "startDate", ascending: true)]
+            let sortDescriptors = [NSSortDescriptor(key: "startDate", ascending: false)]
 
             request.predicate = predicate
             request.sortDescriptors = sortDescriptors
@@ -37,26 +43,54 @@ class ProductionDataManager: ObservableObject {
         
         do {
             productionList = try viewContext.fetch(request)
-//            let dateFormatter = DateFormatter()
-//            dateFormatter.dateFormat = "LLLL"
-//            //let nameOfMonth = dateFormatter.string(from: now)
-//            var monthName = ""
-//            var historyDetails:[DataProduction] = []
-//            for production in productionList {
-//                let nameOfMonth = dateFormatter.string(from: production.date!)
-//                
-//                if monthName != nameOfMonth {
-//                    
-//                    if monthName != "" {
-//                        historyDatas.append(
-//                        HistoryData(historyMonth: monthName,
-//                                    historyDetails: historyDetails)
-//                        )
-//                    }
-//                    historyDetails = []
-//                }
-//                historyDetails.append(production)
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "MMMM YYYY"
+            //let nameOfMonth = dateFormatter.string(from: now)
+            var monthName = ""
+            
+//            var filteredProductionList : [DataProduction] = productionList.filter{
+//                $0.itemType == selectedType
 //            }
+            
+            productionList = productionList.filter { data in
+                if let itemType = data.itemType {
+                    print("ItemType", itemType.lowercased())
+                    print("selected", selectedType.lowercased())
+                    print(itemType.lowercased() == selectedType.lowercased())
+                    return itemType.lowercased() == selectedType.lowercased()
+                }else{
+                    return false
+                }
+                
+            }
+            print("SELECTED TYPE: ", selectedType)
+            print("filteredProductionList: ", productionList.count)
+            
+            var historyMonthDetails:[DataProduction] = []
+            for (index, production) in productionList.enumerated() {
+                
+                let nameOfMonth = dateFormatter.string(from: production.date!)
+
+                if monthName == "" || (monthName == nameOfMonth && index != productionList.count-1){
+                    historyMonthDetails.append(production)
+                } else if index == productionList.count-1 || monthName != nameOfMonth{
+                    if index == productionList.count-1{
+                        historyMonthDetails.append(production)
+                    }
+                    historyDatas.append(
+                    HistoryData(historyMonth: monthName,
+                                historyDetails: historyMonthDetails)
+                    )
+                    historyMonthDetails = []
+                    historyMonthDetails.append(production)
+                    
+                }
+                monthName = nameOfMonth
+                
+//                historyMonthDetails.append(production)
+            }
+            
+            print("historyData", historyDatas.count)
         }catch {
             print("DEBUG: Some error occured while fetching")
         }
@@ -78,7 +112,6 @@ class ProductionDataManager: ObservableObject {
 
         save()
         self.fetchProductionData()
-        print(productionList.count)
     }
     
     func save() {

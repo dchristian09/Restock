@@ -13,7 +13,7 @@ struct History_card_view: View {
         
             HStack{
                 Text("\(Calendar.current.dateComponents([.day], from: dataProduction.date!).day!)")
-                .font(.title)
+                    .font(.title).padding(5).fontWeight(.bold).foregroundColor(.gray)
             
             NavigationLink{
                 Production_Detail()
