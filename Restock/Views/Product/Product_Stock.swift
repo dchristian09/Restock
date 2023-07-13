@@ -104,18 +104,19 @@ struct Product_Stock: View {
             recipe.idProduct ==  item.id
         }
         
-        for recipe in arrayRecipe{
-            let materialData = materialDataManager.materialList.filter{ material in
-                material.id == recipe.idMaterial
-            }
-            if recipe.quantity * Int32(itemAmount)! > materialData.first!.currentStock {
-                showAlert = true
-                break
-            }
-            showAlert = false
-        }
+        
         
         if stockOption == "Produce"{
+            for recipe in arrayRecipe{
+                let materialData = materialDataManager.materialList.filter{ material in
+                    material.id == recipe.idMaterial
+                }
+                if recipe.quantity * Int32(itemAmount)! > materialData.first!.currentStock {
+                    showAlert = true
+                    break
+                }
+                showAlert = false
+            }
             
             if !showAlert{
                 for recipe in arrayRecipe{
