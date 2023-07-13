@@ -9,7 +9,7 @@ import SwiftUI
 
 struct Product_Detail: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @Binding var product: DataProduct
+    @State var product: DataProduct
     
     @StateObject var recipeDataManager : RecipeDataManager = RecipeDataManager.shared
     @StateObject var materialDataManager: MaterialDataManager = MaterialDataManager.shared

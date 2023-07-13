@@ -13,6 +13,14 @@ class MaterialDataManager: ObservableObject {
     private let viewContext = PersistenceController.shared.viewContext
     
     @Published var materialList:[DataMaterial] = []
+    @Published var searchText: String = "" {
+        didSet{
+            fetchMaterialData()
+        }
+    }
+    
+    @Published var urgentMaterial : [DataMaterial] = []
+    @Published var safeMaterial : [DataMaterial] = []
     
     init() {
         fetchMaterialData()
@@ -23,6 +31,23 @@ class MaterialDataManager: ObservableObject {
         
         do {
             materialList = try viewContext.fetch(request)
+            if searchText.isEmpty{
+                urgentMaterial =  materialList.filter { material in
+                   material.minimalStock > material.currentStock}
+                safeMaterial = materialList.filter { material in
+                   material.minimalStock <= material.currentStock}
+            }else{
+//                urgent material filter
+                urgentMaterial = urgentMaterial.filter{ material in
+                    material.name!.lowercased().contains(searchText.lowercased())
+                }
+                
+//                safe material filter
+                safeMaterial = safeMaterial.filter{ material in
+                    material.name!.lowercased().contains(searchText.lowercased())
+                }
+                
+            }
         }catch {
             print("DEBUG: Some error occured while fetching")
         }

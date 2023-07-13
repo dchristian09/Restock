@@ -13,6 +13,15 @@ class ProductDataManager: ObservableObject {
     private let viewContext = PersistenceController.shared.viewContext
     
     @Published var productList:[DataProduct] = []
+    @Published var searchText: String = "" {
+        didSet {
+            fetchProductData()
+        }
+    }
+    
+    @Published var urgentProducts: [DataProduct] = []
+    
+    @Published var safeProducts: [DataProduct] = []
     
     init() {
         fetchProductData()
@@ -23,8 +32,28 @@ class ProductDataManager: ObservableObject {
         let request = NSFetchRequest<DataProduct>(entityName: "DataProduct")
         request.sortDescriptors = [NSSortDescriptor(key: "currentStock", ascending: true)]
         
+        
         do {
             productList = try viewContext.fetch(request)
+//            fetch urgent Product
+            if searchText.isEmpty{
+                 urgentProducts =  productList.filter { product in
+                    product.minimalStock > product.currentStock}
+//            fetch urgent Product
+                 safeProducts = productList.filter { product in
+                    product.minimalStock <= product.currentStock}
+            }else{
+//                urgent product filter
+                urgentProducts = urgentProducts.filter{ product in
+                    product.name!.lowercased().contains(searchText.lowercased())
+                }
+//                safe product filter
+                safeProducts = safeProducts.filter{ product in
+                    product.name!.lowercased().contains(searchText.lowercased())
+                }
+            }
+
+            print("Jumlah prodak", productList.count)
         }catch {
             print("DEBUG: Some error occured while fetching")
         }
