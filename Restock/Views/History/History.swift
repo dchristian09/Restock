@@ -41,7 +41,7 @@ struct History: View {
                         .fill(.white)
                         .frame(maxHeight: .greatestFiniteMagnitude)
                     
-                    VStack{
+                    VStack(alignment: .center){
                         
                         HStack{
                             Spacer()
@@ -72,13 +72,12 @@ struct History: View {
 //
 //                            }.foregroundColor(.blue)
 //                                .padding(.trailing)
-                        }.padding(.bottom)
+                        }.padding(.top)
                         
                         List {
                             //ForEach(historyDatas, id: \.historyMonth){ historyData in
                             ForEach(productionDataManager.historyDatas, id: \.historyMonth){ historyData in
                                 Section {
-                                    
                                     //Divider()
                                     ForEach(historyData.historyDetails, id:\.self){ historyDetail in
                                         History_card_view(dataProduction: historyDetail)

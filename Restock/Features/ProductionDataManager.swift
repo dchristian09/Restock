@@ -55,10 +55,8 @@ class ProductionDataManager: ObservableObject {
             
             productionList = productionList.filter { data in
                 if let itemType = data.itemType {
-                    print("ItemType", itemType.lowercased())
-                    print("selected", selectedType.lowercased())
-                    print(itemType.lowercased() == selectedType.lowercased())
-                    return itemType.lowercased() == selectedType.lowercased()
+                    
+                    return itemType.lowercased() == selectedType.lowercased() && data.isActive
                 }else{
                     return false
                 }
@@ -107,10 +105,18 @@ class ProductionDataManager: ObservableObject {
         production.qty = productionQty
         production.idProduct = product_id
         production.itemType = itemType
+        production.isActive = true
 //        company.id = UUID()
 //        company.title = companyTitle
 //        company.owner = companyOwner
 
+        save()
+        self.fetchProductionData()
+    }
+    
+    func softDeleteData(production: DataProduction){
+        production.isActive = false
+        
         save()
         self.fetchProductionData()
     }

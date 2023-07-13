@@ -29,7 +29,7 @@ struct Production_Card_View: View {
                 HStack(alignment: .top){
                     VStack{
                         Circle()
-                            .fill(.green)
+                            .fill(dataProduction?.isProduce ?? true ? .green : .red)
                             .frame(width: 8, height: 8, alignment: .leading)
                             .padding([.top, .leading])
                         Spacer()
@@ -71,7 +71,7 @@ struct Production_Card_View: View {
                         Text("\(dataProduction?.isProduce ?? true ? "+" : "-")\(dataProduction?.qty ?? 7)")
                             .font(.title)
                             .bold()
-                            .foregroundColor(.green).padding(10)
+                            .foregroundColor(dataProduction?.isProduce ?? true ? .green : .red).padding(10)
                         Spacer()
                     }
                     

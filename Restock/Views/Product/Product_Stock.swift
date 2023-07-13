@@ -124,7 +124,7 @@ struct Product_Stock: View {
                     }
                     
                     materialDataManager.restockMaterial(material: materialData.first!, currentStock: materialData.first!.currentStock - (recipe.quantity * Int32(itemAmount)!))
-                    productionDataManager.addDataToCoreData(productionLabel: "Produce " + item.name!, productionDate: itemDate, productionNotes: itemNote, isProduce: false, productionQty: materialData.first!.currentStock - (recipe.quantity * Int32(itemAmount)!), product_id: materialData.first!.id!, itemType: "Material")
+                    productionDataManager.addDataToCoreData(productionLabel: "Produce " + item.name!, productionDate: itemDate, productionNotes: itemNote, isProduce: false, productionQty: (recipe.quantity * Int32(itemAmount)!), product_id: materialData.first!.id!, itemType: "Material")
                 }
                 
                 productDataManager.produceProduct(product: item, currentStock: item.currentStock + (Int32(itemAmount)!))
