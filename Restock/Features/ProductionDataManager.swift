@@ -13,11 +13,21 @@ class ProductionDataManager: ObservableObject {
     static let shared = ProductionDataManager()
     private let viewContext = PersistenceController.shared.viewContext
     
+    var productDataManager: ProductDataManager = ProductDataManager.shared
+    var materialDataManager: MaterialDataManager = MaterialDataManager.shared
+    
+    var itemName : String = ""
     @Published var productionList : [DataProduction] = []
     @Published var historyDatas : [HistoryData] = []
     
     @Published var selectedType: String = "product" {
         didSet {
+            fetchProductionData()
+        }
+    }
+    
+    @Published var searchText : String = "" {
+        didSet{
             fetchProductionData()
         }
     }
@@ -53,14 +63,33 @@ class ProductionDataManager: ObservableObject {
 //                $0.itemType == selectedType
 //            }
             
-            productionList = productionList.filter { data in
-                if let itemType = data.itemType {
-                    
-                    return itemType.lowercased() == selectedType.lowercased() && data.isActive
-                }else{
-                    return false
+
+            
+            if searchText.isEmpty{
+    //            Check data that have the same type (product / material) and check if the data already deleted or not
+                productionList = productionList.filter { data in
+                    if let itemType = data.itemType {
+                        return itemType.lowercased() == selectedType.lowercased() && data.isActive
+                    }else{
+                        return false
+                    }
                 }
+            }else{
                 
+    //            Check data that have the same type (product / material) and check if the data already deleted or not
+                productionList = productionList.filter { data in
+                    if let itemType = data.itemType {
+                        return itemType.lowercased() == selectedType.lowercased() && data.isActive
+                    }else{
+                        return false
+                    }
+                }
+                productionList = productionList.filter{ data in
+                    getName(itemType: data.itemType!, idItem: data.idProduct!)
+                    return itemName.lowercased().contains(searchText.lowercased())
+                    
+                }
+
             }
             print("SELECTED TYPE: ", selectedType)
             print("filteredProductionList: ", productionList.count)
@@ -92,6 +121,22 @@ class ProductionDataManager: ObservableObject {
             print("historyData", historyDatas.count)
         }catch {
             print("DEBUG: Some error occured while fetching")
+        }
+    }
+    
+    func getName(itemType: String, idItem: UUID){
+        if itemType.lowercased() == "product"{
+            let product = productDataManager.productList.filter{
+                $0.id == idItem
+            }
+            itemName = product.first!.name!
+            
+        }else{
+            let material = materialDataManager.materialList.filter{
+                $0.id == idItem
+            }
+            itemName = material.first!.name!
+            
         }
     }
     

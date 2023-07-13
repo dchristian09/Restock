@@ -102,7 +102,7 @@ struct History: View {
             .navigationBarTitle("History")
             .navigationBarTitleDisplayMode(.large)
             .navigationBarBackButtonHidden(true)
-            .searchable(text: $searchText)
+            .searchable(text: $productionDataManager.searchText)
         }
  
 //        .onAppear{
