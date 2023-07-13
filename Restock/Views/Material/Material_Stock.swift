@@ -98,11 +98,11 @@ struct Material_Stock: View {
 
         if stockOption == "Restock"{
             materialDataManager.restockMaterial(material: item, currentStock: item.currentStock + (Int32(itemAmount)!))
-            productionDataManager.addDataToCoreData(productionLabel: itemLabel, productionDate: itemDate, productionNotes: itemNote, isProduce: true, productionQty: Int32(itemAmount)!, product_id: item.id!)
+            productionDataManager.addDataToCoreData(productionLabel: itemLabel, productionDate: itemDate, productionNotes: itemNote, isProduce: true, productionQty: Int32(itemAmount)!, product_id: item.id!, itemType: "material")
             self.presentationMode.wrappedValue.dismiss()
         }else{
             materialDataManager.restockMaterial(material: item, currentStock: item.currentStock - (Int32(itemAmount)!))
-            productionDataManager.addDataToCoreData(productionLabel: itemLabel, productionDate: itemDate, productionNotes: itemNote, isProduce: false, productionQty: Int32(itemAmount)!, product_id: item.id!)
+            productionDataManager.addDataToCoreData(productionLabel: itemLabel, productionDate: itemDate, productionNotes: itemNote, isProduce: false, productionQty: Int32(itemAmount)!, product_id: item.id!, itemType: "material")
             self.presentationMode.wrappedValue.dismiss()
         }
     }

@@ -61,7 +61,7 @@ class MaterialDataManager: ObservableObject {
         material.minimalStock = minimumStock
         material.isActive = isActive
         material.unit = unit
-        material.note = note        
+        material.note = note
         save()
         self.fetchMaterialData()
     }

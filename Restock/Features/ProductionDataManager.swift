@@ -62,7 +62,7 @@ class ProductionDataManager: ObservableObject {
         }
     }
     
-    func addDataToCoreData(productionLabel: String, productionDate: Date, productionNotes: String, isProduce: Bool, productionQty: Int32, product_id: UUID) {
+    func addDataToCoreData(productionLabel: String, productionDate: Date, productionNotes: String, isProduce: Bool, productionQty: Int32, product_id: UUID, itemType: String) {
         let production = DataProduction(context: viewContext)
         production.id = UUID()
         production.label = productionLabel
@@ -71,6 +71,7 @@ class ProductionDataManager: ObservableObject {
         production.isProduce = isProduce
         production.qty = productionQty
         production.idProduct = product_id
+        production.itemType = itemType
 //        company.id = UUID()
 //        company.title = companyTitle
 //        company.owner = companyOwner

@@ -84,6 +84,13 @@ class ProductDataManager: ObservableObject {
         self.fetchProductData()
     }
     
+    func produceProduct(product: DataProduct, currentStock: Int32){
+        product.currentStock = currentStock
+        
+        save()
+        self.fetchProductData()
+        
+    }
     func deleteProduct(withID id: UUID) {
         let fetchRequest: NSFetchRequest<DataProduct> = DataProduct.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "id == %@", id as CVarArg)

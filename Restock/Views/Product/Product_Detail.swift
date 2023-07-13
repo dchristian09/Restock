@@ -49,7 +49,7 @@ struct Product_Detail: View {
                     //button
                     HStack{
                         NavigationLink{
-                            Product_Stock(stockOption: "Produce")
+                            Product_Stock(item: product, stockOption: "Produce")
                         }label: {
                             HStack {
                                 Image(systemName: "plus.circle")
@@ -61,7 +61,7 @@ struct Product_Detail: View {
                             
                         }
                         NavigationLink{
-                            Product_Stock(stockOption: "Reduce")
+                            Product_Stock(item: product, stockOption: "Reduce")
                         }label: {
                             HStack {
                                 Image(systemName: "minus.circle")
