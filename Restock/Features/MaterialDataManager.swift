@@ -76,6 +76,13 @@ class MaterialDataManager: ObservableObject {
         self.fetchMaterialData()
     }
     
+    func restockMaterial(material: DataMaterial, currentStock: Int32){
+        material.currentStock = currentStock
+        
+        save()
+        self.fetchMaterialData()
+    }
+    
     func save() {
         do {
             try viewContext.save()

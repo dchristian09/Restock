@@ -37,26 +37,26 @@ class ProductionDataManager: ObservableObject {
         
         do {
             productionList = try viewContext.fetch(request)
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "LLLL"
-            //let nameOfMonth = dateFormatter.string(from: now)
-            var monthName = ""
-            var historyDetails:[DataProduction] = []
-            for production in productionList {
-                let nameOfMonth = dateFormatter.string(from: production.date!)
-                
-                if monthName != nameOfMonth {
-                    
-                    if monthName != "" {
-                        historyDatas.append(
-                        HistoryData(historyMonth: monthName,
-                                    historyDetails: historyDetails)
-                        )
-                    }
-                    historyDetails = []
-                }
-                historyDetails.append(production)
-            }
+//            let dateFormatter = DateFormatter()
+//            dateFormatter.dateFormat = "LLLL"
+//            //let nameOfMonth = dateFormatter.string(from: now)
+//            var monthName = ""
+//            var historyDetails:[DataProduction] = []
+//            for production in productionList {
+//                let nameOfMonth = dateFormatter.string(from: production.date!)
+//                
+//                if monthName != nameOfMonth {
+//                    
+//                    if monthName != "" {
+//                        historyDatas.append(
+//                        HistoryData(historyMonth: monthName,
+//                                    historyDetails: historyDetails)
+//                        )
+//                    }
+//                    historyDetails = []
+//                }
+//                historyDetails.append(production)
+//            }
         }catch {
             print("DEBUG: Some error occured while fetching")
         }

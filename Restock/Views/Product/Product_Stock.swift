@@ -13,6 +13,8 @@ struct Product_Stock: View {
     @State private var itemNote: String = ""
     @State private var itemLabel: String = ""
     @State private var itemDate = Date.now
+    
+    @State var showAlert : Bool = false
     var stockOption:String = ""
     var body: some View {
         NavigationView{
@@ -78,12 +80,20 @@ struct Product_Stock: View {
                     //                    }
                     Button(stockOption) {
                         //function
-                    }
+                    }.disabled(itemAmount == "" && itemLabel == "")
                 }
             }
         }
         .navigationBarBackButtonHidden(true)
+        .alert(isPresented: $showAlert){
+            return Alert(title: Text("Lacking Raw Material"), message: Text("Please restock your material first"), dismissButton: .default(Text("OK")))
+        }
     }
+    
+    func Production(){
+        
+    }
+    
 }
 
 //struct Product_Stock_Previews: PreviewProvider {
