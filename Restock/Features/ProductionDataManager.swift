@@ -27,17 +27,18 @@ class ProductionDataManager: ObservableObject {
     }
     
     func fetchProductionData(startDate:Date? = nil, endDate:Date? = nil) {
+        historyDatas = []
         let request = NSFetchRequest<DataProduction>(entityName: "DataProduction")
 //        request.resultType = .dictionaryResultType
         request.propertiesToFetch = ["id", "date", "idProduct", "label", "qty", "isProduce"]
-//
+        let sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+        request.sortDescriptors = sortDescriptors
+        
         if (startDate != nil && endDate != nil){
             let predicate = NSPredicate(format: "date >= %@ && date <= %@", startDate! as CVarArg, endDate! as CVarArg)
             //let predicate = NSPredicate(format: "%K >= %@ && %K < %@", "date", firstDayOfTheMonth! as NSDate, "date", beginningOfNextMonth! as NSDate)
-            let sortDescriptors = [NSSortDescriptor(key: "startDate", ascending: false)]
-
+            
             request.predicate = predicate
-            request.sortDescriptors = sortDescriptors
         }
         
         

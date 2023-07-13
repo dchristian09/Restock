@@ -15,7 +15,7 @@ struct History: View {
     let themes = ["Product", "Material"]
     let columns = [GridItem(.fixed(35)), GridItem(.flexible())]
 
-    @State var productionDataManager = ProductionDataManager.shared
+    @StateObject var productionDataManager = ProductionDataManager.shared
     //@State var historyDatas = ProductionDataManager.shared.historyDatas
     //@State var historyDatas:[HistoryData] = []
     
@@ -53,7 +53,7 @@ struct History: View {
                             .pickerStyle(.segmented)
                             Spacer()
                         }
-                        HStack{
+                        HStack(alignment: .center){
                             Button{
                                 withAnimation{
                                     showingSheet = true
@@ -68,10 +68,10 @@ struct History: View {
                                 History_FilterDate(showSheetView: $showingSheet)
                             }
                             Spacer()
-                            Button("Edit"){
-                                
-                            }.foregroundColor(.blue)
-                                .padding(.trailing)
+//                            Button("Edit"){
+//
+//                            }.foregroundColor(.blue)
+//                                .padding(.trailing)
                         }.padding(.bottom)
                         
                         List {
