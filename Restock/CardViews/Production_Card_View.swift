@@ -8,8 +8,17 @@
 import SwiftUI
 
 struct Production_Card_View: View {
-    var dataProduction:DataProduction? = nil
+    var dataProduction:DataProduction? 
     
+    
+    
+//    var material: DataMaterial {
+//
+//    }
+    @State var itemName: String = ""
+//    var item
+    @StateObject var productDataManager: ProductDataManager = ProductDataManager.shared
+    @StateObject var materialDataManager: MaterialDataManager = MaterialDataManager.shared
     
     var body: some View {
         
@@ -20,7 +29,7 @@ struct Production_Card_View: View {
                 HStack(alignment: .top){
                     VStack{
                         Circle()
-                            .fill(.green)
+                            .fill(dataProduction?.isProduce ?? true ? .green : .red)
                             .frame(width: 8, height: 8, alignment: .leading)
                             .padding([.top, .leading])
                         Spacer()
@@ -41,7 +50,7 @@ struct Production_Card_View: View {
                         }.padding(.top, 10)
                         
                         // nama barang
-                        Text(dataProduction?.productRelation?.name ?? "Bouquet Rose")
+                        Text(itemName)
                             .font(.title)
                             .bold()
                             .padding([.bottom], 0.1)
@@ -51,24 +60,49 @@ struct Production_Card_View: View {
                         Text(dateToString(tanggal:dataProduction?.date))
                             .font(.caption2)
                             .foregroundColor(.black)
-                        
+            
                     }
+                    
                     Spacer()
                     
+                    
+                    //plus minus stock
+                    VStack{
+                        Spacer()
+                        Text("\(dataProduction?.isProduce ?? true ? "+" : "-")\(dataProduction?.qty ?? 7)")
+                            .font(.title)
+                            .bold()
+                            .foregroundColor(dataProduction?.isProduce ?? true ? .green : .red).padding(10)
+                        Spacer()
+                    }
+                    
+                    
+                    
+                    
+                       
                 }
-                //plus minus stock
-                
-                Text("\(dataProduction?.isProduce ?? true ? "+" : "-")\(dataProduction?.qty ?? 7)")
-                    .font(.largeTitle)
-                    .bold()
-                    .foregroundColor(.green)
-                    .offset(x: 120)
+               
             }
             
+        }.onAppear{
+            getName()
         }
-        
-        .frame(width:312, height: 94)
-        
+        .frame(width:312, height: 72)
+    }
+
+    func getName(){
+        if dataProduction?.itemType?.lowercased() == "product"{
+            let product = productDataManager.productList.filter{
+                $0.id == dataProduction?.idProduct
+            }
+            itemName = product.first!.name!
+            
+        }else{
+            let material = materialDataManager.materialList.filter{
+                $0.id == dataProduction?.idProduct
+            }
+            itemName = material.first!.name!
+        }
     }
     
     func dateToString(tanggal:Date?) -> String{
@@ -84,8 +118,8 @@ struct Production_Card_View: View {
     }
 }
 
-struct Production_Card_View_Previews: PreviewProvider {
-    static var previews: some View {
-        Production_Card_View()
-    }
-}
+//struct Production_Card_View_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Production_Card_View(, product: .init())
+//    }
+//}

@@ -14,19 +14,19 @@ struct History: View {
     @State private var searchText = ""
     let themes = ["Product", "Material"]
     let columns = [GridItem(.fixed(35)), GridItem(.flexible())]
-
-    @State var productionDataManager = ProductionDataManager.shared
+    
+    @StateObject var productionDataManager = ProductionDataManager.shared
     //@State var historyDatas = ProductionDataManager.shared.historyDatas
     //@State var historyDatas:[HistoryData] = []
     
-//        HistoryData(historyMonth: "June", historyDetails: [
-//            HistoryDetail(historyDate: Date(), itemName: "Rose bouquet", productionLabel: "Graduation Ceremony", quantity: 5, isProduce: false),
-//            HistoryDetail(historyDate: Date(), itemName: "Rose bouquet", productionLabel: "Graduation Ceremony", quantity: 5, isProduce: true)
-//        ]),
-//        HistoryData(historyMonth: "July", historyDetails: [
-//            HistoryDetail(historyDate: Date(), itemName: "Rose bouquet", productionLabel: "Graduation Ceremonyx", quantity: 13, isProduce: true)
-//        ])
-//    ]
+    //        HistoryData(historyMonth: "June", historyDetails: [
+    //            HistoryDetail(historyDate: Date(), itemName: "Rose bouquet", productionLabel: "Graduation Ceremony", quantity: 5, isProduce: false),
+    //            HistoryDetail(historyDate: Date(), itemName: "Rose bouquet", productionLabel: "Graduation Ceremony", quantity: 5, isProduce: true)
+    //        ]),
+    //        HistoryData(historyMonth: "July", historyDetails: [
+    //            HistoryDetail(historyDate: Date(), itemName: "Rose bouquet", productionLabel: "Graduation Ceremonyx", quantity: 13, isProduce: true)
+    //        ])
+    //    ]
     @State var currentMonth:String = "0"
     var body: some View {
         NavigationView{
@@ -34,90 +34,110 @@ struct History: View {
                 Rectangle()
                     .fill(Color(hex: 0xf2f4ff))
                     .ignoresSafeArea()
- 
+                RoundedRectangle(cornerRadius: 50, style:.continuous)
+                    .fill(.white)
+                    .frame(maxHeight: .greatestFiniteMagnitude)
                 //   ScrollView {
                 ZStack{
-                    RoundedRectangle(cornerRadius: 50, style:.continuous)
-                        .fill(.white)
-                        .frame(maxHeight: .greatestFiniteMagnitude)
                     
-                    VStack{
-                        
+                    
+                    VStack(alignment: .center){
                         HStack{
                             Spacer()
-                            Picker("Appearance", selection: $selectedTheme) {
+                            Picker("Appearance", selection: $productionDataManager.selectedType) {
                                 ForEach(themes, id: \.self) {
                                     Text($0)
                                 }
                             }
                             .pickerStyle(.segmented)
                             Spacer()
-                        }
-                        HStack{
-                            Button{
-                                withAnimation{
-                                    showingSheet = true
+                        }.padding(.all)
+                        HStack(alignment: .center){
+                            if (productionDataManager.historyDatas.count > 0){
+                                Button{
+                                    withAnimation{
+                                        showingSheet = true
+                                    }
+                                }label: {
+                                    Text("Filter Date")
+                                        .foregroundColor(.blue)
+                                        .padding(.leading)
+                                    Image(systemName: "calendar")
+                                        .foregroundColor(.blue)
+                                }.sheet(isPresented: $showingSheet){
+                                    History_FilterDate(showSheetView: $showingSheet)
                                 }
-                            }label: {
-                                Text("Filter Date")
-                                    .foregroundColor(.blue)
-                                    .padding(.leading)
-                                Image(systemName: "calendar")
-                                    .foregroundColor(.blue)
-                            }.sheet(isPresented: $showingSheet){
-                                History_FilterDate(showSheetView: $showingSheet)
                             }
                             Spacer()
-                            Button("Edit"){
-                                
-                            }.foregroundColor(.blue)
-                                .padding(.trailing)
-                        }.padding(.bottom)
-                        
-                        List {
-                            //ForEach(historyDatas, id: \.historyMonth){ historyData in
-                            ForEach(productionDataManager.historyDatas, id: \.historyMonth){ historyData in
-                                Section {
-                                    HStack{
-                                        Text(historyData.historyMonth)
-                                        Spacer()
+                            //                            Button("Edit"){
+                            //
+                            //                            }.foregroundColor(.blue)
+                            //                                .padding(.trailing)
+                        }.padding(.top)
+                        if (productionDataManager.historyDatas.count > 0){
+                            List {
+                                //ForEach(historyDatas, id: \.historyMonth){ historyData in
+                                ForEach(productionDataManager.historyDatas, id: \.historyMonth){ historyData in
+                                    Section {
+                                        //Divider()
+                                        ForEach(historyData.historyDetails, id:\.self){ historyDetail in
+                                            History_card_view(dataProduction: historyDetail)
+                                            
+                                        }
+                                    } header: {
+                                        //                                    HStack{
+                                        Text(String(historyData.historyMonth)).padding(5).font(.title2)
+                                        //                                        Spacer()
+                                        //                                    }
                                     }
-                                    //Divider()
-                                    ForEach(historyData.historyDetails, id:\.self){ historyDetail in
-                                        History_card_view(dataProduction: historyDetail)
-                                        
-                                    }
-                                    
-                                    
-                                    
                                 }
+                            }.listStyle(.plain)
+                        }else{
+                            
+                            Text("There is no product history available. It will be")
+                                .multilineTextAlignment(.center)
+                                .padding(.top)
+                                .fontWeight(.thin)
+                            Text("generated when you Produce or Reduce in")
+                                .fontWeight(.thin)
+                            HStack {
+                                Text("the ")
+                                    .fontWeight(.thin)
+                                Image(systemName: "tray")
+                                Text("Product tab")
+                                    .fontWeight(.thin)
                             }
-                        }.listStyle(.plain)
+                            
+                            
+                            Image("history_no_data")
+                                .resizable()
+                                .frame(width: 250, height: 250)
+                        }
                         
                         Spacer()
                     }
-                   // .padding()
+                    // .padding()
                 }
                 //}
- 
+                
             }
             .navigationBarTitle("History")
             .navigationBarTitleDisplayMode(.large)
             .navigationBarBackButtonHidden(true)
-            .searchable(text: $searchText)
+//            .searchable(text: $productionDataManager.searchText)
         }
- 
-//        .onAppear{
-//            let fetchRequest: NSFetchRequest<DataProduction> = DataProduction.fetchRequest()
-//
-//            do {
-//                var pd:[DataProduction] = try PersistenceController.shared.container.viewContext.fetch(fetchRequest)
-//                print(pd)
-//                pd[0].productRelation?.name
-//            } catch {
-//                print("gagal")
-//            }
-//        }
+        
+        //        .onAppear{
+        //            let fetchRequest: NSFetchRequest<DataProduction> = DataProduction.fetchRequest()
+        //
+        //            do {
+        //                var pd:[DataProduction] = try PersistenceController.shared.container.viewContext.fetch(fetchRequest)
+        //                print(pd)
+        //                pd[0].productRelation?.name
+        //            } catch {
+        //                print("gagal")
+        //            }
+        //        }
     }
 }
 
@@ -126,4 +146,4 @@ struct History_Previews: PreviewProvider {
         History()
     }
 }
- 
+

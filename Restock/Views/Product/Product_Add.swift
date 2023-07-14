@@ -42,7 +42,6 @@ struct Product_Add: View {
                     .ignoresSafeArea()
                 VStack{
                     VStack {
-                        
                         //icon
                         HStack{
                             Spacer()
@@ -256,8 +255,6 @@ struct Product_Add: View {
             isDataIncomplete = true
         }
         
-        let newProduct:DataProduct =  productDataManager.addDataToCoreData(productName: productName, currentStock: Int32(productCurrentStock) ?? 0, minimumStock: Int32(productMinimalStock) ?? 0, isActive: true, unit: selectedUnitList)
-        
         if(arrayMaterialIngredients.count > 0){
             for materialIngredient in arrayMaterialIngredients {
                 if(materialIngredient.data == nil || materialIngredient.materialQuantity.isEmpty){
@@ -265,9 +262,9 @@ struct Product_Add: View {
                     isDataIncomplete = true
                     
                     //if data incomplete, delete product
-                    productDataManager.deleteProduct(withID: newProduct.id!)
+//                    productDataManager.deleteProduct(withID: newProduct.id!)
                     
-                    return
+                    break
                 }
                 isMaterialIncomplete = false
                 isDataIncomplete = false
@@ -275,6 +272,8 @@ struct Product_Add: View {
 //            If all data already completed
             print(recipeDataManager.recipeList.count)
             if !isMaterialIncomplete && !isDataIncomplete{
+                let newProduct: DataProduct =  productDataManager.addDataToCoreData(productName: productName, currentStock: Int32(productCurrentStock) ?? 0, minimumStock: Int32(productMinimalStock) ?? 0, isActive: true, unit: selectedUnitList)
+                
                 for materialIngredient in arrayMaterialIngredients {
                 
                         let idProduct : UUID =  newProduct.id!
@@ -289,7 +288,7 @@ struct Product_Add: View {
             
         }else{
             //if data incomplete, delete product
-            productDataManager.deleteProduct(withID: newProduct.id!)
+//            productDataManager.deleteProduct(withID: newProduct.id!)
             
             isMaterialIncomplete = true
             isDataIncomplete = true

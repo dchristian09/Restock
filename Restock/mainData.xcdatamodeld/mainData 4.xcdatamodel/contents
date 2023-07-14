@@ -23,14 +23,15 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="unit" optional="YES" attributeType="String"/>
         <relationship name="productRelation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DataProduction" inverseName="productRelation" inverseEntity="DataProduction"/>
-        <relationship name="relationship" optional="YES" maxCount="1" deletionRule="Nullify"/>
         <relationship name="resep" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DataRecipe" inverseName="product" inverseEntity="DataRecipe"/>
     </entity>
     <entity name="DataProduction" representedClassName="DataProduction" syncable="YES" codeGenerationType="class">
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="idProduct" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="isActive" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="isProduce" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="itemType" optional="YES" attributeType="String"/>
         <attribute name="label" optional="YES" attributeType="String"/>
         <attribute name="notes" optional="YES" attributeType="String"/>
         <attribute name="qty" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>

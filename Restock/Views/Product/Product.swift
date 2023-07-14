@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Product: View {
-    @State private var searchText = ""
+//    @State private var searchText = ""
     let columns = [GridItem(.flexible()), GridItem(.flexible())]
     @State var showingAlert: Bool = false
 
@@ -19,7 +19,7 @@ struct Product: View {
     @StateObject var productDataManager: ProductDataManager = ProductDataManager.shared
     @StateObject var materialDataManager: MaterialDataManager = MaterialDataManager.shared
     
-    @State var urgentProducts: [DataProduct] = []
+    
     
     var body: some View {
         NavigationView{
@@ -27,12 +27,12 @@ struct Product: View {
                 Rectangle()
                     .fill(Color(hex: 0xF4F4FD))
                     .ignoresSafeArea()
-                
+                RoundedRectangle(cornerRadius: 50, style:.continuous)
+                    .fill(.white)
+                    .frame(maxHeight: .greatestFiniteMagnitude)
                 ScrollView {
                     ZStack{
-                        RoundedRectangle(cornerRadius: 50, style:.continuous)
-                            .fill(.white)
-                            .frame(maxHeight: .infinity)
+                        
                         
                         //there is product
                         if(productDataManager.productList.count > 0){
@@ -44,11 +44,11 @@ struct Product: View {
                                         .font(.title2.bold())
                                     Spacer()
                                     
-                                    if urgentProducts.count > 4 {
+                                    if productDataManager.urgentProducts.count > 4 {
                                         NavigationLink {
                                             Product_Reminder()
                                         } label: {
-                                            Text("View Another " + String(urgentProducts.count))
+                                            Text("View Another " + String(productDataManager.urgentProducts.count))
                                                 .font(.footnote)
                                                 .foregroundColor(.blue)
                                         }
@@ -56,23 +56,34 @@ struct Product: View {
                                 }.padding()
                                 
                                 // Product Card
-                                if urgentProducts.count > 0 {
+                                if productDataManager.urgentProducts.count > 0 {
                                     LazyVGrid(columns: columns){
-                                        ForEach(urgentProducts.indices,id:\.self){ index in
+                                        ForEach(productDataManager.urgentProducts.indices,id:\.self){ index in
                                             NavigationLink{
-                                                Product_Detail(product: $urgentProducts[index])
+                                                Product_Detail(product: productDataManager.urgentProducts[index])
                                             }label: {
-                                                Main_Card_View(materialName: urgentProducts[index].name ?? "",  materialUnit: urgentProducts[index].unit ?? "", materialStock: urgentProducts[index].currentStock, materialMinStock: urgentProducts[index].minimalStock)
+                                                Main_Card_View(materialName: productDataManager.urgentProducts[index].name ?? "",  materialUnit: productDataManager.urgentProducts[index].unit ?? "", materialStock: productDataManager.urgentProducts[index].currentStock, materialMinStock: productDataManager.urgentProducts[index].minimalStock)
                                             }
                                         }
                                     }
-                                }else{
+                                }else if materialDataManager.urgentMaterial.isEmpty && productDataManager.searchText.isEmpty{
                                     //Low stock empty state
                                     VStack{
                                         Spacer()
                                         HStack(){
                                             Spacer()
                                             Text("Yay!  All your product at a safe level~")
+                                            Spacer()
+                                        }
+                                        Spacer()
+                                    }.padding(10)
+                                }else if productDataManager.urgentProducts.isEmpty && !productDataManager.searchText.isEmpty{
+                                    //Low Stock empty state on search
+                                    VStack{
+                                        Spacer()
+                                        HStack(){
+                                            Spacer()
+                                            Text("No Product Match")
                                             Spacer()
                                         }
                                         Spacer()
@@ -87,15 +98,27 @@ struct Product: View {
                                     Spacer()
                                 }.padding()
                                 
-                                // Product Card
-                                LazyVGrid(columns: columns){
-                                    ForEach(productDataManager.productList.indices,id:\.self){ index in
-                                        NavigationLink{
-                                            Product_Detail(product: $productDataManager.productList[index])
-                                        }label: {
-                                            Main_Card_View(materialName: productDataManager.productList[index].name ?? "",  materialUnit: productDataManager.productList[index].unit ?? "", materialStock: productDataManager.productList[index].currentStock, materialMinStock: productDataManager.productList[index].minimalStock)
+                                if !productDataManager.safeProducts.isEmpty{
+                                    // Product Card
+                                    LazyVGrid(columns: columns){
+                                        ForEach(productDataManager.safeProducts.indices,id:\.self){ index in
+                                            NavigationLink{
+                                                Product_Detail(product: productDataManager.safeProducts[index])
+                                            }label: {
+                                                Main_Card_View(materialName: productDataManager.safeProducts[index].name ?? "",  materialUnit: productDataManager.safeProducts[index].unit ?? "", materialStock: productDataManager.safeProducts[index].currentStock, materialMinStock: productDataManager.safeProducts[index].minimalStock)
+                                            }
                                         }
                                     }
+                                }else if productDataManager.safeProducts.isEmpty && !productDataManager.searchText.isEmpty{
+                                    VStack{
+                                        Spacer()
+                                        HStack(){
+                                            Spacer()
+                                            Text("No Product Match")
+                                            Spacer()
+                                        }
+                                        Spacer()
+                                    }.padding(10)
                                 }
                                 Spacer()
                             }
@@ -149,7 +172,7 @@ struct Product: View {
             .navigationBarTitle("Product")
             .navigationBarTitleDisplayMode(.large)
             .navigationBarBackButtonHidden(true)
-            .searchable(text: $searchText)
+            .searchable(text: $productDataManager.searchText)
             .toolbar{
                 ToolbarItem(placement: .navigationBarTrailing){
 
@@ -189,16 +212,19 @@ struct Product: View {
 
                 }
             }
-        }.onAppear{
-            getUrgentStock()
         }
+//        .onAppear{
+//            getUrgentStock()
+//        }
     }
     
-    func getUrgentStock(){
-        urgentProducts = productDataManager.productList.filter { product in
-            product.minimalStock > product.currentStock
-        }
-    }
+    
+    
+//    func getUrgentStock(){
+//        productDataManager.urgentProducts = productDataManager.productList.filter { product in
+//            product.minimalStock > product.currentStock
+//        }
+//    }
 }
 
 

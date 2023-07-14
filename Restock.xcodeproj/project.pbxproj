@@ -61,6 +61,7 @@
 		3634D6302A56CD1C00C31903 /* Material_Stock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Material_Stock.swift; sourceTree = "<group>"; };
 		3634D6322A56D47F00C31903 /* Product_Stock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product_Stock.swift; sourceTree = "<group>"; };
 		3634D6342A56DC0A00C31903 /* History_FilterDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History_FilterDate.swift; sourceTree = "<group>"; };
+		3634D6362A57F51900C31903 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		36CB89352A385137000BDA6D /* Restock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Restock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36CB89382A385137000BDA6D /* RestockApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestockApp.swift; sourceTree = "<group>"; };
 		36CB893A2A385137000BDA6D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -518,9 +519,9 @@
 				DEVELOPMENT_TEAM = 44349BA3CD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Restock/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -548,9 +549,9 @@
 				DEVELOPMENT_TEAM = 44349BA3CD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Restock/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

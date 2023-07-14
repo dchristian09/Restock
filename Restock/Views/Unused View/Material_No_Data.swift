@@ -44,8 +44,7 @@ struct Material_No_Data: View {
                         
                         Image("material_no_data")
                             .resizable()
-                            .frame(width: 300, height: 250)
-                            .padding(.top, 30)
+                            .frame(width: 300, height: 300)
                         Spacer()
                     }
                 }.frame(height: 600)

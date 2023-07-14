@@ -9,7 +9,17 @@ import SwiftUI
 
 struct Production_Detail: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
+    @Binding var production: DataProduction
+    
+    @StateObject var productDataManager: ProductDataManager = ProductDataManager.shared
+    @StateObject var materialDataManager: MaterialDataManager = MaterialDataManager.shared
+    
+    @State var itemName : String = ""
+    @State var itemUnit : String = ""
+    
     var body: some View {
+        
         NavigationView{
             ZStack {
                 Rectangle()
@@ -22,30 +32,30 @@ struct Production_Detail: View {
                         .scaledToFit()
                         .frame(width: 300, height: 250)
                         .padding(.top)
-                    Text("Bouquet Rose")
+                    Text(itemName)
                         .font(.largeTitle)
                     VStack{
                         List {
                             Section {
                                 HStack {
-                                    Text("Product Amount")
+                                    Text(production.isProduce ? "Produce " : "Reduce " + "Amount")
                                     Spacer()
-                                    Text("4 pcs")
+                                    Text(String(production.qty) + " " + itemUnit)
                                 }
                                 HStack {
-                                    Text("Produce Date")
+                                    Text(production.isProduce ? "Produce " : "Reduce " + " Date")
                                     Spacer()
-                                    Text("Jun 14, 2023")
+                                    Text(dateToString(tanggal:production.date))
                                 }
                                 HStack {
-                                    Text("Produce Label")
+                                    Text(production.isProduce ? "Produce " : "Reduce " + "Label")
                                     Spacer()
-                                    Text("Stok Toko")
+                                    Text(production.label!)
                                 }
                                 HStack {
                                     Text("Notes")
                                     Spacer()
-                                    Text("-")
+                                    Text(production.notes != "" ? production.notes! : "-")
                                 }
                             }
                         }
@@ -57,9 +67,41 @@ struct Production_Detail: View {
             }
             .navigationBarTitle("Production Detail", displayMode: .inline)
             .navigationBarItems(leading: backButton)
+        }.onAppear{
+            getData()
         }
         .navigationBarBackButtonHidden(true)
     }
+    
+    func getData(){
+        if production.itemType?.lowercased() == "product"{
+            let product = productDataManager.productList.filter{
+                $0.id == production.idProduct
+            }
+            itemName = product.first!.name!
+            itemUnit = product.first!.unit!
+            
+        }else{
+            let material = materialDataManager.materialList.filter{
+                $0.id == production.idProduct
+            }
+            itemName = material.first!.name!
+            itemUnit = material.first!.unit!
+        }
+    }
+    
+    func dateToString(tanggal:Date?) -> String{
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd MMMM yyyy"
+        
+        guard let currentDate = tanggal else {
+            return " - "
+        }
+        
+        return formatter.string(from: tanggal!)
+        
+    }
+    
     var backButton: some View {
         Button(action: {
             self.presentationMode.wrappedValue.dismiss()
@@ -72,8 +114,8 @@ struct Production_Detail: View {
     }
 }
 
-struct Production_Detail_Previews: PreviewProvider {
-    static var previews: some View {
-        Production_Detail()
-    }
-}
+//struct Production_Detail_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Production_Detail()
+//    }
+//}

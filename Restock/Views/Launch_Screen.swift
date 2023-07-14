@@ -17,7 +17,7 @@ struct Launch_Screen: View {
                 .fill(Color(hex: 0xF4F4FD))
                 .ignoresSafeArea()
             if self.isActive {
-                Product()
+                ContentView()
             } else {
 //                Image("launch_screen")
 //                    .resizable()

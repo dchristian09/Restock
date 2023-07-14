@@ -318,21 +318,6 @@ struct Product_Edit: View {
         
     }
     
-    func cancelEdit(){
-        print("inCancelEdit : ",self.toPreviousPage)
-        print("inCancelEdit Count : ",self.oldArrayMaterialIngredients.count)
-        for materialIngredient in oldArrayMaterialIngredients {
-            let idProduct : UUID =  product.id!
-            let idMaterial : UUID = materialIngredient.data!.id!
-            let qtyMaterial: Int32 = Int32(materialIngredient.materialQuantity) ?? 0
-            
-            recipeDataManager.addDataToCoreData(idProduct: idProduct, idMaterial: idMaterial, quantity: qtyMaterial)
-            
-        }
-        self.toPreviousPage = false
-        
-        print("Check me previous",self.toPreviousPage)
-    }
     
     func saveEdit(){
         if(productName.isEmpty || stringMinimalStock.isEmpty){
@@ -382,17 +367,15 @@ struct Product_Edit: View {
                     
                 }
                 self.presentationMode.wrappedValue.dismiss()
-                //                print("Sha Sha", recipeDataManager.recipeList.count)
-                //                self.presentationMode.wrappedValue.dismiss()
-                self.toPreviousPage = false
+               
             }
             
         }else{
             isMaterialIncomplete = true
             isDataIncomplete = true
-            //            self.presentationMode.wrappedValue.dismiss()
+            self.presentationMode.wrappedValue.dismiss()
             
-            self.toPreviousPage = false
+      
         }
         
     }
