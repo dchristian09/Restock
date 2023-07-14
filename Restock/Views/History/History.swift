@@ -37,7 +37,7 @@ struct History: View {
                 RoundedRectangle(cornerRadius: 50, style:.continuous)
                     .fill(.white)
                     .frame(maxHeight: .greatestFiniteMagnitude)
-                ScrollView {
+//                ScrollView {
                     ZStack{
                         VStack(alignment: .center){
                             HStack{
@@ -133,7 +133,7 @@ struct History: View {
                     }
                     //}
                     
-                }
+//                }
                 .navigationBarTitle("History")
                 .navigationBarTitleDisplayMode(.large)
                 .navigationBarBackButtonHidden(true)
