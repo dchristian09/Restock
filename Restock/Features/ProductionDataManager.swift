@@ -99,11 +99,12 @@ class ProductionDataManager: ObservableObject {
                 
                 let nameOfMonth = dateFormatter.string(from: production.date!)
 
-                if monthName == "" || (monthName == nameOfMonth && index != productionList.count-1){
+                if monthName == "" && index != productionList.count-1 || (monthName == nameOfMonth && index != productionList.count-1) {
                     historyMonthDetails.append(production)
                 } else if index == productionList.count-1 || monthName != nameOfMonth{
                     if index == productionList.count-1{
                         historyMonthDetails.append(production)
+                        monthName = nameOfMonth
                     }
                     historyDatas.append(
                     HistoryData(historyMonth: monthName,

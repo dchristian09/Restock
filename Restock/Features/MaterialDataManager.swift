@@ -53,7 +53,7 @@ class MaterialDataManager: ObservableObject {
         }
     }
     
-    func addDataToCoreData(materialName: String, currentStock: Int32, minimumStock: Int32, isActive: Bool, unit: String, note: String) {
+    func addDataToCoreData(materialName: String, currentStock: Int32, minimumStock: Int32, isActive: Bool, unit: String, note: String)  -> DataMaterial {
         let material = DataMaterial(context: viewContext)
         material.id = UUID()
         material.name = materialName
@@ -62,8 +62,10 @@ class MaterialDataManager: ObservableObject {
         material.isActive = isActive
         material.unit = unit
         material.note = note
+        
         save()
         self.fetchMaterialData()
+        return material
     }
     
     func editDataFromCoreData(material: DataMaterial, materialName: String, minimalStock: Int32, isActive: Bool, note: String) {
