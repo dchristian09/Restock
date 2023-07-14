@@ -37,126 +37,126 @@ struct History: View {
                 RoundedRectangle(cornerRadius: 50, style:.continuous)
                     .fill(.white)
                     .frame(maxHeight: .greatestFiniteMagnitude)
-                //   ScrollView {
-                ZStack{
-                    VStack(alignment: .center){
-                        HStack{
-                            Spacer()
-                            Picker("Appearance", selection: $productionDataManager.selectedType) {
-                                ForEach(themes, id: \.self) {
-                                    Text($0)
-                                }
-                            }
-                            .pickerStyle(.segmented)
-                            Spacer()
-                        }.padding(.all)
-                        HStack(alignment: .center){
-                            if (productionDataManager.historyDatas.count > 0){
-                                Button{
-                                    withAnimation{
-                                        showingSheet = true
+                ScrollView {
+                    ZStack{
+                        VStack(alignment: .center){
+                            HStack{
+                                Spacer()
+                                Picker("Appearance", selection: $productionDataManager.selectedType) {
+                                    ForEach(themes, id: \.self) {
+                                        Text($0)
                                     }
-                                }label: {
-                                    Text("Filter Date")
-                                        .foregroundColor(.blue)
-                                        .padding(.leading)
-                                    Image(systemName: "calendar")
-                                        .foregroundColor(.blue)
-                                }.sheet(isPresented: $showingSheet){
-                                    History_FilterDate(showSheetView: $showingSheet)
                                 }
-                            }
-                            Spacer()
-                            //                            Button("Edit"){
-                            //
-                            //                            }.foregroundColor(.blue)
-                            //                                .padding(.trailing)
-                        }.padding(.top)
-                        if (productionDataManager.historyDatas.count > 0){
-                            List {
-                                //ForEach(historyDatas, id: \.historyMonth){ historyData in
-                                ForEach(productionDataManager.historyDatas, id: \.historyMonth){ historyData in
-                                    Section {
-                                        //Divider()
-                                        ForEach(historyData.historyDetails, id:\.self){ historyDetail in
-                                            History_Card_View(dataProduction: historyDetail)
-                                            
+                                .pickerStyle(.segmented)
+                                Spacer()
+                            }.padding(.all)
+                            HStack(alignment: .center){
+                                if (productionDataManager.historyDatas.count > 0){
+                                    Button{
+                                        withAnimation{
+                                            showingSheet = true
                                         }
-                                    } header: {
-                                        //                                    HStack{
-                                        Text(String(historyData.historyMonth)).padding(5).font(.title2)
-                                        //                                        Spacer()
-                                        //                                    }
+                                    }label: {
+                                        Text("Filter Date")
+                                            .foregroundColor(.blue)
+                                            .padding(.leading)
+                                        Image(systemName: "calendar")
+                                            .foregroundColor(.blue)
+                                    }.sheet(isPresented: $showingSheet){
+                                        History_FilterDate(showSheetView: $showingSheet)
                                     }
                                 }
-                            }.listStyle(.plain)
-                        }else{
-                            VStack {
+                                Spacer()
+                                //                            Button("Edit"){
+                                //
+                                //                            }.foregroundColor(.blue)
+                                //                                .padding(.trailing)
+                            }.padding(.top)
+                            if (productionDataManager.historyDatas.count > 0){
+                                List {
+                                    //ForEach(historyDatas, id: \.historyMonth){ historyData in
+                                    ForEach(productionDataManager.historyDatas, id: \.historyMonth){ historyData in
+                                        Section {
+                                            //Divider()
+                                            ForEach(historyData.historyDetails, id:\.self){ historyDetail in
+                                                History_Card_View(dataProduction: historyDetail)
+                                                
+                                            }
+                                        } header: {
+                                            //                                    HStack{
+                                            Text(String(historyData.historyMonth)).padding(5).font(.title2)
+                                            //                                        Spacer()
+                                            //                                    }
+                                        }
+                                    }
+                                }.listStyle(.plain)
+                            }else{
                                 VStack {
-                                    Text("There is no history available.")
-                                        .font(.system(size: 20))
-                                        .foregroundColor(Color(hex: 0x8E8E93))
-                                    Text("It will be generated when you Produce")
-                                        .font(.system(size: 20))
-                                        .foregroundColor(Color(hex: 0x8E8E93))
-                                    
-                                    HStack {
-                                        Text("or Reduce in the")
+                                    VStack {
+                                        Text("There is no history available.")
                                             .font(.system(size: 20))
                                             .foregroundColor(Color(hex: 0x8E8E93))
-                                        if (productionDataManager.selectedType == "Product"){
-                                            Image(systemName: "tray")
+                                        Text("It will be generated when you Produce")
+                                            .font(.system(size: 20))
+                                            .foregroundColor(Color(hex: 0x8E8E93))
+                                        
+                                        HStack {
+                                            Text("or Reduce in the")
                                                 .font(.system(size: 20))
                                                 .foregroundColor(Color(hex: 0x8E8E93))
-                                            Text("Product tab")
-                                                .font(.system(size: 20))
-                                                .foregroundColor(Color(hex: 0x8E8E93))
-                                        }else{
-                                            Image(systemName: "shippingbox")
-                                                .font(.system(size: 20))
-                                                .foregroundColor(Color(hex: 0x8E8E93))
-                                            Text("Material tab")
-                                                .font(.system(size: 20))
-                                                .foregroundColor(Color(hex: 0x8E8E93))
+                                            if (productionDataManager.selectedType == "Product"){
+                                                Image(systemName: "tray")
+                                                    .font(.system(size: 20))
+                                                    .foregroundColor(Color(hex: 0x8E8E93))
+                                                Text("Product tab")
+                                                    .font(.system(size: 20))
+                                                    .foregroundColor(Color(hex: 0x8E8E93))
+                                            }else{
+                                                Image(systemName: "shippingbox")
+                                                    .font(.system(size: 20))
+                                                    .foregroundColor(Color(hex: 0x8E8E93))
+                                                Text("Material tab")
+                                                    .font(.system(size: 20))
+                                                    .foregroundColor(Color(hex: 0x8E8E93))
+                                            }
                                         }
                                     }
+                                    
+                                    Image("history_no_data")
+                                        .resizable()
+                                        .frame(width: 300, height: 300)
+                                    Spacer()
                                 }
-                                
-                                Image("history_no_data")
-                                    .resizable()
-                                    .frame(width: 300, height: 300)
-                                Spacer()
                             }
                         }
+                        // .padding()
                     }
-                    // .padding()
+                    //}
+                    
                 }
-                //}
-                
+                .navigationBarTitle("History")
+                .navigationBarTitleDisplayMode(.large)
+                .navigationBarBackButtonHidden(true)
+                //            .searchable(text: $productionDataManager.searchText)
             }
-            .navigationBarTitle("History")
-            .navigationBarTitleDisplayMode(.large)
-            .navigationBarBackButtonHidden(true)
-            //            .searchable(text: $productionDataManager.searchText)
+            
+            //        .onAppear{
+            //            let fetchRequest: NSFetchRequest<DataProduction> = DataProduction.fetchRequest()
+            //
+            //            do {
+            //                var pd:[DataProduction] = try PersistenceController.shared.container.viewContext.fetch(fetchRequest)
+            //                print(pd)
+            //                pd[0].productRelation?.name
+            //            } catch {
+            //                print("gagal")
+            //            }
+            //        }
         }
-        
-        //        .onAppear{
-        //            let fetchRequest: NSFetchRequest<DataProduction> = DataProduction.fetchRequest()
-        //
-        //            do {
-        //                var pd:[DataProduction] = try PersistenceController.shared.container.viewContext.fetch(fetchRequest)
-        //                print(pd)
-        //                pd[0].productRelation?.name
-        //            } catch {
-        //                print("gagal")
-        //            }
-        //        }
     }
 }
-
-struct History_Previews: PreviewProvider {
-    static var previews: some View {
-        History()
+    
+    struct History_Previews: PreviewProvider {
+        static var previews: some View {
+            History()
+        }
     }
-}
-

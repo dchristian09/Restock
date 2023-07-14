@@ -39,7 +39,8 @@ struct Product: View {
                             VStack{
                                 //low stock product
                                 HStack{
-                                    Image(systemName: "shippingbox")
+                                    Image(systemName: "bell")
+                                        .font(.system(size: 20))
                                     Text("Low Stock Product")
                                         .font(.title2.bold())
                                     Spacer()
@@ -92,7 +93,8 @@ struct Product: View {
                                 
                                 //safe product
                                 HStack{
-                                    Image(systemName: "shippingbox")
+                                    Image(systemName: "tray")
+                                        .font(.system(size: 20))
                                     Text("Safe Product")
                                         .font(.title2.bold())
                                     Spacer()

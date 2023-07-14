@@ -38,7 +38,8 @@ struct Material: View {
                             VStack{
                                 //low stock material
                                 HStack{
-                                    Image(systemName: "shippingbox")
+                                    Image(systemName: "bell")
+                                        .font(.system(size: 20))
                                     Text("Low Stock Material")
                                         .font(.title2.bold())
                                     Spacer()
@@ -93,6 +94,7 @@ struct Material: View {
                                 // safe material
                                 HStack{
                                     Image(systemName: "shippingbox")
+                                        .font(.system(size: 20))
                                     Text("Safe Material")
                                         .font(.title2.bold())
                                     Spacer()
