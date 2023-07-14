@@ -43,22 +43,30 @@ struct History_card_view: View {
     func cancelProduction(){
         productionDataManager.softDeleteData(production: dataProduction)
         
-        let arrayRecipe = recipeDataManager.recipeList.filter{ recipe in
-            recipe.idProduct == dataProduction.idProduct
-        }
-        
-        for recipe in arrayRecipe{
-            let materialData = materialDataManager.materialList.filter{ material in
-                material.id == recipe.idMaterial
+        if dataProduction.itemType == "product"{
+            let arrayRecipe = recipeDataManager.recipeList.filter{ recipe in
+                recipe.idProduct == dataProduction.idProduct
             }
             
-            materialDataManager.restockMaterial(material: materialData.first!, currentStock: (recipe.quantity * dataProduction.qty) + materialData.first!.currentStock)
-        }
+            for recipe in arrayRecipe{
+                let materialData = materialDataManager.materialList.filter{ material in
+                    material.id == recipe.idMaterial
+                }
+                
+                materialDataManager.restockMaterial(material: materialData.first!, currentStock: (recipe.quantity * dataProduction.qty) + materialData.first!.currentStock)
+            }
+            
         
-        let productData = productDataManager.productList.filter{ product in
-            product.id == dataProduction.idProduct
+            let productData = productDataManager.productList.filter{ product in
+                product.id == dataProduction.idProduct
+            }
+            productDataManager.produceProduct(product: productData.first!, currentStock: productData.first!.currentStock - dataProduction.qty)
+        }else{
+            let materialData = materialDataManager.materialList.filter{ material in
+                material.id == dataProduction.idProduct
+            }
+            materialDataManager.restockMaterial(material: materialData.first!, currentStock: materialData.first!.currentStock + dataProduction.qty)
         }
-        productDataManager.produceProduct(product: productData.first!, currentStock: productData.first!.currentStock - dataProduction.qty)
         
     }
 }
