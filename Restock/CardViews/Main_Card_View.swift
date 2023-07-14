@@ -21,7 +21,7 @@ struct Main_Card_View: View {
                 HStack(alignment: .top){
                     
                     //image
-                    Image("error_image")
+                    Image("bouquet")
                         .resizable()
                         .frame(width: 53, height: 54)
                         .cornerRadius(12)
