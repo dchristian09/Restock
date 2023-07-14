@@ -79,7 +79,7 @@ struct History: View {
                                     Section {
                                         //Divider()
                                         ForEach(historyData.historyDetails, id:\.self){ historyDetail in
-                                            History_card_view(dataProduction: historyDetail)
+                                            History_Card_View(dataProduction: historyDetail)
                                             
                                         }
                                     } header: {

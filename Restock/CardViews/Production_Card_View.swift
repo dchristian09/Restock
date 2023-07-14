@@ -60,6 +60,7 @@ struct Production_Card_View: View {
                         Text(dateToString(tanggal:dataProduction?.date))
                             .font(.caption2)
                             .foregroundColor(.black)
+                            .offset(y: -5)
             
                     }
                     
