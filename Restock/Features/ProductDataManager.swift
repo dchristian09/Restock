@@ -13,16 +13,47 @@ class ProductDataManager: ObservableObject {
     private let viewContext = PersistenceController.shared.viewContext
     
     @Published var productList:[DataProduct] = []
+    @Published var searchText: String = "" {
+        didSet {
+            fetchProductData()
+        }
+    }
+    
+    @Published var urgentProducts: [DataProduct] = []
+    
+    @Published var safeProducts: [DataProduct] = []
     
     init() {
         fetchProductData()
     }
     
     func fetchProductData() {
+        
         let request = NSFetchRequest<DataProduct>(entityName: "DataProduct")
+        request.sortDescriptors = [NSSortDescriptor(key: "currentStock", ascending: true)]
+        
         
         do {
             productList = try viewContext.fetch(request)
+//            fetch urgent Product
+            if searchText.isEmpty{
+                 urgentProducts =  productList.filter { product in
+                    product.minimalStock > product.currentStock}
+//            fetch urgent Product
+                 safeProducts = productList.filter { product in
+                    product.minimalStock <= product.currentStock}
+            }else{
+//                urgent product filter
+                urgentProducts = urgentProducts.filter{ product in
+                    product.name!.lowercased().contains(searchText.lowercased())
+                }
+//                safe product filter
+                safeProducts = safeProducts.filter{ product in
+                    product.name!.lowercased().contains(searchText.lowercased())
+                }
+            }
+
+            print("Jumlah prodak", productList.count)
         }catch {
             print("DEBUG: Some error occured while fetching")
         }
@@ -43,6 +74,39 @@ class ProductDataManager: ObservableObject {
         print(productList.count)
         return product
     }
+    
+    func editDataFromCoreData(product: DataProduct, productName: String, minimalStock: Int32, isActive: Bool) {
+        product.name = productName
+        product.minimalStock = minimalStock
+        product.isActive = isActive
+        
+        save()
+        self.fetchProductData()
+    }
+    
+    func produceProduct(product: DataProduct, currentStock: Int32){
+        product.currentStock = currentStock
+        
+        save()
+        self.fetchProductData()
+        
+    }
+    func deleteProduct(withID id: UUID) {
+        let fetchRequest: NSFetchRequest<DataProduct> = DataProduct.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+
+        do {
+            let products = try viewContext.fetch(fetchRequest)
+            if let product = products.first {
+                viewContext.delete(product)
+                save()
+                self.fetchProductData()
+            }
+        } catch {
+            print("Error deleting product: \(error.localizedDescription)")
+        }
+    }
+    
     
     func save() {
         do {

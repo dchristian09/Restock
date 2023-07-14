@@ -11,11 +11,12 @@ struct History_FilterDate: View {
     @Binding var showSheetView: Bool
     @State var startDate = Date.now
     @State var endDate = Date.now
+    
     var body: some View {
         NavigationView {
             ZStack (alignment: .top){
                 Rectangle()
-                    .fill(Color(hex: 0xf2f4ff))
+                    .fill(Color(hex: 0xF4F4FD))
                     .ignoresSafeArea()
                 VStack{
                     List{

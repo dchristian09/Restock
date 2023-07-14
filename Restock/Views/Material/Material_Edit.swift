@@ -10,20 +10,36 @@ import PhotosUI
 
 struct Material_Edit: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
+    @StateObject var productDataManager: ProductDataManager = ProductDataManager.shared
+    @StateObject var materialDataManager: MaterialDataManager = MaterialDataManager.shared
+    @StateObject var recipeDataManager: RecipeDataManager = RecipeDataManager.shared
+    
     @State var selectedUnitList:String = "pcs"
-    @State var materialName: String = ""
-    @State var materialCurrentStock: String = ""
-    @State var materialMinimalStock: String = ""
+    
+//    Accept Variable from Material_Detail
+    @Binding var material: DataMaterial
+    @State var materialName: String
+    @State var materialCurrentStock: Int32
+    @State var materialMinimalStock: Int32
+    @State var materialNote: String = "-"
+    @State var materialUnit: String
+    
+//    Save Integer material to String in textfield
+    @State var stringMinimalStock: String = ""
+    @State var stringCurrentStock: String = ""
+    
+//picker image variable
     @State var selectedMaterialImage: [PhotosPickerItem] = []
     @State var dataMaterialImage: Data?
-    @State var materialNote: String = ""
-    let unitList = ["pcs", "gram", "liter", "ml", "sheet", "bottle"]
-    @State var arrayMaterialIngredients: [MaterialIngredients] = []
+
     var body: some View {
+        let unitList = [materialUnit]
+        
         NavigationView{
             ZStack {
                 Rectangle()
-                    .fill(Color(hex: 0xf2f4ff))
+                    .fill(Color(hex: 0xF4F4FD))
                     .ignoresSafeArea()
                 VStack{
                     VStack {
@@ -76,43 +92,67 @@ struct Material_Edit: View {
                         Section{
                             //product
                             HStack{
-                                Text("Bouquet Rose")
-                                //                                TextField("Name", text: $materialName)
-                                //                                    .keyboardType(.default)
-                                //                                    .multilineTextAlignment(.trailing)
+                                Text("Name")
+                                TextField("Name", text: $materialName)
+                                    .keyboardType(.default)
+                                    .multilineTextAlignment(.trailing)
+                                    .onChange(of: materialName) { newValue in
+                                        materialName = newValue.isEmpty ? "" : newValue
+                                    }
                             }
                             
                             //current stock
                             HStack{
-                                Text("1")
-                                //                                TextField("Current Stock", text: $materialCurrentStock)
-                                //                                    .keyboardType(.numberPad)
-                                //                                    .multilineTextAlignment(.trailing)
+                                Text("Current Stock")
+                                TextField("Current Stock", text: $stringCurrentStock)
+                                    .keyboardType(.numberPad)
+                                    .multilineTextAlignment(.trailing)
+                                    .disabled(true)
+                            }//                  set int as string in textfield
+                            .onAppear {
+                                stringCurrentStock = String(materialCurrentStock)
                             }
+                           
+
                             
                             //minimal stock
                             HStack{
-                                Text("3")
-                                //                                TextField("Minimal Stock", text: $materialMinimalStock)
-                                //                                    .keyboardType(.numberPad)
-                                //                                    .multilineTextAlignment(.trailing)
+                                Text("Minimal Stock")
+                                    TextField("Minimal Stock", text: $stringMinimalStock)
+                                        .keyboardType(.numberPad)
+                                        .multilineTextAlignment(.trailing)
+                            }//                  set int as string in textfield
+                            .onAppear {
+                                stringMinimalStock = String(materialMinimalStock)
                             }
+//                  set new value in variable
+                            .onChange(of: stringMinimalStock) { newValue in
+                                if let stockValue = Int32(newValue) {
+                                    materialMinimalStock = stockValue
+                                }
+                            }
+
                         }
                         
                         Section{
                             HStack{
                                 Picker("Material Unit", selection: $selectedUnitList){
                                     ForEach (unitList, id: \.self){
-                                        Text($0)
+                                        Text($0 )
                                     }
-                                    
+
                                 }.pickerStyle(.menu)
+                                    .disabled(true)
                             }
                         }
                         
                         Section{
-                            TextField("Notes", text: $materialNote)
+                            TextField("Notes", text:  $materialNote)
+                                .onChange(of: materialNote) { newValue in
+                                materialNote = newValue.isEmpty ? "-" : newValue
+                            }
                         }
+                        
                     }
                 }
             }
@@ -126,16 +166,22 @@ struct Material_Edit: View {
                 ToolbarItem(placement: .navigationBarTrailing){
                     Button("Done") {
                         //function
+                        saveEdit()
                     }
                 }
             }
         }
         .navigationBarBackButtonHidden(true)
     }
-}
-
-struct Material_Edit_Previews: PreviewProvider {
-    static var previews: some View {
-        Material_Edit()
+    
+    func saveEdit(){
+        materialDataManager.editDataFromCoreData(material: material, materialName: materialName, minimalStock: materialMinimalStock, isActive: true, note: materialNote)
+        self.presentationMode.wrappedValue.dismiss()
     }
 }
+
+//struct Material_Edit_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Material_Edit(materialName: "", materialCurrentStock: 0, materialMinimalStock: 0)
+//    }
+//}

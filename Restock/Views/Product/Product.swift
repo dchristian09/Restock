@@ -8,16 +8,24 @@
 import SwiftUI
 
 struct Product: View {
-    @State private var searchText = ""
+//    @State private var searchText = ""
     let columns = [GridItem(.flexible()), GridItem(.flexible())]
     @State var showingAlert: Bool = false
+
+    @State var isNoMaterialAlert = false
+
     @State var showingSheet: Bool = false
+
     @StateObject var productDataManager: ProductDataManager = ProductDataManager.shared
+    @StateObject var materialDataManager: MaterialDataManager = MaterialDataManager.shared
+    
+    
+    
     var body: some View {
         NavigationView{
             ZStack{
                 Rectangle()
-                    .fill(Color(hex: 0xf2f4ff))
+                    .fill(Color(hex: 0xF4F4FD))
                     .ignoresSafeArea()
                 
                 ScrollView {
@@ -35,24 +43,51 @@ struct Product: View {
                                     Text("Low Stock Product")
                                         .font(.title2.bold())
                                     Spacer()
-                                    NavigationLink {
-                                        Product_Reminder()
-                                    } label: {
-                                        Text("View Another")
-                                            .font(.footnote)
-                                            .foregroundColor(.blue)
+                                    
+                                    if productDataManager.urgentProducts.count > 4 {
+                                        NavigationLink {
+                                            Product_Reminder()
+                                        } label: {
+                                            Text("View Another " + String(productDataManager.urgentProducts.count))
+                                                .font(.footnote)
+                                                .foregroundColor(.blue)
+                                        }
                                     }
                                 }.padding()
                                 
                                 // Product Card
-                                LazyVGrid(columns: columns){
-                                    ForEach(productDataManager.productList.indices,id:\.self){ index in
-                                        NavigationLink{
-                                            Product_Detail(product: $productDataManager.productList[index])
-                                        }label: {
-                                            Main_Card_View(materialName: productDataManager.productList[index].name ?? "",  materialUnit: productDataManager.productList[index].unit ?? "", materialStock: productDataManager.productList[index].currentStock)
+                                if productDataManager.urgentProducts.count > 0 {
+                                    LazyVGrid(columns: columns){
+                                        ForEach(productDataManager.urgentProducts.indices,id:\.self){ index in
+                                            NavigationLink{
+                                                Product_Detail(product: productDataManager.urgentProducts[index])
+                                            }label: {
+                                                Main_Card_View(materialName: productDataManager.urgentProducts[index].name ?? "",  materialUnit: productDataManager.urgentProducts[index].unit ?? "", materialStock: productDataManager.urgentProducts[index].currentStock, materialMinStock: productDataManager.urgentProducts[index].minimalStock)
+                                            }
                                         }
                                     }
+                                }else if materialDataManager.urgentMaterial.isEmpty && productDataManager.searchText.isEmpty{
+                                    //Low stock empty state
+                                    VStack{
+                                        Spacer()
+                                        HStack(){
+                                            Spacer()
+                                            Text("Yay!  All your product at a safe level~")
+                                            Spacer()
+                                        }
+                                        Spacer()
+                                    }.padding(10)
+                                }else if productDataManager.urgentProducts.isEmpty && !productDataManager.searchText.isEmpty{
+                                    //Low Stock empty state on search
+                                    VStack{
+                                        Spacer()
+                                        HStack(){
+                                            Spacer()
+                                            Text("No Product Match")
+                                            Spacer()
+                                        }
+                                        Spacer()
+                                    }.padding(10)
                                 }
                                 
                                 //safe product
@@ -63,15 +98,27 @@ struct Product: View {
                                     Spacer()
                                 }.padding()
                                 
-                                // Product Card
-                                LazyVGrid(columns: columns){
-                                    ForEach(productDataManager.productList.indices,id:\.self){ index in
-                                        NavigationLink{
-                                            Product_Detail(product: $productDataManager.productList[index])
-                                        }label: {
-                                            Main_Card_View(materialName: productDataManager.productList[index].name ?? "",  materialUnit: productDataManager.productList[index].unit ?? "", materialStock: productDataManager.productList[index].currentStock)
+                                if !productDataManager.safeProducts.isEmpty{
+                                    // Product Card
+                                    LazyVGrid(columns: columns){
+                                        ForEach(productDataManager.safeProducts.indices,id:\.self){ index in
+                                            NavigationLink{
+                                                Product_Detail(product: productDataManager.safeProducts[index])
+                                            }label: {
+                                                Main_Card_View(materialName: productDataManager.safeProducts[index].name ?? "",  materialUnit: productDataManager.safeProducts[index].unit ?? "", materialStock: productDataManager.safeProducts[index].currentStock, materialMinStock: productDataManager.safeProducts[index].minimalStock)
+                                            }
                                         }
                                     }
+                                }else if productDataManager.safeProducts.isEmpty && !productDataManager.searchText.isEmpty{
+                                    VStack{
+                                        Spacer()
+                                        HStack(){
+                                            Spacer()
+                                            Text("No Product Match")
+                                            Spacer()
+                                        }
+                                        Spacer()
+                                    }.padding(10)
                                 }
                                 Spacer()
                             }
@@ -81,42 +128,41 @@ struct Product: View {
                         else{
                             ZStack{
                                 Rectangle()
-                                    .fill(Color(hex: 0xf2f4ff))
+                                    .fill(Color(hex: 0xF4F4FD))
                                     .ignoresSafeArea()
                                 
                                 ZStack{
                                     RoundedRectangle(cornerRadius: 50, style:.continuous)
                                         .fill(.white)
                                         .frame(maxHeight: .infinity)
+                                        .padding(.top, 5)
                                     
                                     VStack {
-                                        Text("There is no product yet.")
-                                            .font(.system(size: 22))
-                                            .foregroundColor(Color(hex: 0x8E8E93)).padding(EdgeInsets(top: 30, leading: 0, bottom: 0, trailing: 0))
+                                        VStack {
+                                            Text("There is no product yet.")
+                                                .font(.system(size: 20))
+                                                .foregroundColor(Color(hex: 0x8E8E93))
+                                            
+                                            HStack {
+                                                Text("Please tap")
+                                                    .font(.system(size: 20))
+                                                    .foregroundColor(Color(hex: 0x8E8E93))
+                                                Image(systemName: "plus")
+                                                    .font(.system(size: 20))
+                                                    .foregroundColor(.blue)
+                                                Text("to add your product")
+                                                    .font(.system(size: 20))
+                                                    .foregroundColor(Color(hex: 0x8E8E93))
+                                            }
+                                        }.padding(.top, 50)
                                         
-                                        HStack {
-                                            Text("Please tap")
-                                                .font(.system(size: 22))
-                                                .foregroundColor(Color(hex: 0x8E8E93))
-                                            Image(systemName: "plus")
-                                                .font(.system(size: 22))
-                                                .foregroundColor(.blue)
-                                            Text("to add your product")
-                                                .font(.system(size: 22))
-                                                .foregroundColor(Color(hex: 0x8E8E93))
-                                        }
                                         
                                         Image("product_no_data")
                                             .resizable()
-                                            .frame(width: 393, height: 255)
-                                        
+                                            .frame(width: 300, height: 300)
                                         Spacer()
-                                        Image("product_no_data_wave")
-                                            .resizable()
-                                            .frame(width: 416, height: 104)
-                                            .offset(y: 65)
                                     }
-                                }
+                                }.frame(height: 700)
                             }
                         }
                     }
@@ -126,9 +172,26 @@ struct Product: View {
             .navigationBarTitle("Product")
             .navigationBarTitleDisplayMode(.large)
             .navigationBarBackButtonHidden(true)
-            .searchable(text: $searchText)
+            .searchable(text: $productDataManager.searchText)
             .toolbar{
                 ToolbarItem(placement: .navigationBarTrailing){
+
+                    if materialDataManager.materialList.count > 0 {
+                                NavigationLink(destination: Product_Add()) {
+                                    Image(systemName: "plus")
+                                }
+                            } else {
+                                Button(action: {
+                                    // Handle the case where materials list is empty
+                                    isNoMaterialAlert = true
+                                }) {
+                                    Image(systemName: "plus")
+                                }
+                                .alert(isPresented: $isNoMaterialAlert) {
+                                    Alert(title: Text("No Material"), message: Text("Please add material first."), dismissButton: .default(Text("OK")))
+                                }
+                            }
+//g tau ini bagian yang mana
                     HStack{
                         Button {
                             withAnimation {
@@ -146,10 +209,22 @@ struct Product: View {
                             Image(systemName: "plus")
                         }
                     }
+
                 }
             }
         }
+//        .onAppear{
+//            getUrgentStock()
+//        }
     }
+    
+    
+    
+//    func getUrgentStock(){
+//        productDataManager.urgentProducts = productDataManager.productList.filter { product in
+//            product.minimalStock > product.currentStock
+//        }
+//    }
 }
 
 

@@ -34,11 +34,24 @@ class RecipeDataManager: ObservableObject {
         recipe.idMaterial = idMaterial
         recipe.idProduct = idProduct
         recipe.quantity = quantity
-        
+        print("ID Product", idProduct)
 
         save()
         self.fetchRecipeData()
         print(recipeList)
+    }
+    
+    func editData(recipe: DataRecipe, quantity: Int32){
+        recipe.quantity = quantity
+        
+        save()
+        self.fetchRecipeData()
+    }
+    func deleteData(recipe: DataRecipe){
+        viewContext.delete(recipe)
+        
+        save()
+        self.fetchRecipeData()
     }
     
     func save() {

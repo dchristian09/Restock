@@ -10,8 +10,16 @@ import SwiftUI
 struct Material_Detail: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @Binding var material: DataMaterial
-    //    var stockOption:String = ""
+    
+    var stockOption:String = ""
     var body: some View {
+        
+        let materialName: String = $material.wrappedValue.name ?? ""
+        let materialCurrentStock: Int32 = $material.wrappedValue.currentStock
+        let materialMinimalStock: Int32 = $material.wrappedValue.minimalStock
+        let materialNote: String = $material.wrappedValue.note ?? "-"
+        let materialUnit: String = $material.wrappedValue.unit ?? ""
+        
         NavigationView{
             ZStack {
                 Rectangle()
@@ -24,12 +32,12 @@ struct Material_Detail: View {
                         .scaledToFit()
                         .frame(width: 300, height: 250)
                         .padding(.top)
-                    Text($material.wrappedValue.name ?? "")
+                    Text(materialName)
                         .font(.largeTitle)
                     HStack{
                         
                         NavigationLink{
-                            Material_Stock(stockOption: "Restock")
+                            Material_Stock(item: material, stockOption: "Restock")
                         }label: {
                             HStack {
                                 Image(systemName: "plus.circle")
@@ -41,7 +49,7 @@ struct Material_Detail: View {
                             
                         }
                         NavigationLink{
-                            Material_Stock(stockOption: "Reduce")
+                            Material_Stock(item: material, stockOption: "Reduce")
                         }label: {
                             HStack {
                                 Image(systemName: "minus.circle")
@@ -63,19 +71,19 @@ struct Material_Detail: View {
                                 HStack {
                                     Text("Current Stock")
                                     Spacer()
-                                    Text(String($material.wrappedValue.currentStock) + " " + ($material.wrappedValue.unit ?? ""))
+                                    Text(String(materialCurrentStock) + " " + (materialUnit))
                                 }
                                 HStack {
                                     Text("Minimal Stock")
                                     Spacer()
-                                    Text(String($material.wrappedValue.minimalStock) + " " + ($material.wrappedValue.unit ?? ""))
+                                    Text(String(materialMinimalStock) + " " + (materialUnit))
                                 }
                             }
                             Section(header: Text("Notes")){
                                 HStack {
                                     Text("Notes")
                                     Spacer()
-                                    Text($material.wrappedValue.note ?? "-")
+                                    Text( materialNote)
                                 }
                             }
                         }
@@ -98,11 +106,12 @@ struct Material_Detail: View {
                     })
                 }
                 ToolbarItem(placement: .navigationBarTrailing){
-                    NavigationLink{
-                        Material_Edit()
-                    }label: {
+                    NavigationLink(
+                        destination: Material_Edit(material: $material, materialName: materialName, materialCurrentStock: materialCurrentStock, materialMinimalStock: materialMinimalStock, materialNote: materialNote, materialUnit: materialUnit)
+                    ){
                         Text("Edit")
                     }
+
                 }
             }
         }
@@ -113,6 +122,6 @@ struct Material_Detail: View {
 
 //struct Material_Detail_Previews: PreviewProvider {
 //    static var previews: some View {
-//        Material_Detail()
+//        Material_Detail(material: .constant(DataMaterial(name: "Sasa", minimalStock: 8, currentStock: 10, notes: "-")))
 //    }
 //}

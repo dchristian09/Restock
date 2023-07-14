@@ -23,10 +23,10 @@ struct PersistenceController {
             container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
         }
         
-        let description = container.persistentStoreDescriptions.first
-                description?.setOption(true as NSNumber, forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
-                description?.shouldMigrateStoreAutomatically = true
-                description?.shouldInferMappingModelAutomatically = true
+//        let description = container.persistentStoreDescriptions.first
+//                description?.setOption(true as NSNumber, forKey: NSPersistentStoreRemoteChangeNotificationPostOptionKey)
+//                description?.shouldMigrateStoreAutomatically = true
+//                description?.shouldInferMappingModelAutomatically = true
 //
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {

@@ -11,14 +11,19 @@ import PhotosUI
 struct Material: View {
     @State private var searchText = ""
     let columns = [GridItem(.flexible()), GridItem(.flexible())]
+    
     @State var showingAlert: Bool = false
     @State var showingSheet: Bool = false
+    
     @StateObject var materialDataManager: MaterialDataManager = MaterialDataManager.shared
+    
+    //    @State var materialDataManager.urgentMaterials: [DataMaterial] = []
+    
     var body: some View {
         NavigationView{
             ZStack{
                 Rectangle()
-                    .fill(Color(hex: 0xf2f4ff))
+                    .fill(Color(hex: 0xF4F4FD))
                     .ignoresSafeArea()
                 
                 ScrollView {
@@ -36,34 +41,53 @@ struct Material: View {
                                     Text("Low Stock Material")
                                         .font(.title2.bold())
                                     Spacer()
-                                    NavigationLink {
-                                        Material_Reminder()
-                                    } label: {
-                                        Text("View Another")
-                                            .font(.footnote)
-                                            .foregroundColor(.blue)
+                                    
+                                    if materialDataManager.urgentMaterial.count > 4 {
+                                        NavigationLink {
+                                            Material_Reminder()
+                                        } label: {
+                                            Text("View More " + String(materialDataManager.urgentMaterial.count))
+                                                .font(.footnote)
+                                                .foregroundColor(.blue)
+                                        }
                                     }
                                 }.padding()
                                 //material card
-                                LazyVGrid(columns: columns){
-                                    ForEach(materialDataManager.materialList.indices,id:\.self){ index in
-                                        NavigationLink{
-                                            Material_Detail(material: $materialDataManager.materialList[index])
-                                        }label: {
-                                            Main_Card_View(materialName:materialDataManager.materialList[index].name ?? "", materialUnit: materialDataManager.materialList[index].unit ?? "", materialStock: materialDataManager.materialList[index].currentStock)
-                                                .swipeActions{
-                                                    Button("Delete", role: .destructive){
-                                                        materialDataManager.materialList.remove(at: index)
-                                                    }
-                                                }
-                                        }
-                                        .swipeActions{
-                                            Button("Delete", role: .destructive){
-                                                materialDataManager.materialList.remove(at: index)
+                                if materialDataManager.urgentMaterial.count > 0 {
+                                    LazyVGrid(columns: columns){
+                                        ForEach(materialDataManager.urgentMaterial.indices,id:\.self){ index in
+                                            NavigationLink{
+                                                Material_Detail(material: $materialDataManager.urgentMaterial[index])
+                                            }label: {
+                                                Main_Card_View(materialName:materialDataManager.urgentMaterial[index].name ?? "", materialUnit: materialDataManager.urgentMaterial[index].unit ?? "", materialStock: materialDataManager.urgentMaterial[index].currentStock, materialMinStock: materialDataManager.urgentMaterial[index].minimalStock)
+                                                
                                             }
+                                            
                                         }
+                                        
                                     }
-                                    
+                                }else if materialDataManager.urgentMaterial.isEmpty && materialDataManager.searchText.isEmpty{
+                                    //Low Stock empty state
+                                    VStack{
+                                        Spacer()
+                                        HStack(){
+                                            Spacer()
+                                            Text("Yay!  All your material at a safe level~")
+                                            Spacer()
+                                        }
+                                        Spacer()
+                                    }.padding(10)
+                                }else if materialDataManager.urgentMaterial.isEmpty && !materialDataManager.searchText.isEmpty{
+                                    //Low Stock empty state on search
+                                    VStack{
+                                        Spacer()
+                                        HStack(){
+                                            Spacer()
+                                            Text("No Material Match")
+                                            Spacer()
+                                        }
+                                        Spacer()
+                                    }.padding(10)
                                 }
                                 // safe material
                                 HStack{
@@ -73,55 +97,84 @@ struct Material: View {
                                     Spacer()
                                 }.padding()
                                 //material card
-                                LazyVGrid(columns: columns){
-                                    ForEach(materialDataManager.materialList.indices,id:\.self){ index in
-                                        NavigationLink{
-                                            Material_Detail(material: $materialDataManager.materialList[index])
-                                        }label: {
-                                            Main_Card_View(materialName:materialDataManager.materialList[index].name ?? "", materialUnit: materialDataManager.materialList[index].unit ?? "", materialStock: materialDataManager.materialList[index].currentStock)
-                                            
+                                if !materialDataManager.safeMaterial.isEmpty{
+                                    LazyVGrid(columns: columns){
+                                        ForEach(materialDataManager.safeMaterial.indices,id:\.self){ index in
+                                            NavigationLink{
+                                                Material_Detail(material: $materialDataManager.safeMaterial[index])
+                                            }label: {
+                                                Main_Card_View(materialName:materialDataManager.safeMaterial[index].name ?? "", materialUnit: materialDataManager.safeMaterial[index].unit ?? "", materialStock: materialDataManager.safeMaterial[index].currentStock, materialMinStock: materialDataManager.safeMaterial[index].minimalStock)
+                                            }
                                         }
                                     }
+                                } else if materialDataManager.safeMaterial.isEmpty && materialDataManager.searchText.isEmpty{
+                                    //Low Stock empty state on search
+                                    VStack{
+                                        Spacer()
+                                        HStack(){
+                                            Spacer()
+                                            Text("No Safe Material")
+                                            Spacer()
+                                        }
+                                        Spacer()
+                                    }.padding(10)
+                                } else if materialDataManager.safeMaterial.isEmpty && !materialDataManager.searchText.isEmpty{
+                                    //Low Stock empty state on search
+                                    VStack{
+                                        Spacer()
+                                        HStack(){
+                                            Spacer()
+                                            Text("No Material Match")
+                                            Spacer()
+                                        }
+                                        Spacer()
+                                    }.padding(10)
                                 }
+
                                 Spacer()
                             }
                             .padding()
-                        //no material
+                            //no material
                         } else {
-                            VStack {
-                                Text("There is no material yet.")
-                                    .font(.system(size: 22))
-                                    .foregroundColor(Color(hex: 0x8E8E93))
-                                
-                                HStack {
-                                    Text("Please tap")
-                                        .font(.system(size: 22))
-                                        .foregroundColor(Color(hex: 0x8E8E93))
-                                    Image(systemName: "plus")
-                                        .font(.system(size: 22))
-                                        .foregroundColor(.blue)
-                                    Text("to add your material")
-                                        .font(.system(size: 22))
-                                        .foregroundColor(Color(hex: 0x8E8E93))
-                                }
-                                
-                                Image("material_no_data")
-                                    .resizable()
-                                    .frame(width: 393, height: 256)
-                                
-                                Image("material_no_data_wave")
-                                    .resizable()
-                                    .frame(width: 393, height: 104)
-                                    .offset(y: 65)
-                            }.padding()
+                            Material_No_Data()
                         }
+                        //                            VStack {
+                        //                                Text("There is no material yet.")
+                        //                                    .font(.system(size: 22))
+                        //                                    .foregroundColor(Color(hex: 0x8E8E93))
+                        //
+                        //                                HStack {
+                        //                                    Text("Please tap")
+                        //                                        .font(.system(size: 22))
+                        //                                        .foregroundColor(Color(hex: 0x8E8E93))
+                        //                                    Image(systemName: "plus")
+                        //                                        .font(.system(size: 22))
+                        //                                        .foregroundColor(.blue)
+                        //                                    Text("to add your material")
+                        //                                        .font(.system(size: 22))
+                        //                                        .foregroundColor(Color(hex: 0x8E8E93))
+                        //                                }
+                        //
+                        //                                Image("material_no_data")
+                        //                                    .resizable()
+                        //                                    .frame(width: 393, height: 256)
+                        //
+                        //                                Image("material_no_data_wave")
+                        //                                    .resizable()
+                        //                                    .frame(width: 393, height: 104)
+                        //                                    .offset(y: 65)
+                        //                            }.padding()
+                        //                        }
                     }
                 }
             }
+            //            .onAppear{
+            //                getUrgentStock()
+            //            }
             .navigationBarTitle("Material")
             .navigationBarTitleDisplayMode(.large)
             .navigationBarBackButtonHidden(true)
-            .searchable(text: $searchText)
+            .searchable(text: $materialDataManager.searchText)
             .toolbar{
                 ToolbarItem(placement: .navigationBarTrailing){
                     HStack{
@@ -145,6 +198,12 @@ struct Material: View {
             }
         }
     }
+
+//    func getUrgentStock(){
+//        materialDataManager.urgentMaterials = materialDataManager.materialList.filter { material in
+//            material.minimalStock > material.currentStock
+//        }
+//    }
 }
 
 //struct Material_Previews: PreviewProvider {

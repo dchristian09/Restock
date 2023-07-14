@@ -9,12 +9,31 @@ import SwiftUI
 
 struct Product_Detail: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-    @Binding var product: DataProduct
+    @State var product: DataProduct
+    
+    @StateObject var recipeDataManager : RecipeDataManager = RecipeDataManager.shared
+    @StateObject var materialDataManager: MaterialDataManager = MaterialDataManager.shared
+    @State var productMaterial : [ProductRecipe] = []
+    @State var pindah = false
     var body: some View {
-        NavigationView{
+        
+        let productName: String = $product.wrappedValue.name ?? ""
+        let productCurrentStock: Int32 = $product.wrappedValue.currentStock
+        let productMinimalStock: Int32 = $product.wrappedValue.minimalStock
+        let productUnit: String = $product.wrappedValue.unit ?? ""
+        
+//        NavigationView{
             ZStack {
+                
+                
+//                NavigationLink{
+//                    Product_Edit(recipeDataManager: recipeDataManager, product: $product, productName: productName, productCurrentStock: productCurrentStock, productMinimalStock: productMinimalStock, productUnit: productUnit, toPreviousPage: $pindah)
+//                }label: {
+//                    EmptyView()
+//                }
+                
                 Rectangle()
-                    .fill(Color(hex: 0xf2f4ff))
+                    .fill(Color(hex: 0xF4F4FD))
                     .ignoresSafeArea()
                 VStack{
                     //image
@@ -25,12 +44,12 @@ struct Product_Detail: View {
                         .frame(width: 300, height: 250)
                         .padding(.top)
                     //text
-                    Text($product.wrappedValue.name ?? "")
+                    Text(productName)
                         .font(.largeTitle)
                     //button
                     HStack{
                         NavigationLink{
-                            Product_Stock(stockOption: "Produce")
+                            Product_Stock(item: product, stockOption: "Produce")
                         }label: {
                             HStack {
                                 Image(systemName: "plus.circle")
@@ -42,7 +61,7 @@ struct Product_Detail: View {
                             
                         }
                         NavigationLink{
-                            Product_Stock(stockOption: "Reduce")
+                            Product_Stock(item: product, stockOption: "Reduce")
                         }label: {
                             HStack {
                                 Image(systemName: "minus.circle")
@@ -64,35 +83,23 @@ struct Product_Detail: View {
                                 HStack {
                                     Text("Current Stock")
                                     Spacer()
-                                    Text(String($product.wrappedValue.currentStock) + " " + ($product.wrappedValue.unit ?? ""))
+                                    Text(String(productCurrentStock) + " " + (productUnit))
                                 }
                                 HStack {
                                     Text("Minimal Stock")
                                     Spacer()
-                                    Text(String($product.wrappedValue.minimalStock) + " " + ($product.wrappedValue.unit ?? ""))
+                                    Text(String(productMinimalStock) + " " + (productUnit))
                                 }
                             }
                             //materials section
                             Section(header: Text("Materials")){
-                                HStack {
-                                    Text("Tissue Paper")
-                                    Spacer()
-                                    Text("5 pcs")
+                                ForEach(productMaterial, id: \.self){ material in
+                                    HStack {
+                                        Text(material.materialName)
+                                        Spacer()
+                                        Text(String(material.quantity) + " " + material.unit)
+                                    }
                                 }
-                                HStack {
-                                    Text("Rose Flower")
-                                    Spacer()
-                                    Text("5 pcs")
-                                }
-                                HStack {
-                                    Text("Lem Fox")
-                                    Spacer()
-                                    Text("20 gram")
-                                }
-                                HStack {
-                                    Text("Red Ribbon")
-                                    Spacer()
-                                    Text("1 pcs")
                                 }
                             }
                         }
@@ -101,8 +108,9 @@ struct Product_Detail: View {
                     Spacer()
                 }
                 
-            }
+//            }
             .navigationBarTitle("Product Detail", displayMode: .inline)
+        
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading){
                     Button(action: {
@@ -114,21 +122,70 @@ struct Product_Detail: View {
                         }
                     })
                 }
+               
+                
                 ToolbarItem(placement: .navigationBarTrailing){
-                    NavigationLink{
-                        Product_Edit()
-                    }label: {
+                    NavigationLink(destination: Product_Edit(recipeDataManager: recipeDataManager, product: $product, productName: productName, productCurrentStock: productCurrentStock, productMinimalStock: productMinimalStock, productUnit: productUnit, toPreviousPage: $pindah)) {
                         Text("Edit")
                     }
                     
+                    
+                    
                 }
+                
+//                ToolbarItem(placement: .navigationBarTrailing){
+//                    Button("Sapiman"){
+//                        print("Detail Iterasi Resep")
+//
+//                        recipeDataManager.fetchRecipeData()
+                        
+//                        for i in recipeDataManager.recipeList{
+//                            print(i.idProduct)
+//                        }
+//
+//                        print("End Detail Iterasi Resep")
+//                        print("Sapiman", recipeDataManager.recipeList.count)
+//                    }
+                    
+//                }
+                
+            }.navigationBarBackButtonHidden(true)
+            .onAppear{
+                print("Appear Detail")
+                getRecipe()
             }
         }
         
-        .navigationBarBackButtonHidden(true)
-    }
+        func getRecipe(){
+//            initial state
+            productMaterial = []
+            print ("Detail Rece",recipeDataManager.recipeList.count)
+//            get recipe
+            let arrayRecipe = recipeDataManager.recipeList.filter { recipe in
+                recipe.idProduct ==  product.id}
+            
+            print ("Detail Array Rece",recipeDataManager.recipeList.count)
+            
+            for recipe in arrayRecipe{
+                let materialData = materialDataManager.materialList.filter{
+                    $0.id == recipe.idMaterial
+                }
+                productMaterial.append(ProductRecipe(materialName: materialData[0].name!, unit: materialData[0].unit!, quantity: recipe.quantity))
+            }
+                
+            print(productMaterial.count)
+            
+        }
+    
+   
+    
 }
 
+struct ProductRecipe : Hashable {
+    var materialName: String
+    var unit: String
+    var quantity: Int32
+}
 
 //struct Product_Detail_Previews: PreviewProvider {
 //    @State static var teamp:DataProduct  = DataProduct()

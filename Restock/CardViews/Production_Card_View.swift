@@ -8,67 +8,118 @@
 import SwiftUI
 
 struct Production_Card_View: View {
+    var dataProduction:DataProduction? 
+    
+    
+    
+//    var material: DataMaterial {
+//
+//    }
+    @State var itemName: String = ""
+//    var item
+    @StateObject var productDataManager: ProductDataManager = ProductDataManager.shared
+    @StateObject var materialDataManager: MaterialDataManager = MaterialDataManager.shared
+    
     var body: some View {
+        
         ZStack{
             RoundedRectangle(cornerRadius: 16, style:.continuous)
-                .fill(Color(hex: 0xF2F4FF))
+                .fill(Color(hex: 0xF4F4FD))
             ZStack{
                 HStack(alignment: .top){
-                    VStack(alignment:.center){
-                        Spacer()
-                        //image barang
-                        Image("bouquet")
-                            .resizable()
-                            .frame(width: 55, height: 55)
-                            .cornerRadius(12)
-                            .foregroundColor(.white)
-                            .padding(.leading, 10.0)
+                    VStack{
+                        Circle()
+                            .fill(dataProduction?.isProduce ?? true ? .green : .red)
+                            .frame(width: 8, height: 8, alignment: .leading)
+                            .padding([.top, .leading])
                         Spacer()
                     }
-                        
                     VStack(alignment: .leading){
-                        Spacer()
+                        HStack{
+                            // keterangan stock
+                            Text("\(dataProduction?.isProduce ?? true ? "Produce" : "Reduce") Stock")
+                                .font(.subheadline)
+                                .foregroundColor(.black)
+                            Text("-")
+                                .font(.subheadline)
+                                .foregroundColor(.black)
+                            // keterangan stock
+                            Text(dataProduction?.label ?? "Event Graduation")
+                                .font(.subheadline)
+                                .foregroundColor(.black)
+                        }.padding(.top, 10)
+                        
                         // nama barang
-                        Text("Bouquet Rose")
-                            .font(.system(size: 20))
+                        Text(itemName)
+                            .font(.title)
                             .bold()
-                            .padding(.bottom, 0.5)
+                            .padding([.bottom], 0.1)
                             .foregroundColor(.black)
-                        // keterangan barang
-                        Text("Event Graduation")
-                            .font(.system(size: 11))
-                            .foregroundColor(Color(hex: 0x8E8E93))
-                            .fontWeight(.regular)
+                        //tanggal barang
+                        //Text("14/07/2023")
+                        Text(dateToString(tanggal:dataProduction?.date))
+                            .font(.caption2)
                             .foregroundColor(.black)
-                        Spacer()
+            
                     }
                     
                     Spacer()
                     
                     
-                    VStack(alignment: .trailing){
+                    //plus minus stock
+                    VStack{
                         Spacer()
-                        //jumlah plus minus stock
-                        Text("+1")
-                            .font(.system(size: 20))
+                        Text("\(dataProduction?.isProduce ?? true ? "+" : "-")\(dataProduction?.qty ?? 7)")
+                            .font(.title)
                             .bold()
-                            .foregroundColor(Color(hex: 0x00CA4E))
-                        //produce/reduce stock
-                        Text("Produce")
-                            .font(.system(size: 11))
-                            .fontWeight(.regular)
-                            .foregroundColor(Color(hex: 0x00CA4E))
+                            .foregroundColor(dataProduction?.isProduce ?? true ? .green : .red).padding(10)
                         Spacer()
-                    }.padding(.trailing)
+                    }
+                    
+                    
+                    
+                    
+                       
                 }
+               
             }
+            
+        }.onAppear{
+            getName()
         }
         .frame(width:312, height: 72)
     }
-}
 
-struct Production_Card_View_Previews: PreviewProvider {
-    static var previews: some View {
-        Production_Card_View()
+    func getName(){
+        if dataProduction?.itemType?.lowercased() == "product"{
+            let product = productDataManager.productList.filter{
+                $0.id == dataProduction?.idProduct
+            }
+            itemName = product.first!.name!
+            
+        }else{
+            let material = materialDataManager.materialList.filter{
+                $0.id == dataProduction?.idProduct
+            }
+            itemName = material.first!.name!
+        }
+    }
+    
+    func dateToString(tanggal:Date?) -> String{
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy"
+        
+        guard let currentDate = tanggal else {
+            return " - "
+        }
+        
+        return formatter.string(from: tanggal!)
+        
     }
 }
+
+//struct Production_Card_View_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Production_Card_View(, product: .init())
+//    }
+//}

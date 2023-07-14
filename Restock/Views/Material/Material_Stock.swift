@@ -9,17 +9,23 @@ import SwiftUI
 
 struct Material_Stock: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    
+    @StateObject var materialDataManager: MaterialDataManager = MaterialDataManager.shared
+    @StateObject var productionDataManager: ProductionDataManager = ProductionDataManager.shared
+    @StateObject var labelDataManager: LabelDataManager = LabelDataManager.shared
+    
 //    @Binding var product: DataProduct
-    @State private var itemAmount: String = ""
-    @State private var itemNote: String = ""
-    @State private var itemLabel: String = ""
-    @State private var itemDate = Date.now
+    @State var item: DataMaterial 
+    @State var itemAmount: String = ""
+    @State var itemNote: String = ""
+    @State var itemLabel: String = ""
+    @State var itemDate = Date.now
     var stockOption:String = ""
     var body: some View {
         NavigationView{
             ZStack {
                 Rectangle()
-                    .fill(Color(hex: 0xf2f4ff))
+                    .fill(Color(hex: 0xF4F4FD))
                     .ignoresSafeArea()
                 VStack{
                     Spacer()
@@ -32,7 +38,7 @@ struct Material_Stock: View {
                             .frame(width: 300, height: 250)
                             .padding(.top)
                         //text
-                        Text("Flower Bouquet")
+                        Text(item.name!)
                             .font(.largeTitle)
                     }
                     Form {
@@ -79,12 +85,28 @@ struct Material_Stock: View {
                     //                    }
                     Button(stockOption) {
                         //function
-                    }
+                        Production()
+                        
+                    }.disabled(itemAmount == "" && itemLabel == "")
                 }
             }
         }
         .navigationBarBackButtonHidden(true)
     }
+    
+    func Production(){
+
+        if stockOption == "Restock"{
+            materialDataManager.restockMaterial(material: item, currentStock: item.currentStock + (Int32(itemAmount)!))
+            productionDataManager.addDataToCoreData(productionLabel: itemLabel, productionDate: itemDate, productionNotes: itemNote, isProduce: true, productionQty: Int32(itemAmount)!, product_id: item.id!, itemType: "Material")
+            self.presentationMode.wrappedValue.dismiss()
+        }else{
+            materialDataManager.restockMaterial(material: item, currentStock: item.currentStock - (Int32(itemAmount)!))
+            productionDataManager.addDataToCoreData(productionLabel: itemLabel, productionDate: itemDate, productionNotes: itemNote, isProduce: false, productionQty: Int32(itemAmount)!, product_id: item.id!, itemType: "Material")
+            self.presentationMode.wrappedValue.dismiss()
+        }
+    }
+    
 }
 
 //struct Material_Stock_Previews: PreviewProvider {
