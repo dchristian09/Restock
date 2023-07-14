@@ -32,15 +32,13 @@ struct History: View {
         NavigationView{
             ZStack{
                 Rectangle()
-                    .fill(Color(hex: 0xf2f4ff))
+                    .fill(Color(hex: 0xF4F4FD))
                     .ignoresSafeArea()
                 RoundedRectangle(cornerRadius: 50, style:.continuous)
                     .fill(.white)
                     .frame(maxHeight: .greatestFiniteMagnitude)
                 //   ScrollView {
                 ZStack{
-                    
-                    
                     VStack(alignment: .center){
                         HStack{
                             Spacer()
@@ -93,28 +91,43 @@ struct History: View {
                                 }
                             }.listStyle(.plain)
                         }else{
-                            
-                            Text("There is no product history available. It will be")
-                                .multilineTextAlignment(.center)
-                                .padding(.top)
-                                .fontWeight(.thin)
-                            Text("generated when you Produce or Reduce in")
-                                .fontWeight(.thin)
-                            HStack {
-                                Text("the ")
-                                    .fontWeight(.thin)
-                                Image(systemName: "tray")
-                                Text("Product tab")
-                                    .fontWeight(.thin)
+                            VStack {
+                                VStack {
+                                    Text("There is no history available.")
+                                        .font(.system(size: 20))
+                                        .foregroundColor(Color(hex: 0x8E8E93))
+                                    Text("It will be generated when you Produce")
+                                        .font(.system(size: 20))
+                                        .foregroundColor(Color(hex: 0x8E8E93))
+                                    
+                                    HStack {
+                                        Text("or Reduce in the")
+                                            .font(.system(size: 20))
+                                            .foregroundColor(Color(hex: 0x8E8E93))
+                                        if (productionDataManager.selectedType == "Product"){
+                                            Image(systemName: "tray")
+                                                .font(.system(size: 20))
+                                                .foregroundColor(Color(hex: 0x8E8E93))
+                                            Text("Product tab")
+                                                .font(.system(size: 20))
+                                                .foregroundColor(Color(hex: 0x8E8E93))
+                                        }else{
+                                            Image(systemName: "shippingbox")
+                                                .font(.system(size: 20))
+                                                .foregroundColor(Color(hex: 0x8E8E93))
+                                            Text("Material tab")
+                                                .font(.system(size: 20))
+                                                .foregroundColor(Color(hex: 0x8E8E93))
+                                        }
+                                    }
+                                }
+                                
+                                Image("history_no_data")
+                                    .resizable()
+                                    .frame(width: 300, height: 300)
+                                Spacer()
                             }
-                            
-                            
-                            Image("history_no_data")
-                                .resizable()
-                                .frame(width: 250, height: 250)
                         }
-                        
-                        Spacer()
                     }
                     // .padding()
                 }
@@ -124,7 +137,7 @@ struct History: View {
             .navigationBarTitle("History")
             .navigationBarTitleDisplayMode(.large)
             .navigationBarBackButtonHidden(true)
-//            .searchable(text: $productionDataManager.searchText)
+            //            .searchable(text: $productionDataManager.searchText)
         }
         
         //        .onAppear{
