@@ -27,12 +27,12 @@ struct Product: View {
                 Rectangle()
                     .fill(Color(hex: 0xF4F4FD))
                     .ignoresSafeArea()
-                
+                RoundedRectangle(cornerRadius: 50, style:.continuous)
+                    .fill(.white)
+                    .frame(maxHeight: .greatestFiniteMagnitude)
                 ScrollView {
                     ZStack{
-                        RoundedRectangle(cornerRadius: 50, style:.continuous)
-                            .fill(.white)
-                            .frame(maxHeight: .infinity)
+                        
                         
                         //there is product
                         if(productDataManager.productList.count > 0){

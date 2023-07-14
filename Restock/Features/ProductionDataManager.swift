@@ -20,7 +20,7 @@ class ProductionDataManager: ObservableObject {
     @Published var productionList : [DataProduction] = []
     @Published var historyDatas : [HistoryData] = []
     
-    @Published var selectedType: String = "product" {
+    @Published var selectedType: String = "Product" {
         didSet {
             fetchProductionData()
         }

@@ -23,19 +23,19 @@ struct ContentView: View {
 //                    Text("Product")
                     Image(systemName: "tray").environment(\.symbolVariants, .none)
                     Text("Product")
-                }
+                }.tag(0)
             Material()
                 .preferredColorScheme(.light)
                 .tabItem {
                     Image(systemName: "shippingbox").environment(\.symbolVariants, .none)
                     Text("Material")
-                }
+                }.tag(1)
             History()
                 .preferredColorScheme(.light)
                 .tabItem {
                     Image(systemName: "clock.arrow.circlepath")
                     Text("History")
-                }
+                }.tag(2)
             
         }
         .navigationBarBackButtonHidden(true)
