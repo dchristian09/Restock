@@ -22,7 +22,8 @@ struct Material_Add: View {
     let product = ["Bouquet Rose", "Chocolate Bouquet", "Saya suka sama milo dinosaurus"]
     
     @StateObject var materialDataManager:MaterialDataManager = MaterialDataManager.shared
-    
+    @StateObject var productDataManager:ProductDataManager = ProductDataManager.shared
+    @StateObject var recipeDataManager:RecipeDataManager = RecipeDataManager.shared
     
     var body: some View {
         NavigationView{
@@ -146,7 +147,15 @@ struct Material_Add: View {
     }
     
     func saveData(){
-        materialDataManager.addDataToCoreData(materialName: materialName, currentStock: Int32(materialCurrentStock) ?? 0, minimumStock: Int32(materialMinimalStock) ?? 0, isActive: true, unit: selectedUnitList, note: materialNote)
+        var material = materialDataManager.addDataToCoreData(materialName: materialName, currentStock: Int32(materialCurrentStock) ?? 0, minimumStock: Int32(materialMinimalStock) ?? 0, isActive: true, unit: selectedUnitList, note: materialNote)
+        
+        if isAlsoProduct{
+            var newProduct = productDataManager.addDataToCoreData(productName: materialName, currentStock: Int32(materialCurrentStock) ?? 0, minimumStock: Int32(materialMinimalStock) ?? 0, isActive: true, unit: selectedUnitList)
+            
+            recipeDataManager.addDataToCoreData(idProduct: newProduct.id!, idMaterial: material.id!, quantity: 1)
+            
+        }
+        
     }
 }
 

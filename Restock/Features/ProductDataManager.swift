@@ -71,7 +71,7 @@ class ProductDataManager: ObservableObject {
         
         save()
         self.fetchProductData()
-        print(productList.count)
+//        print(productList.count)
         return product
     }
     
