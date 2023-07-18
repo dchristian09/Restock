@@ -27,19 +27,20 @@ struct Product: View {
                 Rectangle()
                     .fill(Color(hex: 0xF4F4FD))
                     .ignoresSafeArea()
-                
+                RoundedRectangle(cornerRadius: 50, style:.continuous)
+                    .fill(.white)
+                    .frame(maxHeight: .greatestFiniteMagnitude)
                 ScrollView {
                     ZStack{
-                        RoundedRectangle(cornerRadius: 50, style:.continuous)
-                            .fill(.white)
-                            .frame(maxHeight: .infinity)
+                        
                         
                         //there is product
                         if(productDataManager.productList.count > 0){
                             VStack{
                                 //low stock product
                                 HStack{
-                                    Image(systemName: "shippingbox")
+                                    Image(systemName: "bell")
+                                        .font(.system(size: 20))
                                     Text("Low Stock Product")
                                         .font(.title2.bold())
                                     Spacer()
@@ -92,7 +93,8 @@ struct Product: View {
                                 
                                 //safe product
                                 HStack{
-                                    Image(systemName: "shippingbox")
+                                    Image(systemName: "tray")
+                                        .font(.system(size: 20))
                                     Text("Safe Product")
                                         .font(.title2.bold())
                                     Spacer()

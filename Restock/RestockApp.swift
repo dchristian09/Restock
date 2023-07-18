@@ -13,15 +13,7 @@ struct RestockApp: App {
     
     var body: some Scene {
         WindowGroup {
-            if(!isUser){
-                NavigationStack{
-                    Launch_Screen()
-                }
-            }else{
-                ContentView()
-            }
-            
-            
+         ContentView() 
         }
     }
 }

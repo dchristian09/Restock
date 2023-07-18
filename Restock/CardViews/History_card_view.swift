@@ -1,5 +1,5 @@
 //
-//  History_card_view.swift
+//  History_Card_View.swift
 //  Restock
 //
 //  Created by Farid Azhari on 08/07/23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct History_card_view: View {
+struct History_Card_View: View {
     @State var dataProduction:DataProduction
     
     @StateObject var productionDataManager : ProductionDataManager = ProductionDataManager.shared
@@ -71,8 +71,8 @@ struct History_card_view: View {
     }
 }
 
-//struct History_card_view_Previews: PreviewProvider {
+//struct History_Card_View_Previews: PreviewProvider {
 //    static var previews: some View {
-//        History_card_view(historyDetail: HistoryDetail())
+//        History_Card_View(historyDetail: HistoryDetail())
 //    }
 //}

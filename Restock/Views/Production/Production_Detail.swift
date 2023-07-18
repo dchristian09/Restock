@@ -23,7 +23,7 @@ struct Production_Detail: View {
         NavigationView{
             ZStack {
                 Rectangle()
-                    .fill(Color(hex: 0xf2f4ff))
+                    .fill(Color(hex: 0xF4F4FD))
                     .ignoresSafeArea()
                 VStack{
                     Image("bouquet")
@@ -38,17 +38,17 @@ struct Production_Detail: View {
                         List {
                             Section {
                                 HStack {
-                                    Text(production.isProduce ? "Produce " : "Reduce " + "Amount")
+                                    Text(production.isProduce ? "Produce " + "Amount" : "Reduce " + "Amount")
                                     Spacer()
                                     Text(String(production.qty) + " " + itemUnit)
                                 }
                                 HStack {
-                                    Text(production.isProduce ? "Produce " : "Reduce " + " Date")
+                                    Text(production.isProduce ? "Produce " + "Date" : "Reduce " + "Date")
                                     Spacer()
                                     Text(dateToString(tanggal:production.date))
                                 }
                                 HStack {
-                                    Text(production.isProduce ? "Produce " : "Reduce " + "Label")
+                                    Text(production.isProduce ? "Produce " + "Label" : "Reduce " + "Label")
                                     Spacer()
                                     Text(production.label!)
                                 }

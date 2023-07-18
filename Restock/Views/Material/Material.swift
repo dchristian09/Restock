@@ -25,19 +25,21 @@ struct Material: View {
                 Rectangle()
                     .fill(Color(hex: 0xF4F4FD))
                     .ignoresSafeArea()
+                RoundedRectangle(cornerRadius: 50, style:.continuous)
+                    .fill(.white)
+                    .frame(maxHeight: .greatestFiniteMagnitude)
                 
                 ScrollView {
                     ZStack{
-                        RoundedRectangle(cornerRadius: 50, style:.continuous)
-                            .fill(.white)
-                            .frame(maxHeight: .infinity)
+                        
                         
                         //there is material
                         if(materialDataManager.materialList.count > 0 ){
                             VStack{
                                 //low stock material
                                 HStack{
-                                    Image(systemName: "shippingbox")
+                                    Image(systemName: "bell")
+                                        .font(.system(size: 20))
                                     Text("Low Stock Material")
                                         .font(.title2.bold())
                                     Spacer()
@@ -92,6 +94,7 @@ struct Material: View {
                                 // safe material
                                 HStack{
                                     Image(systemName: "shippingbox")
+                                        .font(.system(size: 20))
                                     Text("Safe Material")
                                         .font(.title2.bold())
                                     Spacer()
@@ -178,16 +181,17 @@ struct Material: View {
             .toolbar{
                 ToolbarItem(placement: .navigationBarTrailing){
                     HStack{
-                        Button {
-                            withAnimation {
-                                showingSheet = true
+                        if(materialDataManager.materialList.count > 0 ){
+                            Button {
+                                withAnimation {
+                                    showingSheet = true
+                                }
+                            }label: {
+                                Image(systemName: "info.circle")
+                            }.sheet(isPresented: $showingSheet){
+                                Indicator_Modal_View(showSheetView: $showingSheet)
                             }
-                        }label: {
-                            Image(systemName: "info.circle")
-                        }.sheet(isPresented: $showingSheet){
-                            Indicator_Modal_View(showSheetView: $showingSheet)
                         }
-                        
                         NavigationLink {
                             Material_Add()
                         }label: {

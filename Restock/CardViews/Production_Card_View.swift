@@ -60,8 +60,10 @@ struct Production_Card_View: View {
                         Text(dateToString(tanggal:dataProduction?.date))
                             .font(.caption2)
                             .foregroundColor(.black)
+                            .offset(y: -5)
             
                     }
+                    
                     Spacer()
                     
                     
@@ -86,9 +88,7 @@ struct Production_Card_View: View {
         }.onAppear{
             getName()
         }
-        
-        .frame(width:312, height: 94)
-        
+        .frame(width:312, height: 72)
     }
 
     func getName(){
