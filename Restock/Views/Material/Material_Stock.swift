@@ -20,6 +20,7 @@ struct Material_Stock: View {
     @State var itemNote: String = ""
     @State var itemLabel: String = ""
     @State var itemDate = Date.now
+    
     var stockOption:String = ""
     var body: some View {
         NavigationView{
@@ -98,11 +99,30 @@ struct Material_Stock: View {
 
         if stockOption == "Restock"{
             materialDataManager.restockMaterial(material: item, currentStock: item.currentStock + (Int32(itemAmount)!))
+            
             productionDataManager.addDataToCoreData(productionLabel: itemLabel, productionDate: itemDate, productionNotes: itemNote, isProduce: true, productionQty: Int32(itemAmount)!, product_id: item.id!, itemType: "Material")
+            
+            if item.isProduct{
+                let product = ProductDataManager.shared.productList.filter{
+                    $0.name == item.name
+                }
+                
+                productionDataManager.addDataToCoreData(productionLabel: itemLabel, productionDate: itemDate, productionNotes: itemNote, isProduce: true, productionQty: Int32(itemAmount)!, product_id: product.first!.id!, itemType: "Product")
+            }
             self.presentationMode.wrappedValue.dismiss()
         }else{
+            
             materialDataManager.restockMaterial(material: item, currentStock: item.currentStock - (Int32(itemAmount)!))
             productionDataManager.addDataToCoreData(productionLabel: itemLabel, productionDate: itemDate, productionNotes: itemNote, isProduce: false, productionQty: Int32(itemAmount)!, product_id: item.id!, itemType: "Material")
+            
+            if item.isProduct{
+                let product = ProductDataManager.shared.productList.filter{
+                    $0.name == item.name
+                }
+                
+                productionDataManager.addDataToCoreData(productionLabel: itemLabel, productionDate: itemDate, productionNotes: itemNote, isProduce: true, productionQty: Int32(itemAmount)!, product_id: product.first!.id!, itemType: "Product")
+            }
+            
             self.presentationMode.wrappedValue.dismiss()
         }
     }

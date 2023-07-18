@@ -23,13 +23,15 @@ struct Product_Edit: View {
     @State var productCurrentStock: Int32
     @State var productMinimalStock: Int32
     @State var productUnit: String
+    @State var dataProductImage: Data
+//    @State var productImage: Data
     
     //    Save Integer material to string
     @State var stringMinimalStock: String = ""
     @State var stringCurrentStock: String = ""
     
     @State var selectedProductImage: [PhotosPickerItem] = []
-    @State var dataProductImage: Data?
+    
     
     //    ALERT CHECKER
     @State private var isDataIncomplete = false
@@ -320,7 +322,7 @@ struct Product_Edit: View {
     
     
     func saveEdit(){
-        if(productName.isEmpty || stringMinimalStock.isEmpty){
+        if(productName.isEmpty || stringMinimalStock.isEmpty || (dataProductImage == nil)){
             isDataIncomplete = true
         }
         
@@ -342,8 +344,15 @@ struct Product_Edit: View {
             
             //            If all data already completed
             if !isMaterialIncomplete && !isDataIncomplete{
+                if product.isMaterial {
+                    let material = materialDataManager.materialList.filter{
+                        $0.name == product.name
+                    }
+                    materialDataManager.editDataFromCoreData(material: material.first!, materialName: productName, minimalStock: productMinimalStock, isActive: true, note: material.first!.note ?? "-", image: dataProductImage)
+                }
                 
-                productDataManager.editDataFromCoreData(product: product, productName: productName, minimalStock: productMinimalStock, isActive: true)
+                productDataManager.editDataFromCoreData(product: product, productName: productName, minimalStock: productMinimalStock, isActive: true, image: dataProductImage)
+                
 //                get old data from core data
                 let arrayRecipe = recipeDataManager.recipeList.filter { recipe in
                     recipe.idProduct ==  product.id
@@ -366,6 +375,8 @@ struct Product_Edit: View {
                     
                     
                 }
+                
+                
                 self.presentationMode.wrappedValue.dismiss()
                
             }

@@ -126,7 +126,7 @@ struct Product_Detail: View {
                
                 
                 ToolbarItem(placement: .navigationBarTrailing){
-                    NavigationLink(destination: Product_Edit(recipeDataManager: recipeDataManager, product: $product, productName: productName, productCurrentStock: productCurrentStock, productMinimalStock: productMinimalStock, productUnit: productUnit, toPreviousPage: $pindah)) {
+                    NavigationLink(destination: Product_Edit(recipeDataManager: recipeDataManager, product: $product, productName: productName, productCurrentStock: productCurrentStock, productMinimalStock: productMinimalStock, productUnit: productUnit, dataProductImage: productImage, toPreviousPage: $pindah)) {
                         Text("Edit")
                     }
                     

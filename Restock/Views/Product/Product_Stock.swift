@@ -104,8 +104,6 @@ struct Product_Stock: View {
             recipe.idProduct ==  item.id
         }
         
-        
-        
         if stockOption == "Produce"{
             for recipe in arrayRecipe{
                 let materialData = materialDataManager.materialList.filter{ material in
@@ -119,25 +117,47 @@ struct Product_Stock: View {
             }
             
             if !showAlert{
-                for recipe in arrayRecipe{
-                    let materialData = materialDataManager.materialList.filter{ material in
-                        material.id == recipe.idMaterial
+                if !item.isMaterial{
+                    for recipe in arrayRecipe{
+                        let materialData = materialDataManager.materialList.filter{ material in
+                            material.id == recipe.idMaterial
+                        }
+                        
+                        materialDataManager.restockMaterial(material: materialData.first!, currentStock: materialData.first!.currentStock - (recipe.quantity * Int32(itemAmount)!))
+                        
+                        productionDataManager.addDataToCoreData(productionLabel: "Produce " + item.name!, productionDate: itemDate, productionNotes: itemNote, isProduce: false, productionQty: (recipe.quantity * Int32(itemAmount)!), product_id: materialData.first!.id!, itemType: "Material")
+                    }
+                }else{
+                    let material = materialDataManager.materialList.filter{
+                        item.name == $0.name
                     }
                     
-                    materialDataManager.restockMaterial(material: materialData.first!, currentStock: materialData.first!.currentStock - (recipe.quantity * Int32(itemAmount)!))
-                    productionDataManager.addDataToCoreData(productionLabel: "Produce " + item.name!, productionDate: itemDate, productionNotes: itemNote, isProduce: false, productionQty: (recipe.quantity * Int32(itemAmount)!), product_id: materialData.first!.id!, itemType: "Material")
+                    materialDataManager.restockMaterial(material: material.first!, currentStock: material.first!.currentStock + Int32(itemAmount)!)
+                    
+                    productionDataManager.addDataToCoreData(productionLabel: itemLabel, productionDate: itemDate, productionNotes: itemNote, isProduce: true, productionQty:  Int32(itemAmount)!, product_id: material.first!.id!, itemType: "Material")
+                    
                 }
-                
                 productDataManager.produceProduct(product: item, currentStock: item.currentStock + (Int32(itemAmount)!))
+                
                 productionDataManager.addDataToCoreData(productionLabel: itemLabel, productionDate: itemDate, productionNotes: itemNote, isProduce: true, productionQty: Int32(itemAmount)!, product_id: item.id!, itemType: "Product")
                 self.presentationMode.wrappedValue.dismiss()
             }
             
         }else{
-            
             if !showAlert{
                 productDataManager.produceProduct(product: item, currentStock: item.currentStock - (Int32(itemAmount)!))
+                
                 productionDataManager.addDataToCoreData(productionLabel: itemLabel, productionDate: itemDate, productionNotes: itemNote, isProduce: false, productionQty: Int32(itemAmount)!, product_id: item.id!, itemType: "Product")
+                
+                if item.isMaterial{
+                    let material = materialDataManager.materialList.filter{
+                        $0.name == item.name
+                    }
+                    
+                    materialDataManager.restockMaterial(material: material.first!, currentStock: material.first!.currentStock - Int32(itemAmount)!)
+                    
+                    productionDataManager.addDataToCoreData(productionLabel: itemLabel, productionDate: itemDate, productionNotes: itemNote, isProduce: false, productionQty: Int32(itemAmount)!, product_id: material.first!.id!, itemType: "Material")
+                }
                 self.presentationMode.wrappedValue.dismiss()
             }
         }

@@ -41,32 +41,49 @@ struct History_Card_View: View {
     }
     
     func cancelProduction(){
+        
         productionDataManager.softDeleteData(production: dataProduction)
         
-        if dataProduction.itemType == "product"{
+        if dataProduction.itemType?.lowercased() == "product"{
             let arrayRecipe = recipeDataManager.recipeList.filter{ recipe in
                 recipe.idProduct == dataProduction.idProduct
             }
             
-            for recipe in arrayRecipe{
-                let materialData = materialDataManager.materialList.filter{ material in
-                    material.id == recipe.idMaterial
+            if dataProduction.isProduce{
+                
+                for recipe in arrayRecipe{
+                    let materialData = materialDataManager.materialList.filter{ material in
+                        material.id == recipe.idMaterial
+                    }
+                    
+                    materialDataManager.restockMaterial(material: materialData.first!, currentStock: (recipe.quantity * dataProduction.qty) + materialData.first!.currentStock)
+            
                 }
                 
-                materialDataManager.restockMaterial(material: materialData.first!, currentStock: (recipe.quantity * dataProduction.qty) + materialData.first!.currentStock)
+                
+                let productData = productDataManager.productList.filter{ product in
+                    product.id == dataProduction.idProduct
+                }
+                productDataManager.produceProduct(product: productData.first!, currentStock: productData.first!.currentStock - dataProduction.qty)
+            }else{
+                
+                let productData = productDataManager.productList.filter{ product in
+                    product.id == dataProduction.idProduct
+                }
+                productDataManager.produceProduct(product: productData.first!, currentStock: productData.first!.currentStock + dataProduction.qty)
             }
-            
-        
-            let productData = productDataManager.productList.filter{ product in
-                product.id == dataProduction.idProduct
-            }
-            productDataManager.produceProduct(product: productData.first!, currentStock: productData.first!.currentStock - dataProduction.qty)
         }else{
             let materialData = materialDataManager.materialList.filter{ material in
                 material.id == dataProduction.idProduct
             }
-            materialDataManager.restockMaterial(material: materialData.first!, currentStock: materialData.first!.currentStock + dataProduction.qty)
+            if dataProduction.isProduce{
+                materialDataManager.restockMaterial(material: materialData.first!, currentStock: materialData.first!.currentStock - dataProduction.qty)
+            }else{
+                materialDataManager.restockMaterial(material: materialData.first!, currentStock: materialData.first!.currentStock - dataProduction.qty)
+            }
+            
         }
+        
         
     }
 }

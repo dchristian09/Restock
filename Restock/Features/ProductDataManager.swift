@@ -59,7 +59,7 @@ class ProductDataManager: ObservableObject {
         }
     }
     
-    func addDataToCoreData(productName: String, currentStock: Int32, minimumStock: Int32, isActive: Bool, unit: String, image: Data) -> DataProduct {
+    func addDataToCoreData(productName: String, currentStock: Int32, minimumStock: Int32, isActive: Bool, unit: String, image: Data, isMaterial: Bool) -> DataProduct {
         let product = DataProduct(context: viewContext)
         product.id = UUID()
         product.name = productName
@@ -68,6 +68,7 @@ class ProductDataManager: ObservableObject {
         product.isActive = isActive
         product.image = image
         product.unit = unit
+        product.isMaterial = isMaterial
         
         
         save()
@@ -76,10 +77,12 @@ class ProductDataManager: ObservableObject {
         return product
     }
     
-    func editDataFromCoreData(product: DataProduct, productName: String, minimalStock: Int32, isActive: Bool) {
+    func editDataFromCoreData(product: DataProduct, productName: String, minimalStock: Int32, isActive: Bool, image: Data) {
         product.name = productName
         product.minimalStock = minimalStock
         product.isActive = isActive
+        product.image = image
+        
         
         save()
         self.fetchProductData()

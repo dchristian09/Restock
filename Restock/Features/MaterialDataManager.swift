@@ -28,6 +28,7 @@ class MaterialDataManager: ObservableObject {
     
     func fetchMaterialData() {
         let request = NSFetchRequest<DataMaterial>(entityName: "DataMaterial")
+        request.sortDescriptors = [NSSortDescriptor(key: "currentStock", ascending: true)]
         
         do {
             materialList = try viewContext.fetch(request)
@@ -53,7 +54,7 @@ class MaterialDataManager: ObservableObject {
         }
     }
     
-    func addDataToCoreData(materialName: String, currentStock: Int32, minimumStock: Int32, isActive: Bool, unit: String, note: String, image: Data)  -> DataMaterial {
+    func addDataToCoreData(materialName: String, currentStock: Int32, minimumStock: Int32, isActive: Bool, unit: String, note: String, image: Data, isProduct: Bool)  -> DataMaterial {
         let material = DataMaterial(context: viewContext)
         material.id = UUID()
         material.name = materialName
@@ -63,17 +64,19 @@ class MaterialDataManager: ObservableObject {
         material.unit = unit
         material.note = note
         material.image = image
+        material.isProduct = isProduct
         
         save()
         self.fetchMaterialData()
         return material
     }
     
-    func editDataFromCoreData(material: DataMaterial, materialName: String, minimalStock: Int32, isActive: Bool, note: String) {
+    func editDataFromCoreData(material: DataMaterial, materialName: String, minimalStock: Int32, isActive: Bool, note: String, image: Data) {
         material.name = materialName
         material.minimalStock = minimalStock
         material.isActive = isActive
         material.note = note
+        material.image = image
         
         save()
         self.fetchMaterialData()

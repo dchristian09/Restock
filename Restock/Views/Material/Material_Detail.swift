@@ -108,7 +108,7 @@ struct Material_Detail: View {
                 }
                 ToolbarItem(placement: .navigationBarTrailing){
                     NavigationLink(
-                        destination: Material_Edit(material: $material, materialName: materialName, materialCurrentStock: materialCurrentStock, materialMinimalStock: materialMinimalStock, materialNote: materialNote, materialUnit: materialUnit)
+                        destination: Material_Edit(material: $material, materialName: materialName, materialCurrentStock: materialCurrentStock, materialMinimalStock: materialMinimalStock, materialNote: materialNote, materialUnit: materialUnit, dataMaterialImage: materialImage)
                     ){
                         Text("Edit")
                     }
