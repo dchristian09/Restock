@@ -21,6 +21,7 @@ struct Product_Detail: View {
         let productCurrentStock: Int32 = $product.wrappedValue.currentStock
         let productMinimalStock: Int32 = $product.wrappedValue.minimalStock
         let productUnit: String = $product.wrappedValue.unit ?? ""
+        let productImage : Data = $product.wrappedValue.image!
         
 //        NavigationView{
             ZStack {
@@ -37,7 +38,7 @@ struct Product_Detail: View {
                     .ignoresSafeArea()
                 VStack{
                     //image
-                    Image("bouquet")
+                    Image(uiImage: UIImage(data: productImage)!)
                         .resizable()
                         .cornerRadius(16)
                         .scaledToFit()

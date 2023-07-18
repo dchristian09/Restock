@@ -147,10 +147,10 @@ struct Material_Add: View {
     }
     
     func saveData(){
-        var material = materialDataManager.addDataToCoreData(materialName: materialName, currentStock: Int32(materialCurrentStock) ?? 0, minimumStock: Int32(materialMinimalStock) ?? 0, isActive: true, unit: selectedUnitList, note: materialNote)
+        var material = materialDataManager.addDataToCoreData(materialName: materialName, currentStock: Int32(materialCurrentStock) ?? 0, minimumStock: Int32(materialMinimalStock) ?? 0, isActive: true, unit: selectedUnitList, note: materialNote, image: dataProductImage!)
         
         if isAlsoProduct{
-            var newProduct = productDataManager.addDataToCoreData(productName: materialName, currentStock: Int32(materialCurrentStock) ?? 0, minimumStock: Int32(materialMinimalStock) ?? 0, isActive: true, unit: selectedUnitList)
+            var newProduct = productDataManager.addDataToCoreData(productName: materialName, currentStock: Int32(materialCurrentStock) ?? 0, minimumStock: Int32(materialMinimalStock) ?? 0, isActive: true, unit: selectedUnitList, image: dataProductImage!)
             
             recipeDataManager.addDataToCoreData(idProduct: newProduct.id!, idMaterial: material.id!, quantity: 1)
             

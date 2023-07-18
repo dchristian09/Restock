@@ -12,6 +12,7 @@ struct Main_Card_View: View {
     var materialUnit: String = "pcs"
     var materialStock: Int32 = 0
     var materialMinStock: Int32 = 0
+    var materialImage: Data = Data()
     @State var color : Color = .red.opacity(0)
     var body: some View {
         ZStack{
@@ -20,13 +21,25 @@ struct Main_Card_View: View {
             ZStack {
                 HStack(alignment: .top){
                     
+                    if let uiImage = UIImage(data: materialImage) {
+                                    Image(uiImage: uiImage)
+                            .resizable()
+                            .frame(width: 53, height: 54)
+                            .cornerRadius(12)
+                            .foregroundColor(.white)
+                            .padding(.leading, 7.0)
+                                } else {
+                                    Image(systemName: "error_image")
+                                        .resizable()
+                                        .frame(width: 53, height: 54)
+                                        .cornerRadius(12)
+                                        .foregroundColor(.white)
+                                        .padding(.leading, 7.0)
+                                }
+                    
                     //image
-                    Image("error_image")
-                        .resizable()
-                        .frame(width: 53, height: 54)
-                        .cornerRadius(12)
-                        .foregroundColor(.white)
-                        .padding(.leading, 7.0)
+                    
+                    
                     
                     VStack(alignment:.leading){
                         
@@ -83,8 +96,8 @@ struct Main_Card_View: View {
 
 
 
-struct Main_Card_View_Previews: PreviewProvider {
-    static var previews: some View {
-        Main_Card_View()
-    }
-}
+//struct Main_Card_View_Previews: PreviewProvider {
+//    static var previews: some View {
+//        Main_Card_View(materialImage: UIImage("Bouquet"))
+//    }
+//}

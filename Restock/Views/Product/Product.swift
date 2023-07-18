@@ -63,7 +63,7 @@ struct Product: View {
                                             NavigationLink{
                                                 Product_Detail(product: productDataManager.urgentProducts[index])
                                             }label: {
-                                                Main_Card_View(materialName: productDataManager.urgentProducts[index].name ?? "",  materialUnit: productDataManager.urgentProducts[index].unit ?? "", materialStock: productDataManager.urgentProducts[index].currentStock, materialMinStock: productDataManager.urgentProducts[index].minimalStock)
+                                                Main_Card_View(materialName: productDataManager.urgentProducts[index].name ?? "",  materialUnit: productDataManager.urgentProducts[index].unit ?? "", materialStock: productDataManager.urgentProducts[index].currentStock, materialMinStock: productDataManager.urgentProducts[index].minimalStock, materialImage: productDataManager.urgentProducts[index].image! )
                                             }
                                         }
                                     }
@@ -107,7 +107,7 @@ struct Product: View {
                                             NavigationLink{
                                                 Product_Detail(product: productDataManager.safeProducts[index])
                                             }label: {
-                                                Main_Card_View(materialName: productDataManager.safeProducts[index].name ?? "",  materialUnit: productDataManager.safeProducts[index].unit ?? "", materialStock: productDataManager.safeProducts[index].currentStock, materialMinStock: productDataManager.safeProducts[index].minimalStock)
+                                                Main_Card_View(materialName: productDataManager.safeProducts[index].name ?? "",  materialUnit: productDataManager.safeProducts[index].unit ?? "", materialStock: productDataManager.safeProducts[index].currentStock, materialMinStock: productDataManager.safeProducts[index].minimalStock, materialImage: productDataManager.safeProducts[index].image!)
                                             }
                                         }
                                     }

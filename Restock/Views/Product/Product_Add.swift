@@ -20,6 +20,7 @@ struct Product_Add: View {
     @State var productName: String = ""
     @State var productCurrentStock: String = ""
     @State var productMinimalStock: String = ""
+    
     @State var selectedProductImage: [PhotosPickerItem] = []
     @State var dataProductImage: Data?
     let unitList = ["pcs", "gram", "liter", "ml", "sheet", "bottle"]
@@ -272,7 +273,7 @@ struct Product_Add: View {
 //            If all data already completed
             print(recipeDataManager.recipeList.count)
             if !isMaterialIncomplete && !isDataIncomplete{
-                let newProduct: DataProduct =  productDataManager.addDataToCoreData(productName: productName, currentStock: Int32(productCurrentStock) ?? 0, minimumStock: Int32(productMinimalStock) ?? 0, isActive: true, unit: selectedUnitList)
+                let newProduct: DataProduct =  productDataManager.addDataToCoreData(productName: productName, currentStock: Int32(productCurrentStock) ?? 0, minimumStock: Int32(productMinimalStock) ?? 0, isActive: true, unit: selectedUnitList, image: dataProductImage!)
                 
                 for materialIngredient in arrayMaterialIngredients {
                 

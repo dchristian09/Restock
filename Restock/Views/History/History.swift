@@ -37,7 +37,7 @@ struct History: View {
                 RoundedRectangle(cornerRadius: 50, style:.continuous)
                     .fill(.white)
                     .frame(maxHeight: .greatestFiniteMagnitude)
-                ScrollView {
+//                ScrollView {
                     ZStack{
                         VStack(alignment: .center){
                             HStack{
@@ -91,7 +91,7 @@ struct History: View {
                                     }
                                 }.listStyle(.plain)
                             }else{
-                                VStack {
+//                                VStack {
                                     VStack {
                                         Text("There is no history available.")
                                             .font(.system(size: 20))
@@ -126,14 +126,14 @@ struct History: View {
                                         .resizable()
                                         .frame(width: 300, height: 300)
                                     Spacer()
-                                }
+//                                }
                             }
                         }
                         // .padding()
                     }
                     //}
                     
-                }
+//                }
                 .navigationBarTitle("History")
                 .navigationBarTitleDisplayMode(.large)
                 .navigationBarBackButtonHidden(true)

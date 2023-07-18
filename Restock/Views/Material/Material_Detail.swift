@@ -19,6 +19,7 @@ struct Material_Detail: View {
         let materialMinimalStock: Int32 = $material.wrappedValue.minimalStock
         let materialNote: String = $material.wrappedValue.note ?? "-"
         let materialUnit: String = $material.wrappedValue.unit ?? ""
+        let materialImage: Data = $material.wrappedValue.image!
         
         NavigationView{
             ZStack {
@@ -26,7 +27,7 @@ struct Material_Detail: View {
                     .fill(Color(hex: 0xf2f4ff))
                     .ignoresSafeArea()
                 VStack{
-                    Image("bouquet")
+                    Image(uiImage: UIImage(data: materialImage)!)
                         .resizable()
                         .cornerRadius(16)
                         .scaledToFit()

@@ -61,7 +61,7 @@ struct Material: View {
                                             NavigationLink{
                                                 Material_Detail(material: $materialDataManager.urgentMaterial[index])
                                             }label: {
-                                                Main_Card_View(materialName:materialDataManager.urgentMaterial[index].name ?? "", materialUnit: materialDataManager.urgentMaterial[index].unit ?? "", materialStock: materialDataManager.urgentMaterial[index].currentStock, materialMinStock: materialDataManager.urgentMaterial[index].minimalStock)
+                                                Main_Card_View(materialName:materialDataManager.urgentMaterial[index].name ?? "", materialUnit: materialDataManager.urgentMaterial[index].unit ?? "", materialStock: materialDataManager.urgentMaterial[index].currentStock, materialMinStock: materialDataManager.urgentMaterial[index].minimalStock, materialImage: materialDataManager.urgentMaterial[index].image!)
                                                 
                                             }
                                             
@@ -106,7 +106,7 @@ struct Material: View {
                                             NavigationLink{
                                                 Material_Detail(material: $materialDataManager.safeMaterial[index])
                                             }label: {
-                                                Main_Card_View(materialName:materialDataManager.safeMaterial[index].name ?? "", materialUnit: materialDataManager.safeMaterial[index].unit ?? "", materialStock: materialDataManager.safeMaterial[index].currentStock, materialMinStock: materialDataManager.safeMaterial[index].minimalStock)
+                                                Main_Card_View(materialName:materialDataManager.safeMaterial[index].name ?? "", materialUnit: materialDataManager.safeMaterial[index].unit ?? "", materialStock: materialDataManager.safeMaterial[index].currentStock, materialMinStock: materialDataManager.safeMaterial[index].minimalStock, materialImage: materialDataManager.safeMaterial[index].image!)
                                             }
                                         }
                                     }
