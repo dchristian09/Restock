@@ -48,8 +48,10 @@ struct Material_Edit: View {
                         //icon
                         HStack{
                             Spacer()
-                            if let data = dataMaterialImage, let uiimage = UIImage(data: data){
-                                Image(uiImage: uiimage)
+                           // if let data = dataMaterialImage, let uiimage = UIImage(data: data){
+                            if(UIImage(data: dataMaterialImage) != nil) {
+                                let uiimage = UIImage(data: dataMaterialImage)
+                                Image(uiImage: uiimage!)
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 300, height: 250)

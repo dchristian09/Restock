@@ -294,7 +294,6 @@
 			);
 			mainGroup = 36CB892C2A385137000BDA6D;
 			packageReferences = (
-				58E245692A497EBE00DC9B6E /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			productRefGroup = 36CB89362A385137000BDA6D /* Products */;
 			projectDirPath = "";
@@ -485,7 +484,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Restock/Preview Content\"";
-				DEVELOPMENT_TEAM = 44349BA3CD;
+				DEVELOPMENT_TEAM = 78K6P96M34;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Restock/Info.plist;
@@ -515,7 +514,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Restock/Preview Content\"";
-				DEVELOPMENT_TEAM = 44349BA3CD;
+				DEVELOPMENT_TEAM = 78K6P96M34;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Restock/Info.plist;
@@ -558,17 +557,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		58E245692A497EBE00DC9B6E /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCVersionGroup section */
 		C233D0452A4968D5003B8ED3 /* mainData.xcdatamodeld */ = {

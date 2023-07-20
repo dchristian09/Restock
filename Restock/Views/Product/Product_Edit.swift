@@ -58,12 +58,14 @@ struct Product_Edit: View {
                     
                     HStack{
                         Spacer()
-                        if let data = dataProductImage, let uiimage = UIImage(data: data){
-                            Image(uiImage: uiimage)
+                        //if let data = dataProductImage, let uiimage = UIImage(data: data){
+                        if(UIImage(data:dataProductImage) != nil){
+                            let uiimage = UIImage(data: dataProductImage)
+                            Image(uiImage: uiimage!)
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 300, height: 250)
-                        }else{
+                        } else {
                             Image(systemName: "photo")
                                 .resizable()
                                 .frame(width: 180, height: 180)
