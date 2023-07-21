@@ -859,8 +859,8 @@
             filePath = "Restock/Views/Product/Product_Stock.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
             landmarkName = "Production()"
             landmarkType = "7">
             <Locations>
@@ -907,8 +907,8 @@
             filePath = "Restock/CardViews/History_Card_View.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
             landmarkName = "cancelProduction()"
             landmarkType = "7">
          </BreakpointContent>

@@ -132,6 +132,17 @@ struct Product_Stock: View {
 //                        Tiap material di - sesuai resep
                         materialDataManager.restockMaterial(material: materialData.first!, currentStock: materialData.first!.currentStock - (recipe.quantity * Int32(itemAmount)!))
                         
+//                        kalau material yg dipake jg berupa product,                               productny jg diminus
+                        if materialData.first!.isProduct{
+                            let productData = productDataManager.productList.filter{
+                                product in
+                                product.name == materialData.first!.name && product.isMaterial
+                            }
+                            
+                            productDataManager.produceProduct(product: productData.first!, currentStock: materialData.first!.currentStock)
+                            
+                            
+                        }
 //                        di catet di production
                         productionDataManager.addDataToCoreData(productionLabel: "Produce " + item.name!, productionDate: itemDate, productionNotes: itemNote, isProduce: false, productionQty: (recipe.quantity * Int32(itemAmount)!), product_id: materialData.first!.id!, itemType: "Material")
                     }

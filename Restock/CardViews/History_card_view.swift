@@ -41,7 +41,6 @@ struct History_Card_View: View {
     }
     
     func cancelProduction(){
-        
 //                delete data dari history item
         productionDataManager.softDeleteData(production: dataProduction)
         
@@ -91,7 +90,6 @@ struct History_Card_View: View {
                 }
 
             }else{
-                
 //                Kalau product, dan di reduce di cancel, brti cm nambah di                 product,material g ngaruh.
                 let productData = productDataManager.productList.filter{ product in
                     product.id == dataProduction.idProduct
