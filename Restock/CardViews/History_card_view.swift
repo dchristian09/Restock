@@ -49,37 +49,91 @@ struct History_Card_View: View {
                 recipe.idProduct == dataProduction.idProduct
             }
             
+//            Kalau product dan produce di cancel brti:
             if dataProduction.isProduce{
                 
-                for recipe in arrayRecipe{
-                    let materialData = materialDataManager.materialList.filter{ material in
-                        material.id == recipe.idMaterial
-                    }
-                    
-                    materialDataManager.restockMaterial(material: materialData.first!, currentStock: (recipe.quantity * dataProduction.qty) + materialData.first!.currentStock)
-            
-                }
-                
-                
+//                product di -
                 let productData = productDataManager.productList.filter{ product in
                     product.id == dataProduction.idProduct
                 }
                 productDataManager.produceProduct(product: productData.first!, currentStock: productData.first!.currentStock - dataProduction.qty)
+                
+                if productData.first!.isMaterial{
+//                    kalau product jg material
+                    let materialData = materialDataManager.materialList.filter{
+                        material in
+                        material.name == productData.first!.name
+                    }
+                    
+//                    material di -
+                    materialDataManager.restockMaterial(material: materialData.first!, currentStock: materialData.first!.currentStock - dataProduction.qty)
+                    
+                }else{
+//                    kalau bukan
+                    for recipe in arrayRecipe{
+                        let materialData = materialDataManager.materialList.filter{ material in
+                            material.id == recipe.idMaterial
+                        }
+//                    material di +
+                        materialDataManager.restockMaterial(material: materialData.first!, currentStock: (recipe.quantity * dataProduction.qty) + materialData.first!.currentStock)
+                        
+                    }
+                }
+
             }else{
                 
+//                Kalau product, dan di reduce di cancel, brti cm nambah di                 product,material g ngaruh.
                 let productData = productDataManager.productList.filter{ product in
                     product.id == dataProduction.idProduct
                 }
                 productDataManager.produceProduct(product: productData.first!, currentStock: productData.first!.currentStock + dataProduction.qty)
+                
+                if productData.first!.isMaterial{
+//                    kalau product jg material
+                    let materialData = materialDataManager.materialList.filter{
+                        material in
+                        material.name == productData.first!.name
+                    }
+                    
+//                    material di -
+                    materialDataManager.restockMaterial(material: materialData.first!, currentStock: materialData.first!.currentStock + dataProduction.qty)
+                    
+                }
             }
         }else{
+            
+//            Kalau material
             let materialData = materialDataManager.materialList.filter{ material in
                 material.id == dataProduction.idProduct
             }
+//            Kalau produce di cancel, brti material -
             if dataProduction.isProduce{
                 materialDataManager.restockMaterial(material: materialData.first!, currentStock: materialData.first!.currentStock - dataProduction.qty)
+                
+                if materialData.first!.isProduct{
+//                    Kalau material jg product
+                    let productData = productDataManager.productList.filter{ product in
+                        product.name! == materialData.first!.name!
+                    }
+//                    product di -
+                    productDataManager.produceProduct(product: productData.first!, currentStock:  dataProduction.qty - productData.first!.currentStock)
+            
+                   
+                }
             }else{
-                materialDataManager.restockMaterial(material: materialData.first!, currentStock: materialData.first!.currentStock - dataProduction.qty)
+//                kalau reduce di cancel, brti material di +
+                materialDataManager.restockMaterial(material: materialData.first!, currentStock: materialData.first!.currentStock + dataProduction.qty)
+                        
+                if materialData.first!.isProduct{
+//                    Kalau material jg product
+                    let productData = productDataManager.productList.filter{ product in
+                        product.name! == materialData.first!.name!
+                    }
+//                    product di +
+                    productDataManager.produceProduct(product: productData.first!, currentStock:  dataProduction.qty + productData.first!.currentStock)
+            
+                    
+                }
             }
             
         }

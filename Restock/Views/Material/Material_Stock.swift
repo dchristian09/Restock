@@ -32,7 +32,8 @@ struct Material_Stock: View {
                     Spacer()
                     VStack {
                         //image
-                        Image("bouquet")
+//                        Image("bouquet")
+                        Image(uiImage: UIImage(data: item.image!)!)
                             .resizable()
                             .cornerRadius(16)
                             .scaledToFit()
@@ -58,7 +59,7 @@ struct Material_Stock: View {
                         }
                         HStack{
                             Text((stockOption)+" Label")
-                            TextField("Amount", text: $itemLabel)
+                            TextField("Label", text: $itemLabel)
                                 .keyboardType(.default)
                                 .multilineTextAlignment(.trailing)
                         }
@@ -97,30 +98,46 @@ struct Material_Stock: View {
     
     func Production(){
 
+//        Kalau restock
         if stockOption == "Restock"{
+            
+//            material di +
             materialDataManager.restockMaterial(material: item, currentStock: item.currentStock + (Int32(itemAmount)!))
             
+//            production nyatet, isProduce = true, item type material
             productionDataManager.addDataToCoreData(productionLabel: itemLabel, productionDate: itemDate, productionNotes: itemNote, isProduce: true, productionQty: Int32(itemAmount)!, product_id: item.id!, itemType: "Material")
             
+//            Kalau materialnya juga product, product jg d +,
             if item.isProduct{
                 let product = ProductDataManager.shared.productList.filter{
                     $0.name == item.name
                 }
                 
+//                product +
+                ProductDataManager.shared.produceProduct(product: product[0], currentStock: product[0].currentStock + (Int32(itemAmount)!))
+                
+//                production nyatet isProduce true, itemType: Product
                 productionDataManager.addDataToCoreData(productionLabel: itemLabel, productionDate: itemDate, productionNotes: itemNote, isProduce: true, productionQty: Int32(itemAmount)!, product_id: product.first!.id!, itemType: "Product")
             }
             self.presentationMode.wrappedValue.dismiss()
         }else{
             
+//            Kalau reduce, material -
             materialDataManager.restockMaterial(material: item, currentStock: item.currentStock - (Int32(itemAmount)!))
+            
+//            production is Prouce = false, itemType = Material
             productionDataManager.addDataToCoreData(productionLabel: itemLabel, productionDate: itemDate, productionNotes: itemNote, isProduce: false, productionQty: Int32(itemAmount)!, product_id: item.id!, itemType: "Material")
             
             if item.isProduct{
+//                Kalau isProduct, product -
                 let product = ProductDataManager.shared.productList.filter{
                     $0.name == item.name
                 }
                 
-                productionDataManager.addDataToCoreData(productionLabel: itemLabel, productionDate: itemDate, productionNotes: itemNote, isProduce: true, productionQty: Int32(itemAmount)!, product_id: product.first!.id!, itemType: "Product")
+                ProductDataManager.shared.produceProduct(product: product[0], currentStock: product[0].currentStock - (Int32(itemAmount)!))
+                
+//                production jg -
+                productionDataManager.addDataToCoreData(productionLabel: itemLabel, productionDate: itemDate, productionNotes: itemNote, isProduce: false, productionQty: Int32(itemAmount)!, product_id: product.first!.id!, itemType: "Product")
             }
             
             self.presentationMode.wrappedValue.dismiss()

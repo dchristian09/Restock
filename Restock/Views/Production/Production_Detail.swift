@@ -17,6 +17,7 @@ struct Production_Detail: View {
     
     @State var itemName : String = ""
     @State var itemUnit : String = ""
+    @State var itemImage : Data = Data()
     
     var body: some View {
         
@@ -26,12 +27,22 @@ struct Production_Detail: View {
                     .fill(Color(hex: 0xF4F4FD))
                     .ignoresSafeArea()
                 VStack{
-                    Image("bouquet")
-                        .resizable()
-                        .cornerRadius(16)
-                        .scaledToFit()
-                        .frame(width: 300, height: 250)
-                        .padding(.top)
+//                    Image("bouquet")
+                    if(UIImage(data: itemImage) != nil) {
+                        let uiimage = UIImage(data: itemImage)
+                        Image(uiImage: uiimage!)
+                            .resizable()
+                            .cornerRadius(16)
+                            .scaledToFit()
+                            .frame(width: 300, height: 250)
+                            .padding(.top)
+                    }else{
+                        Image(systemName: "photo")
+                            .resizable()
+                            .frame(width: 180, height: 180)
+                    }
+                    Spacer()
+                        
                     Text(itemName)
                         .font(.largeTitle)
                     VStack{
@@ -80,6 +91,8 @@ struct Production_Detail: View {
             }
             itemName = product.first!.name!
             itemUnit = product.first!.unit!
+            itemImage = product.first!.image!
+            
             
         }else{
             let material = materialDataManager.materialList.filter{
@@ -87,6 +100,7 @@ struct Production_Detail: View {
             }
             itemName = material.first!.name!
             itemUnit = material.first!.unit!
+            itemImage = material.first!.image!
         }
     }
     

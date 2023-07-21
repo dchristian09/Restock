@@ -34,7 +34,8 @@ struct Product_Stock: View {
                     Spacer()
                     VStack {
                         //image
-                        Image("bouquet")
+//                        Image("bouquet")
+                        Image(uiImage: UIImage(data: item.image!)!)
                             .resizable()
                             .cornerRadius(16)
                             .scaledToFit()
@@ -60,7 +61,7 @@ struct Product_Stock: View {
                         }
                         HStack{
                             Text((stockOption)+" Label")
-                            TextField("Amount", text: $itemLabel)
+                            TextField("Label", text: $itemLabel)
                                 .keyboardType(.default)
                                 .multilineTextAlignment(.trailing)
                         }
@@ -104,7 +105,9 @@ struct Product_Stock: View {
             recipe.idProduct ==  item.id
         }
         
+//        Kalau produk di produce
         if stockOption == "Produce"{
+//            pengecekan material cukup / nggak
             for recipe in arrayRecipe{
                 let materialData = materialDataManager.materialList.filter{ material in
                     material.id == recipe.idMaterial
@@ -117,39 +120,53 @@ struct Product_Stock: View {
             }
             
             if !showAlert{
+//                Kalau cukup
                 if !item.isMaterial{
+//                    di cek, ini product jg material/ bukan
+//                    Kalau BUKAN material juga
                     for recipe in arrayRecipe{
                         let materialData = materialDataManager.materialList.filter{ material in
                             material.id == recipe.idMaterial
                         }
                         
+//                        Tiap material di - sesuai resep
                         materialDataManager.restockMaterial(material: materialData.first!, currentStock: materialData.first!.currentStock - (recipe.quantity * Int32(itemAmount)!))
                         
+//                        di catet di production
                         productionDataManager.addDataToCoreData(productionLabel: "Produce " + item.name!, productionDate: itemDate, productionNotes: itemNote, isProduce: false, productionQty: (recipe.quantity * Int32(itemAmount)!), product_id: materialData.first!.id!, itemType: "Material")
                     }
                 }else{
+//                    Kalau product is also material
                     let material = materialDataManager.materialList.filter{
                         item.name == $0.name
                     }
                     
+//                    produce product = material ikut nambah sesuai product
                     materialDataManager.restockMaterial(material: material.first!, currentStock: material.first!.currentStock + Int32(itemAmount)!)
                     
                     productionDataManager.addDataToCoreData(productionLabel: itemLabel, productionDate: itemDate, productionNotes: itemNote, isProduce: true, productionQty:  Int32(itemAmount)!, product_id: material.first!.id!, itemType: "Material")
                     
                 }
+                
+//                Productnya +
                 productDataManager.produceProduct(product: item, currentStock: item.currentStock + (Int32(itemAmount)!))
                 
+//                catat di history
                 productionDataManager.addDataToCoreData(productionLabel: itemLabel, productionDate: itemDate, productionNotes: itemNote, isProduce: true, productionQty: Int32(itemAmount)!, product_id: item.id!, itemType: "Product")
                 self.presentationMode.wrappedValue.dismiss()
             }
             
         }else{
+//            Kalau product reduce
             if !showAlert{
+//            Gak mempengaruhi material, product lsg di -
                 productDataManager.produceProduct(product: item, currentStock: item.currentStock - (Int32(itemAmount)!))
                 
                 productionDataManager.addDataToCoreData(productionLabel: itemLabel, productionDate: itemDate, productionNotes: itemNote, isProduce: false, productionQty: Int32(itemAmount)!, product_id: item.id!, itemType: "Product")
                 
                 if item.isMaterial{
+                    
+//                    Kalau product jg material, materialnya jg ikut -
                     let material = materialDataManager.materialList.filter{
                         $0.name == item.name
                     }

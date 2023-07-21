@@ -179,9 +179,27 @@ struct Product: View {
                 ToolbarItem(placement: .navigationBarTrailing){
 
                     if materialDataManager.materialList.count > 0 {
+                                HStack{
+                                    Button {
+                                        withAnimation {
+                                            showingSheet = true
+                                        }
+                                    }label: {
+                                        Image(systemName: "info.circle")
+                                    }.sheet(isPresented: $showingSheet){
+                                        Indicator_Modal_View(showSheetView: $showingSheet)
+                                    }
+                                    
+                                    NavigationLink {
+                                        Product_Add()
+                                    }label: {
+                                        Image(systemName: "plus")
+                                    }
+                                }
                                 NavigationLink(destination: Product_Add()) {
                                     Image(systemName: "plus")
                                 }
+                                
                             } else {
                                 Button(action: {
                                     // Handle the case where materials list is empty
@@ -194,23 +212,7 @@ struct Product: View {
                                 }
                             }
 //g tau ini bagian yang mana
-                    HStack{
-                        Button {
-                            withAnimation {
-                                showingSheet = true
-                            }
-                        }label: {
-                            Image(systemName: "info.circle")
-                        }.sheet(isPresented: $showingSheet){
-                            Indicator_Modal_View(showSheetView: $showingSheet)
-                        }
-                        
-                        NavigationLink {
-                            Product_Add()
-                        }label: {
-                            Image(systemName: "plus")
-                        }
-                    }
+                    
 
                 }
             }

@@ -18,6 +18,7 @@ class ProductionDataManager: ObservableObject {
     
     var itemName : String = ""
     @Published var productionList : [DataProduction] = []
+//    @Published var productionList : [DataProduction] = []
     @Published var historyDatas : [HistoryData] = []
     
     @Published var selectedType: String = "Product" {
