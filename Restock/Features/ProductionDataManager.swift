@@ -18,7 +18,7 @@ class ProductionDataManager: ObservableObject {
     
     var itemName : String = ""
     @Published var productionList : [DataProduction] = []
-//    @Published var productionList : [DataProduction] = []
+    @Published var productionListFiltered : [DataProduction] = []
     @Published var historyDatas : [HistoryData] = []
     
     @Published var selectedType: String = "Product" {
@@ -68,7 +68,8 @@ class ProductionDataManager: ObservableObject {
             
             if searchText.isEmpty{
     //            Check data that have the same type (product / material) and check if the data already deleted or not
-                productionList = productionList.filter { data in
+//                return all data
+                productionListFiltered = productionList.filter { data in
                     if let itemType = data.itemType {
                         return itemType.lowercased() == selectedType.lowercased() && data.isActive
                     }else{
@@ -77,15 +78,16 @@ class ProductionDataManager: ObservableObject {
                 }
             }else{
                 
-    //            Check data that have the same type (product / material) and check if the data already deleted or not
-                productionList = productionList.filter { data in
-                    if let itemType = data.itemType {
-                        return itemType.lowercased() == selectedType.lowercased() && data.isActive
-                    }else{
-                        return false
-                    }
-                }
-                productionList = productionList.filter{ data in
+//    //            Check data that have the same type (product / material) and check if the data already deleted or not
+//                productionList = productionList.filter { data in
+//                    if let itemType = data.itemType {
+//                        return itemType.lowercased() == selectedType.lowercased() && data.isActive
+//                    }else{
+//                        return false
+//                    }
+//                }
+                
+                productionListFiltered = productionListFiltered.filter{ data in
                     getName(itemType: data.itemType!, idItem: data.idProduct!)
                     return itemName.lowercased().contains(searchText.lowercased())
                     
@@ -93,17 +95,17 @@ class ProductionDataManager: ObservableObject {
 
             }
             print("SELECTED TYPE: ", selectedType)
-            print("filteredProductionList: ", productionList.count)
+            print("filteredProductionList: ", productionListFiltered.count)
             
             var historyMonthDetails:[DataProduction] = []
-            for (index, production) in productionList.enumerated() {
+            for (index, production) in productionListFiltered.enumerated() {
                 
                 let nameOfMonth = dateFormatter.string(from: production.date!)
 
-                if monthName == "" && index != productionList.count-1 || (monthName == nameOfMonth && index != productionList.count-1) {
+                if monthName == "" && index != productionListFiltered.count-1 || (monthName == nameOfMonth && index != productionListFiltered.count-1) {
                     historyMonthDetails.append(production)
-                } else if index == productionList.count-1 || monthName != nameOfMonth{
-                    if index == productionList.count-1{
+                } else if index == productionListFiltered.count-1 || monthName != nameOfMonth{
+                    if index == productionListFiltered.count-1{
                         historyMonthDetails.append(production)
                         monthName = nameOfMonth
                     }

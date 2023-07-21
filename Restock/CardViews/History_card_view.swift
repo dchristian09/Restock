@@ -42,6 +42,7 @@ struct History_Card_View: View {
     
     func cancelProduction(){
         
+//                delete data dari history item
         productionDataManager.softDeleteData(production: dataProduction)
         
         if dataProduction.itemType?.lowercased() == "product"{
@@ -58,6 +59,8 @@ struct History_Card_View: View {
                 }
                 productDataManager.produceProduct(product: productData.first!, currentStock: productData.first!.currentStock - dataProduction.qty)
                 
+
+                
                 if productData.first!.isMaterial{
 //                    kalau product jg material
                     let materialData = materialDataManager.materialList.filter{
@@ -67,6 +70,13 @@ struct History_Card_View: View {
                     
 //                    material di -
                     materialDataManager.restockMaterial(material: materialData.first!, currentStock: materialData.first!.currentStock - dataProduction.qty)
+                    
+                    let productionData = productionDataManager.productionList.filter{
+                        $0.idProduct == materialData.first!.id && $0.qty == dataProduction.qty && $0.date == dataProduction.date && $0.isProduce
+                    }
+                    
+//                    delete history material jg
+                    productionDataManager.softDeleteData(production: productionData.first!)
                     
                 }else{
 //                    kalau bukan
@@ -98,6 +108,13 @@ struct History_Card_View: View {
 //                    material di -
                     materialDataManager.restockMaterial(material: materialData.first!, currentStock: materialData.first!.currentStock + dataProduction.qty)
                     
+                    let productionData = productionDataManager.productionList.filter{
+                        $0.idProduct == materialData.first!.id && $0.qty == dataProduction.qty && $0.date == dataProduction.date && !$0.isProduce
+                    }
+                    
+//                    delete history material jg
+                    productionDataManager.softDeleteData(production: productionData.first!)
+                    
                 }
             }
         }else{
@@ -116,9 +133,16 @@ struct History_Card_View: View {
                         product.name! == materialData.first!.name!
                     }
 //                    product di -
-                    productDataManager.produceProduct(product: productData.first!, currentStock:  dataProduction.qty - productData.first!.currentStock)
+                    productDataManager.produceProduct(product: productData.first!, currentStock: productData.first!.currentStock - dataProduction.qty )
             
                    
+                    let productionData = productionDataManager.productionList.filter{
+                        $0.idProduct == productData.first!.id && $0.qty == dataProduction.qty && $0.date == dataProduction.date && $0.isProduce
+                    }
+                    
+//                    delete history material jg
+                    productionDataManager.softDeleteData(production: productionData.first!)
+                    
                 }
             }else{
 //                kalau reduce di cancel, brti material di +
@@ -130,7 +154,14 @@ struct History_Card_View: View {
                         product.name! == materialData.first!.name!
                     }
 //                    product di +
-                    productDataManager.produceProduct(product: productData.first!, currentStock:  dataProduction.qty + productData.first!.currentStock)
+                    productDataManager.produceProduct(product: productData.first!, currentStock: productData.first!.currentStock + dataProduction.qty )
+                    
+                    let productionData = productionDataManager.productionList.filter{
+                        $0.idProduct == productData.first!.id && $0.qty == dataProduction.qty && $0.date == dataProduction.date && !$0.isProduce
+                    }
+                    
+//                    delete history material jg
+                    productionDataManager.softDeleteData(production: productionData.first!)
             
                     
                 }
